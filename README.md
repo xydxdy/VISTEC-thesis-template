@@ -9,4 +9,4 @@
 
 ### Overleaf
 
-You can also use this template directly on Overleaf by visiting the [Overleaf project](https://www.overleaf.com/read/kycjnywvhdzt#0c025e). Overleaf provides a convenient online LaTeX editor and collaboration platform.
+You can also use this template directly on Overleaf by visiting the [Overleaf project](https://www.overleaf.com/read/kycjnywvhdzt#0c025e).

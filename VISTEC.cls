@@ -136,6 +136,7 @@
 \usepackage[english]{babel}
 \usepackage{mfirstuc}
 \usepackage{longtable}
+\usepackage{microtype}
 
 \usepackage[style=vancouver, 
             citestyle=numeric-comp, 
@@ -598,7 +599,7 @@
     }
     \pagestyle{empty}
     \noindent
-    \begin{tabular}{p{0.14\linewidth}p{0.82\linewidth}}
+    \begin{tabular}{p{0.1725\linewidth}p{0.7825\linewidth}}
         \\~\\ % two line spaces
         \leftskip-0.1in Title: & \@title \\
         \leftskip-0.1in Advisor: & \@advisor \\
@@ -654,6 +655,19 @@
     \ifthenelse{\equal\tmpseven\memseven}{}{\begin{tabular}[c]{@{}l@{}}................................................ Member \\ (\@memberseven)\end{tabular}}
     \ifthenelse{\equal\tmpeight\memeight}{& \\[-1em]}{ & \begin{tabular}[c]{@{}l@{}}................................................ Member \\ (\@membereight)\end{tabular} \\~\\ }
     
+    % \multicolumn{1}{l}{\begin{tabular}[c]{@{}c@{}} \\[3em] ...............................................................\\ (\@gradcommittee)\\ Chairperson\\ Graduate Studies Committee\end{tabular}} 
+    % & \multicolumn{1}{l}{}                                                           
+    \end{tabular}%
+    % }
+    \end{table}
+
+    \vfill
+
+    \begin{table}[h]
+    % \centering
+    \singlespacingplus
+    % \resizebox{\textwidth}{!}{%
+    \begin{tabular}{p{0.5\linewidth}p{0.5\linewidth}}%{ll}
     \multicolumn{1}{l}{\begin{tabular}[c]{@{}c@{}} \\[3em] ...............................................................\\ (\@gradcommittee)\\ Chairperson\\ Graduate Studies Committee\end{tabular}} 
     & \multicolumn{1}{l}{}                                                           
     \end{tabular}%

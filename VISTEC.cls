@@ -591,6 +591,9 @@
 %%%%%%%%%%%%%%%%%%%%% Approval page BEGIN %%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\makeapproval}[1]{
     \clearpage
+    \hyphenation{technology}
+    \hyphenation{international}
+    
     \newgeometry{
             left   = 3.75cm,
       	right  = 2.5cm,

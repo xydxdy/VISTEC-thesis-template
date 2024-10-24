@@ -531,27 +531,36 @@
             \noindent\makebox[\thirdsectionindent][r]{\csname the#1\endcsname\hskip 0.3em}\hfil
         \fi
     \fi
-}
+} % space between section number and text
 
 % Custom Section Formatting
-\renewcommand\section{%
-    \parskip 1.5ex%
-    \leftskip 0pt%
-    \@startsection{section}{1}{\z@}{\baselineskip}{0.5pt}{\large\bfseries}
+\renewcommand\section{
+    \parskip 1.5ex
+    \leftskip 0pt\@startsection{section}{1}
+    {\z@}% indent
+    {\baselineskip}% <space before>
+    {0.5pt}% <space after>
+    {\large\bfseries}
 }
 
 % Custom Subsection Formatting
-\renewcommand\subsection{%
-    \parskip 1.5ex%
-    \leftskip 0pt%
-    \@startsection{subsection}{2}{\z@}{\baselineskip}{0.5pt}{\normalsize\bfseries}
-}
+\renewcommand\subsection{
+    \parskip 1.5ex
+    \leftskip 0pt\@startsection{subsection}{2}
+    {\z@}% indent
+    {\baselineskip}% <space before>
+    {0.5pt}% <space after>
+    {\normalsize\bfseries}
+    }
 
 % Custom Subsubsection Formatting
-\renewcommand\subsubsection{%
-    \parskip 1.5ex%
-    \leftskip 0pt%
-    \@startsection{subsubsection}{3}{\z@}{\baselineskip}{0.5pt}{\normalsize\bfseries}
+\renewcommand\subsubsection{
+    \parskip 1.5ex
+    \leftskip 0pt\@startsection{subsubsection}{2}
+    {\z@}% indent
+    {\baselineskip}% <space before>
+    {0.5pt}% <space after>
+    {\normalsize\bfseries}
 }
 
 % Custom Paragraph Formatting

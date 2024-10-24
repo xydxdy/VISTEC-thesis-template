@@ -8,6 +8,12 @@ main.synctex.gz
 *.fls
 *.log
 main.synctex(busy)
+main.bbl
+main.lof
+main.lot
+main.out
+main.toc
+main.blg
 
 # xypic precompiled matrices and outlines
 *.xyc

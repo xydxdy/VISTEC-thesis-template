@@ -6,6 +6,8 @@
 % Email: r.chaisaen@gmail.com
 % Last modified: March 16, 2024
 % version ='1.0'
+
+% VISTEC Thesis Template © 2024 by Rattanaphon Chaisaen is licensed under CC BY-NC-SA 4.0 
 % ---------------------------------------------------------------------------
       
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

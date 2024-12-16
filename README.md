@@ -5,7 +5,7 @@
 ### Prerequisites
 
 * Compiler: pdfLaTeX
-* Packages: TeX live version 2023
+* Packages: TeX live version 2023 / TeX live version 2024
 
 ### Overleaf
 

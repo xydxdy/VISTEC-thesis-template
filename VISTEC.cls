@@ -263,7 +263,7 @@
 
 \ifbse
     \renewcommand{\@school}{School of Biomolecular Science and Engineering}
-    \renewcommand{\@program}{Information Biomolecular Science and Engineering}
+    \renewcommand{\@program}{Biomolecular Science and Engineering}
 \fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% Input Macro Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%%

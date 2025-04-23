@@ -143,6 +143,9 @@
     backend=bibtex
 ]{biblatex}
 
+\preto\fullcite{\AtNextCite{\defcounter{maxnames}{99}}}
+\preto\fullcite{\AtNextCite{\defcounter{minnames}{6}}}
+
 % Declare field formats for bibliographic elements
 \DeclareFieldFormat[article]{title}{#1}
 \DeclareFieldFormat[article]{journaltitle}{\mkbibbold{#1}}
@@ -376,12 +379,12 @@
 \def\paritemindent{1.65cm}
 \def\subparitemindent{2.8cm}
 \def\subsubparitemindent{4cm}
-
+    
 % Enumerate list settings
 \setlist[enumerate]{
     label={\arabic*)},
     leftmargin=0cm,
-    topsep=-2ex,
+    topsep=0ex,
     itemsep=0ex,
     parsep=0ex,
     partopsep=0pt
@@ -390,11 +393,12 @@
 % Itemize list settings
 \setlist[itemize]{
     leftmargin=0cm,
-    topsep=-2ex,
+    topsep=0ex,
     itemsep=0ex,
     parsep=0ex,
     partopsep=0pt
 }
+
 
 %%%%%%%%%%%%%%%% Figure/Table/Code Caption Settings %%%%%%%%%%%%%%%% 
 
@@ -1297,6 +1301,7 @@
 }   
 
 %%%%%%%%%%%%%%%%%%% References page %%%%%%%%%%%%%%%%%%%%
+\DeclareBibliographyCategory{exclude}
 
 \newcommand{\vancouverbib}{
     \clearpage
@@ -1313,7 +1318,7 @@
     \setlength\bibitemsep{0pt}
     
     % Print the bibliography without an additional heading
-    \printbibliography[heading=none]
+    \printbibliography[heading=none, notcategory=exclude]
     
     \clearpage
 }

@@ -4,7 +4,7 @@
 %----------------------------------------------------------------------------
 % Author: Rattanaphon Chaisaen
 % Email: r.chaisaen@gmail.com
-% Last modified: March 16, 2024
+% Last modified: April 23, 2025
 % version ='1.0'
 
 % VISTEC Thesis Template © 2024 by Rattanaphon Chaisaen is licensed under CC BY-NC-SA 4.0 
@@ -877,19 +877,38 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Appendix Page %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% \let\oldappendix\appendix
+% \renewcommand{\appendix}{%
+%     \clearpage
+%     \pagestyle{plain} % Set page style to plain for the appendix
+%     \thispagestyle{empty} % Remove header/footer from the first page of the appendix
+%     \oldappendix
+
+%     % Customize Appendix Sections and Numbering
+%     \renewcommand{\thesection}{\Alph{section}}
+    
+%     % Update Table of Contents Label for Appendix Sections
+%     \addtocontents{toc}{\protect\renewcommand{\protect\chaptername}{Appendix}}
+% }
+
 \let\oldappendix\appendix
 \renewcommand{\appendix}{%
     \clearpage
-    \pagestyle{plain} % Set page style to plain for the appendix
-    \thispagestyle{empty} % Remove header/footer from the first page of the appendix
+    \pagestyle{plain}
+    \thispagestyle{empty}
     \oldappendix
-
-    % Customize Appendix Sections and Numbering
-    \renewcommand{\thesection}{\Alph{section}}
+    \inappendixtrue
+    % Redefine the chapter name printed in headings and ToC
+    % \renewcommand{\chaptername}{Appendix}
     
-    % Update Table of Contents Label for Appendix Sections
-    \addtocontents{toc}{\protect\renewcommand{\protect\chaptername}{Appendix}}
+    % Change chapter numbering to letters (A, B, C...)
+    \renewcommand{\thechapter}{\Alph{chapter}}
+    
+    % Change section numbering to A.1, A.2, etc.
+    \renewcommand{\thesection}{\thechapter.\arabic{section}}
+
 }
+
 
 %%%%%%%%%%%%%%%%%%%%% Author Biography Page %%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -915,20 +934,44 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%% Table of Contents %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newif\ifinappendix
+\inappendixfalse
+
 
 % Custom chapter definition to add to the Table of Contents
-\def\@chapter[#1]#2{
-    \ifnum \c@secnumdepth >\m@ne
-        \refstepcounter{chapter}%
-        \addcontentsline{toc}{chapter}%
-        {\noindent\makebox[\widthof{\@chapapp{ x}{\thechapter}}][l]{\protect\@chapapp{ }\thechapter}\hskip 0em #1}
-    \else
-        \addcontentsline{toc}{chapter}{#1}%
-    \fi
-    \chaptermark{#1}%
-    \@makechapterhead{#2}%
-    \@afterheading
-}%
+
+\def\@chapter[#1]#2{%
+  \ifnum \c@secnumdepth >\m@ne
+    \refstepcounter{chapter}%
+    \addcontentsline{toc}{chapter}%
+      {\noindent\makebox[\widthof{Chapter x}][l]{%
+        \ifinappendix
+          Appendix{ }\thechapter
+        \else
+          Chapter{ }\thechapter
+        \fi
+      }\hskip 0.4em #1}%
+  \else
+    \addcontentsline{toc}{chapter}{#1}%
+  \fi
+  \chaptermark{#1}%
+  \@makechapterhead{#2}%
+  \@afterheading
+}
+
+% \def\@chapter[#1]#2{
+%     \ifnum \c@secnumdepth >\m@ne
+%         \refstepcounter{chapter}%
+%         \addcontentsline{toc}{chapter}%
+%         {\noindent\makebox[\widthof{\@chapapp{ x}{\thechapter}}][l]{\protect\@chapapp{ }\thechapter}\hskip 0em #1}
+%     \else
+%         \addcontentsline{toc}{chapter}{#1}%
+%     \fi
+%     \chaptermark{#1}%
+%     \@makechapterhead{#2}%
+%     \@afterheading
+% }%
+
 
 % Customize ToC formatting for chapters
 \renewcommand*\l@chapter[2]{%

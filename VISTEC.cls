@@ -128,6 +128,12 @@
 \usepackage{longtable}
 \usepackage{microtype}
 
+\usepackage[version=4]{mhchem}
+\usepackage{chemfig}
+\DeclareMathAlphabet{\foo}{OT1}{phv}{m}{n}
+\renewcommand*\printatom[1]{\ensuremath{\foo{#1}}}
+
+
 %%%%%%%%%%%%%%%%%% VISTEC-Vancouver Reference Style %%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%      Updated 16-02-2018       %%%%%%%%%%%%%%%%%%%%%
 % This template is referenced from Vancouver VISTEC update 16022018.ens

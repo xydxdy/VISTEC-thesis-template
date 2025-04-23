@@ -32,7 +32,28 @@ Subheading 2 provides an example of items presented in an enumerated list.
 \end{enumerate}
 
 
+\section{Equation} 
 
+\begin{paragraph}
+As an illustration of \LaTeX's mathematics formatting,
+\autoref{ch2:eq:renyi} is the definition of {\em R\'enyi entropy} and \autoref{ch2:eq:total-loss} is the total loss function:
+\end{paragraph}
+
+%%%%%%%%%%%%%%%%%%%%%%%%% EQUATION  %%%%%%%%%%%%%%%%%%%%%%%%% 
+\begin{equation}
+\label{ch2:eq:renyi}
+H_{\alpha}(X) =
+\frac{1}{1-\alpha}
+\log \left(\sum_{x \in {\cal X}}P[X=x]^{\alpha} \right) .
+\end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%  EQUATION %%%%%%%%%%%%%%%%%%%%%%%%% 
+\begin{equation} 
+\label{ch2:eq:total-loss}
+\begin{aligned}
+\mathcal{L}_{\textrm{total}} = \frac{1}{N}\sum_{i=1}^{N}\{w_i\mathcal{L}_i\}. 
+\end{aligned}
+\end{equation}
 
 
 \section{Algorithm}
@@ -63,30 +84,6 @@ This is an example of \autoref{ch2:algo:my-algo}.
 \end{algorithmic}
 \end{algorithm}
 
-
-
-\section{Equation} 
-
-\begin{paragraph}
-As an illustration of \LaTeX's mathematics formatting,
-\autoref{ch2:eq:renyi} is the definition of {\em R\'enyi entropy} and \autoref{ch2:eq:total-loss} is the total loss function:
-\end{paragraph}
-
-%%%%%%%%%%%%%%%%%%%%%%%%% EQUATION  %%%%%%%%%%%%%%%%%%%%%%%%% 
-\begin{equation}
-\label{ch2:eq:renyi}
-H_{\alpha}(X) =
-\frac{1}{1-\alpha}
-\log \left(\sum_{x \in {\cal X}}P[X=x]^{\alpha} \right) .
-\end{equation}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%  EQUATION %%%%%%%%%%%%%%%%%%%%%%%%% 
-\begin{equation} 
-\label{ch2:eq:total-loss}
-\begin{aligned}
-\mathcal{L}_{\textrm{total}} = \frac{1}{N}\sum_{i=1}^{N}\{w_i\mathcal{L}_i\}. 
-\end{aligned}
-\end{equation}
 
 
 \section{The table numbers}

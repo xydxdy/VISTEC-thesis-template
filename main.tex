@@ -23,7 +23,7 @@
         % fill your \degreefield, \school and \program at `macro.tex`
                 
 %%%%%%% optional: (3) [final, showframe, showgrid]
-                % default: final
+                % default to final
                 % showframe: display frame
                 % showgrid: display grid
 
@@ -40,14 +40,12 @@
 %%%%%%%%%%%%%%%%%%%%%% declare usepackage %%%%%%%%%%%%%%%%%%%%%
 %% Add your use package here!
 
-\usepackage{lipsum} % dummy text
 \usepackage{booktabs}
 \usepackage{multirow}
 \usepackage[version=4]{mhchem}
 \usepackage{chemfig}
 \DeclareMathAlphabet{\foo}{OT1}{phv}{m}{n}
 \renewcommand*\printatom[1]{\ensuremath{\foo{#1}}}
-
 
 
 \begin{document} 
@@ -86,7 +84,7 @@
     %%%%%%%%%%%%%%%%%%%%%%%%%%%% epilogue %%%%%%%%%%%%%%%%%%%%%%%%%%%% 
     %% References page: add your BibTeX of the references at `bibliography.bib`
     \vancouverbib
-    % \include{contents/appendix}   %% add your content at `contents/appendix.tex`
+    \include{contents/appendix}   %% add your content at `contents/appendix.tex`
     \authorbiography                %% add your content at `contents/authorbiography.tex`
 
 \end{document}

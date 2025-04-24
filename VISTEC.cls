@@ -132,14 +132,11 @@
 \usepackage{chemfig}
 \DeclareMathAlphabet{\foo}{OT1}{phv}{m}{n}
 \renewcommand*\printatom[1]{\ensuremath{\foo{#1}}}
-
-
 %%%%%%%%%%%%%%%%%% VISTEC-Vancouver Reference Style %%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%      Updated 16-02-2018       %%%%%%%%%%%%%%%%%%%%%
 % This template is referenced from Vancouver VISTEC update 16022018.ens
 % Link: 
 % https://vistec-my.sharepoint.com/personal/daraporn_m_vistec_ac_th/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fdaraporn%5Fm%5Fvistec%5Fac%5Fth%2FDocuments%2FEndNote&ga=1
-
 \usepackage[
     style=vancouver, 
     citestyle=numeric-comp, 
@@ -149,14 +146,58 @@
     backend=bibtex
 ]{biblatex}
 
-\preto\fullcite{\AtNextCite{\defcounter{maxnames}{99}}}
-\preto\fullcite{\AtNextCite{\defcounter{minnames}{6}}}
 
 % Declare field formats for bibliographic elements
 \DeclareFieldFormat[article]{title}{#1}
 \DeclareFieldFormat[article]{journaltitle}{\mkbibbold{#1}}
 \DeclareFieldFormat{title}{\mkbibbold{#1}}
 \DeclareFieldFormat{booktitle}{\textnormal{#1}}
+
+\renewcommand*{\finentrypunct}{.}
+
+% Custom layout for article
+\DeclareBibliographyDriver{article}{%
+  \usebibmacro{author}%
+  \setunit{\labelnamepunct}\newblock
+  \printfield{title}%
+  \setunit{\addperiod\space}%
+  \printfield[journaltitle]{journaltitle}%
+  \setunit{\addspace}%
+  \printfield{year}%
+  \setunit*{\addsemicolon}%
+  \printfield{volume}%
+  \iffieldundef{number}
+    {}
+    {\printtext[parens]{\printfield{number}}}%
+%   \setunit*{\addcolon}%
+  \printfield{pages}%
+  \finentry%
+}
+
+% Custom layout for proceeding
+\DeclareBibliographyDriver{inproceedings}{%
+  \usebibmacro{author}%
+  \setunit{\labelnamepunct}\newblock
+  \printfield{title}%
+  \setunit{\addperiod\space}%
+  \printtext{In: }%
+  \printfield{booktitle}%
+  \iffieldundef{eventdate}
+    {}
+    {\setunit*{\addspace}\printfield{eventdate}}%
+  \iffieldundef{venue}
+    {}
+    {\setunit*{\addcomma\space}\printfield{venue}}%
+  \setunit{\addperiod\space}%
+  \printfield{year}%
+%   \setunit*{\addcolon}%
+  \printfield{pages}%
+  \finentry%
+}
+
+%% fullcite 
+\preto\fullcite{\AtNextCite{\defcounter{maxnames}{99}}}
+\preto\fullcite{\AtNextCite{\defcounter{minnames}{6}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%% Global formatting %%%%%%%%%%%%%%%%%%%%%%%
@@ -949,14 +990,22 @@
 \def\@chapter[#1]#2{%
   \ifnum \c@secnumdepth >\m@ne
     \refstepcounter{chapter}%
-    \addcontentsline{toc}{chapter}%
-      {\noindent\makebox[\widthof{Chapter x}][l]{%
+    \addcontentsline{toc}{chapter}{%
+      \noindent
+      \makebox[\widthof{Chapter X}][l]{%
         \ifinappendix
-          Appendix{ }\thechapter
+          Appendix~\thechapter%
         \else
-          Chapter{ }\thechapter
+          Chapter~\thechapter%
         \fi
-      }\hskip 0.4em #1}%
+      }%
+      \ifinappendix
+        \hskip 1.2em
+      \else
+        \hskip 0.2em
+      \fi
+      #1%
+    }%
   \else
     \addcontentsline{toc}{chapter}{#1}%
   \fi
@@ -964,6 +1013,7 @@
   \@makechapterhead{#2}%
   \@afterheading
 }
+
 
 % \def\@chapter[#1]#2{
 %     \ifnum \c@secnumdepth >\m@ne

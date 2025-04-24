@@ -86,16 +86,18 @@ This is an example of \autoref{ch2:algo:my-algo}.
 
 
 
-\section{The table numbers}
+\section{The table}
 
 \begin{paragraph}
-The table numbers shall represent the chapter numbers. For example, the first table in the \autoref{chapter2} shall be ``\autoref{ch2:table:results} ...................'', etc. The number and title of a table (Table caption) should be placed ABOVE the table and aligned left. The word ``\autoref{ch2:table:results}'' is \textbf{bold} font except its caption. 
+LaTeX table generators, such as \href{https://www.tablesgenerator.com/}{TablesGenerator.com}\footnotemark{}, can help you easily create well-formatted tables\footnotetext{https://www.tablesgenerator.com/}. 
+Here, \autoref{ch2:table:results} is an example of a table generated using the tool.
 \end{paragraph}
+    
 
 %%%%%%%%%%%%%%%%%%%%%%%%% TABLE BEGIN %%%%%%%%%%%%%%%%%%%%%%%%% 
 %%%%% Create LaTeX table from https://www.tablesgenerator.com/
 \begin{table}[ht]
-\caption{Classification performance.}
+\caption{Classification performance. An asterisk ($^*$) indicates values that are significantly different from the others ($p<0.05$).}
 \label{ch2:table:results}
 \centering
 \normalsize\singlespacingplus
@@ -110,16 +112,16 @@ The table numbers shall represent the chapter numbers. For example, the first ta
 \section{The figure numbers}
 
 \begin{paragraph}
-The figure numbers shall represent the chapter numbers. For example, the first figure in \autoref{chapter2} shall be ``\autoref{ch2:fig:model}'', etc. the number and title of a figure (Figure caption) should be placed BELOW the figure. For the figure caption which contains only 1 line, it should align CENTER throughout the thesis. For the figure caption which contains more than 1 line, it should align left throughout the thesis. The figure format should be pdf, png, jpg or \lstinline[language=C]!\chemfig! as \autoref{ch2:fig:mychemfig}
+Here are the example of Figure \ref{ch2:fig:fig-A} and Figure \ref{ch2:fig:mychemfig}.
 \end{paragraph}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%% FIGURE BEGIN %%%%%%%%%%%%%%%%%%%%%%%%% 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=1\columnwidth]{figures/ch2/model.pdf}
-\longcaption[The MIN2Net model architecture.]{An overview of the MIN2Net model architecture. The figure illustrates the sequence of processing blocks, including the temporal convolutional layers, feature extraction modules, and classification layers. Each component is annotated to reflect its role in the end-to-end EEG signal processing pipeline.}
-\label{ch2:fig:model}
+\includegraphics[width=1\columnwidth]{figures/ch2/A.pdf}
+\longcaption[This is the example of very long caption of images.]{For the figure caption which contains more than 1 line, it should align left throughout the thesis. The second and other lines need to be aligned with the first letter of the first line.}
+\label{ch2:fig:fig-A}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%% FIGURE END %%%%%%%%%%%%%%%%%%%%%%%%% 
 
@@ -140,7 +142,7 @@ The figure numbers shall represent the chapter numbers. For example, the first f
     \chemname{\chemfig{H_2O}}{Water}
     \schemestop
     \chemnameinit{}
-    \caption{The caption on this figure, the second and other lines need to be aligned with the first letter of the first line.}
+    \caption{The caption on this figure.}
     \label{ch2:fig:mychemfig}
 \end{figure}
 
@@ -152,21 +154,25 @@ This is an example of how to cite previous work, such as \cite{min2net}, or mult
 Below is an example BibTeX entry:
 
 \begin{verbatim}
-@ARTICLE{min2net,
-  author  = {Autthasan, Phairot and Chaisaen, Rattanaphon and 
-            Sudhawiyangkul, Thapanun and Rangpong, Phurin and 
-            Kiatthaveephong, Suktipol and Dilokthanakul, Nat 
-            and Bhakdisongkhram, Gun and Phan, Huy and Guan, 
-            Cuntai and Wilaiprasitporn, Theerawit},
-  journal = {IEEE Transactions on Biomedical Engineering}, 
-  title   = {MIN2Net: End-to-End Multi-Task Learning for Subject-
-            Independent Motor Imagery EEG Classification}, 
-  year    = {2022},
-  volume  = {69},
-  number  = {6},
-  pages   = {2105-2118}
-}
-\end{verbatim}
+    @ARTICLE{dummy2022example,
+      author  = {Doe, John and Smith, Jane and Roe, Richard},
+      journal = {Journal of Example Studies}, 
+      title   = {A Dummy Title for Demonstration Purposes}, 
+      year    = {2022},
+      volume  = {42},
+      number  = {1},
+      pages   = {1--10}
+    }
+    \end{verbatim}
 
 \end{paragraph}
 
+\section{Footnotes}
+
+I'm writing to test the \verb|\footnotemark| and \verb|\footnotetext| commands. 
+You can insert a footnote marker using the \verb|\footnotemark|\footnotemark{}
+command and later, when you're ready, typeset the footnote text by writing 
+\verb|\footnotetext{Here's the footnote.}|. \footnotetext{Here's the footnote.}
+
+Let's do one more to see the result\footnotemark{} which I'll comment on within the
+footnote\footnotetext{Specifically, I'd write comments in this one.}.

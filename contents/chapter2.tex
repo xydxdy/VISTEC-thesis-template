@@ -1,35 +1,30 @@
 \chapter{Background}		
 \label{chapter2}
 
-
 \section{Heading}
 
 \begin{paragraph}
-The chapter headings should be 14 points and any other titles should be in 12 points.  The text in the chapter body should be computer printed in 12 points Times New Roman font.
+This is a paragraph under the main section. It introduces the overall content of the section in a general manner.
 \end{paragraph}
 
-\subsection{Sub-heading 1}
+\subsection{Sub-heading}
 
 \begin{subparagraph}
-Typing should be with a spacing of 1.5 between lines, including the List of References and Appendices.
+This is a subparagraph under the first subsection. It provides additional detail or clarification related to the subsection's topic.
 \end{subparagraph}
 
-
-
-
-
-
-\subsubsection{Sub-heading 2}
+\subsubsection{Second-level Sub-heading}
 
 \begin{subsubparagraph}
-Subheading 2 provides an example of items presented in an enumerated list.
+This is a subsubparagraph under the second-level subheading. It is typically used for listing or elaborating fine-grained points.
 \end{subsubparagraph}
 
 \begin{enumerate}[itemindent=\subsubparitemindent]
-\item Enumerate One
-\item Enumerate Two
-\item Enumerate Three
+\item This is the first item in the enumerated list.
+\item This is the second item in the enumerated list.
+\item This is the third item in the enumerated list.
 \end{enumerate}
+
 
 
 \section{Equation} 
@@ -111,40 +106,44 @@ Here, \autoref{ch2:table:results} is an example of a table generated using the t
 
 \section{Figure}
 
+\section{Figure}
+
 \begin{paragraph}
-Here are the example of Figure \ref{ch2:fig:fig-A} and Figure \ref{ch2:fig:mychemfig}.
+Here are examples of figures in a thesis: Figure~\ref{ch2:fig:fig-A} illustrates a standard image inclusion, while Figure~\ref{ch2:fig:mychemfig} shows a chemical reaction diagram generated with \texttt{chemfig}.
 \end{paragraph}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%% FIGURE BEGIN %%%%%%%%%%%%%%%%%%%%%%%%% 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=1\columnwidth]{figures/ch2/A.pdf}
-\longcaption[This is the example of very long caption of images.]{For the figure caption which contains more than 1 line, it should align left throughout the thesis. The second and other lines need to be aligned with the first letter of the first line.}
-\label{ch2:fig:fig-A}
-\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%% FIGURE END %%%%%%%%%%%%%%%%%%%%%%%%% 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%% FIGURE BEGIN %%%%%%%%%%%%%%%%%%%%%%%%% 
 \begin{figure}[ht]
     \centering
-    % From the documentation
-    % https://ctan.mirror.garr.it/mirrors/ctan/macros/generic/chemfig/chemfig-en.pdf
-    \chemnameinit{\chemfig{R-C(-[:-30]OH)=[:30]O}}
+    \includegraphics[width=1\columnwidth]{figures/ch2/A.pdf} % Or .png, .jpg
+    \longcaption[This is a long figure caption example for an image.]{This figure demonstrates how to include a standard image (e.g., PDF, PNG, JPG) into your document. Captions longer than one line should be aligned left and indented after the first line.}
+    \label{ch2:fig:fig-A}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%% FIGURE END %%%%%%%%%%%%%%%%%%%%%%%%% 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%% FIGURE BEGIN %%%%%%%%%%%%%%%%%%%%%%%%% 
+\begin{figure}[ht]
+    \centering
+    \chemnameinit{\chemfig{R-C(-[:-30]OH)=[:30]O}} % Optional display at top
     \schemestart
-    \chemname{\chemfig{R’OH}}{Alcohol}
-    \+
-    \chemname{\chemfig{R-C(-[:-30]OH)=[:30]O}}{Carboxylic acid}
-    \arrow(.mid east--.mid west)
-    \chemname{\chemfig{R-C(-[:-30]OR’)=[:30]O}}{Ester}
-    \+
-    \chemname{\chemfig{H_2O}}{Water}
+        \chemname{\chemfig{R’OH}}{Alcohol}
+        \+
+        \chemname{\chemfig{R-C(-[:-30]OH)=[:30]O}}{Carboxylic acid}
+        \arrow(.mid east--.mid west)
+        \chemname{\chemfig{R-C(-[:-30]OR’)=[:30]O}}{Ester}
+        \+
+        \chemname{\chemfig{H_2O}}{Water}
     \schemestop
-    \chemnameinit{}
-    \caption{The caption on this figure.}
+    \chemnameinit{} % Clear it
+    \caption{An esterification reaction illustrated using the \texttt{chemfig} package.}
     \label{ch2:fig:mychemfig}
 \end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%% FIGURE END %%%%%%%%%%%%%%%%%%%%%%%%% 
+
 
 
 \section{Citation}

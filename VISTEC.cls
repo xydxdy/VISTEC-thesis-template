@@ -1067,7 +1067,7 @@
       \advance\leftskip\@tempdima
       \hskip -\leftskip
       \hskip 1.85cm % indent section label (1.1) from margin
-      #1\quad      % section number + consistent spacing before title
+      #1%\quad      % section number + consistent spacing before title
       \nobreak
       \leaders\hbox{.}\hfill
       \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
@@ -1090,7 +1090,7 @@
       \advance\leftskip\@tempdima
       \hskip -\leftskip
       \hskip 2.7cm  % indent label from margin (aligns with hangindent)
-      #1\quad       % label (e.g., 1.1.1) and space before title
+      #1%\quad       % label (e.g., 1.1.1) and space before title
       \nobreak
       \leaders\hbox{.}\hfill
       \nobreak\hb@xt@\@pnumwidth{\hss #2}\par

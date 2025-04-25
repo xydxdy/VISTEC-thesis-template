@@ -1032,7 +1032,6 @@
   \@afterheading
 }
 
-
 % Customize ToC formatting for chapters
 \renewcommand*\l@chapter[2]{%
 \ifnum \c@tocdepth >\m@ne
@@ -1054,45 +1053,52 @@
     \endgroup
 \fi}
 
-% Customize ToC formatting for sections
+%% Customize ToC formatting for \section entries
 \renewcommand*\l@section[2]{%
-\ifnum \c@tocdepth >\m@ne
+  \ifnum \c@tocdepth >\m@ne
     \addpenalty{-\@highpenalty}%
-    \hskip 0.57cm \@plus\p@ \hangindent=1.85cm
-    \setlength\@tempdima{2em}%
+    \hangindent=1.85cm % Hanging indent for wrapped lines
+    \setlength\@tempdima{2em}% indent before section text
     \begingroup
-        \parindent
-        \z@ \rightskip \@pnumwidth
-        \parfillskip -\@pnumwidth
-        \leavevmode %\bfseries
-        \advance\leftskip\@tempdima
-        \hskip -\leftskip
-        #1\nobreak
-        \leaders\hbox{.}
-        \hfil \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
-        \penalty\@highpenalty
+      \parindent\z@
+      \rightskip\@pnumwidth
+      \parfillskip -\@pnumwidth
+      \leavevmode
+      \advance\leftskip\@tempdima
+      \hskip -\leftskip
+      \hskip 1.85cm % indent section label (1.1) from margin
+      #1\quad      % section number + consistent spacing before title
+      \nobreak
+      \leaders\hbox{.}\hfill
+      \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
+      \penalty\@highpenalty
     \endgroup
-\fi}
+  \fi
+}
 
-% Customize ToC formatting for subsections
+%% Customize ToC formatting for subsections
 \renewcommand*\l@subsection[2]{%
-\ifnum \c@tocdepth >\m@ne
+  \ifnum \c@tocdepth >\z@
     \addpenalty{-\@highpenalty}%
-    \hskip 1.4cm \@plus\p@ \hangindent=2.7cm
-    \setlength\@tempdima{2.5em}%
+    \hangindent=2.7cm % hanging indent for wrapped lines
+    \setlength\@tempdima{2.5em}% alignment reference for text block
     \begingroup
-        \parindent
-        \z@ \rightskip \@pnumwidth
-        \parfillskip -\@pnumwidth
-        \leavevmode %\bfseries
-        \advance\leftskip\@tempdima
-        \hskip -\leftskip
-        #1\nobreak
-        \leaders\hbox{.}
-        \hfil \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
-        \penalty\@highpenalty
+      \parindent\z@
+      \rightskip\@pnumwidth
+      \parfillskip -\@pnumwidth
+      \leavevmode
+      \advance\leftskip\@tempdima
+      \hskip -\leftskip
+      \hskip 2.7cm  % indent label from margin (aligns with hangindent)
+      #1\quad       % label (e.g., 1.1.1) and space before title
+      \nobreak
+      \leaders\hbox{.}\hfill
+      \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
+      \penalty\@highpenalty
     \endgroup
-\fi}
+  \fi
+}
+
 
 
 % First page ToC header
@@ -1149,8 +1155,6 @@
   \restoregeometry
   \clearpage
 }
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Format the List of Tables as the VISTEC Graduate School demands.

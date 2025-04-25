@@ -828,12 +828,16 @@
     \clearpage
 }
 
-% Keywords Environment
 \newenvironment{keywords}[1]{
-    \vfill
-    \noindent\hangindent=4.7em 
+\vfill
+\noindent
+    \begin{minipage}{\textwidth}
+    \noindent\hangindent=2cm
+    \hangafter=1
     Keywords: #1.
-}
+    \end{minipage}
+}{}
+
 
 %%%%%%%%%%%%%%%%%%%%% Acknowledgment page %%%%%%%%%%%%%%%%%%%%%%%%%
 \newenvironment{acknowledgment}{%

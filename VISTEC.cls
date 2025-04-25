@@ -127,6 +127,7 @@
 \usepackage{mfirstuc}
 \usepackage{longtable}
 \usepackage{microtype}
+\usepackage{etoolbox}
 
 \usepackage[version=4]{mhchem}
 \usepackage{chemfig}
@@ -881,45 +882,62 @@
     \capitalisewords{#2}\par
 }
 
-% Header for Abbreviations Page
-\newcommand{\abbreviationheader}{
-    \vspace*{-3cm}
-    \begin{center}%
-        {\normalfont\Large{\bfseries{List of Abbreviations}}}\\[2em]
-    \end{center}
+% First page abbreviation header
+\newcommand{\abbreviationheader}{%
+  \begin{center}
+    {\Large\bfseries List of Abbreviations} \\[2em]
+  \end{center}
+}
+
+% Continuation header
+\newcommand{\abbreviationcontheader}{%
+  \begin{center}
+    {\Large\bfseries List of Abbreviations (Cont.)} \\[2em]
+  \end{center}
 }
 
 % Abbreviations Environment
 \newenvironment{abbreviations}{%
-    \clearpage
-    \pagestyle{plain}
-    \thispagestyle{firstpage} % do not show header footer this page
-    \newgeometry{
-        left   = 3.75cm,
-        right  = 2.5cm,
-        top    = 6.8cm, 
-        bottom = 2.5cm,
-    }
-    
-    \addcontentsline{toc}{chapter}{List of Abbreviations}
+  \clearpage
+  \pagestyle{plain}
+  \fancyfoot[c]{\thepage}
+  \thispagestyle{plain}
 
-    % Custom Header for Continued Pages
-    \fancyhf[ch]{
-        \vspace*{-0.8cm}
-        \begin{center}%
-            \normalfont\Large{\bfseries{List of Abbreviations (Cont.)}}
-        \end{center}
-    }
-    % Abbreviations Header
+  \newgeometry{
+    left   = 3.75cm,
+    right  = 2.5cm,
+    top    = 5cm,
+    bottom = 2.5cm,
+  }
+
+  \addcontentsline{toc}{chapter}{List of Abbreviations}
+
+  \newif\if@firstabbrevpage
+  \@firstabbrevpagetrue
+
+  \begingroup
+    \patchcmd{\@opcol}
+      {\@outputpage}
+      {%
+        \if@firstabbrevpage
+          \global\@firstabbrevpagefalse
+          \abbreviationcontheader
+        \else
+          \abbreviationcontheader
+        \fi
+        \@outputpage
+      }{}{}
+
+    % First page header
     \abbreviationheader
-    
-    % Input the Abbreviations Content
-    \input{contents/abbreviations}
 
-    % Restore Original Geometry
-    \restoregeometry
-    \clearpage
-}
+    % Load abbreviations content file
+    \input{contents/abbreviations}
+  \endgroup
+
+  \restoregeometry
+  \clearpage
+}{}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Appendix Page %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1015,20 +1033,6 @@
 }
 
 
-% \def\@chapter[#1]#2{
-%     \ifnum \c@secnumdepth >\m@ne
-%         \refstepcounter{chapter}%
-%         \addcontentsline{toc}{chapter}%
-%         {\noindent\makebox[\widthof{\@chapapp{ x}{\thechapter}}][l]{\protect\@chapapp{ }\thechapter}\hskip 0em #1}
-%     \else
-%         \addcontentsline{toc}{chapter}{#1}%
-%     \fi
-%     \chaptermark{#1}%
-%     \@makechapterhead{#2}%
-%     \@afterheading
-% }%
-
-
 % Customize ToC formatting for chapters
 \renewcommand*\l@chapter[2]{%
 \ifnum \c@tocdepth >\m@ne
@@ -1090,50 +1094,63 @@
     \endgroup
 \fi}
 
-% Header for the Table of Contents
-\newcommand{\tocheader}{{%
-\vspace*{-3.7cm}
-\begin{center}%
-    {\Large\bfseries{Contents}} \\[2em]
-    {} \hfill {Page}\par
-\end{center}
-\vspace*{-1em}
-}}
+
+% First page ToC header
+\newcommand{\tocheader}{%
+  \begin{center}
+    {\Large\bfseries Contents} \\[2em]
+    {} \hfill Page
+  \end{center}
+}
+
+% Continuation ToC header
+\newcommand{\toccontheader}{%
+  \begin{center}
+    {\Large\bfseries Contents (Cont.)} \\[2em]
+    {} \hfill Page
+  \end{center}
+}
 
 % Custom Table of Contents Command
 \renewcommand\tableofcontents{%
-    \clearpage
-    \pagestyle{plain}
-    \fancyfoot[c]{\thepage}
-    \thispagestyle{firstpage}
-    \newgeometry{
-        left   = 3.75cm,
-        right  = 2.5cm,
-        top    = 7.5cm,
-        bottom = 2.5cm,
-    }
+  \clearpage
+  \pagestyle{plain}
+  \fancyfoot[c]{\thepage}
+  \thispagestyle{plain}
 
-    % Header for Continuation Pages of the Table of Contents
-    \fancyhf[ch]{
-        \vspace*{-1.5cm}
-        \begin{center}%
-            {\Large\bfseries{Contents (Cont.)}} \\[1.2cm]
-            {} \hfill {Page}\par
-            \vspace*{-1em}
-        \end{center}
-    }
-    
-    % Main ToC Header
+  \newgeometry{
+    top    = 5cm,
+    bottom = 2.5cm,
+    left   = 3.75cm,
+    right  = 2.5cm,
+  }
+
+  % Flag to detect first page
+  \newif\if@firsttocpage
+  \@firsttocpagetrue
+
+  \begingroup
+    % Patch \@opcol to inject headers for each page
+    \patchcmd{\@opcol}
+      {\@outputpage}
+      {%
+        \if@firsttocpage
+          \global\@firsttocpagefalse
+          \toccontheader
+        \else
+          \toccontheader
+        \fi
+        \@outputpage
+      }{}{}
     \tocheader
-    
-    % Generate the Table of Contents
-    \begingroup
-        \@starttoc{toc}%
-    \endgroup
-    
-    \restoregeometry
-    \clearpage
+    \@starttoc{toc}%
+  \endgroup
+
+  \restoregeometry
+  \clearpage
 }
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Format the List of Tables as the VISTEC Graduate School demands.
@@ -1172,52 +1189,67 @@
 }
 
 
-% Header for the List of Tables
-\newcommand{\totheader}{
-    \vspace*{-3.7cm}
-    \begin{center}%
-        {\Large\bfseries{\listtablename}} \\[2em]
-        {Table}\hfill{Page}\par
-    \end{center}
-    \vspace*{-1em}
+% First page List of Tables header
+\newcommand{\lotheader}{%
+  \begin{center}
+    {\Large\bfseries \listtablename} \\[2em]
+    Table \hfill Page
+  \end{center}
 }
 
-% Custom List of Tables Command
-\renewcommand\listoftables{%
-    \clearpage
-    \pagestyle{plain}
-    \thispagestyle{firstpage} % No header/footer on the first page
-    \newgeometry{
-        left = 3.75cm,
-        right = 2.5cm,
-        top = 7.5cm,
-        bottom = 2.5cm,
-    }
+% Continuation List of Tables header
+\newcommand{\lotcontheader}{%
+  \begin{center}
+    {\Large\bfseries \listtablename\ (Cont.)} \\[2em]
+    Table \hfill Page
+  \end{center}
+}
 
-    % Add List of Tables to the Table of Contents
-    \addcontentsline{toc}{chapter}{\listtablename}
-    \fancyhf[ch]{
-        \vspace*{-1.5cm}
-        \begin{center}%
-            {\Large\bfseries{\listtablename{ (Cont.)}}} \\[1.2cm]
-            {Table}\hfill{Page}\par
-        \end{center}
-        \vspace*{-1em}
-    }
-        
-    % List of Tables Header
-    \totheader
+% Custom List of Tables command
+\renewcommand\listoftables{%
+  \clearpage
+  \pagestyle{plain}
+  \fancyfoot[c]{\thepage}
+  \thispagestyle{plain}
+
+  \newgeometry{
+    top    = 5cm,
+    bottom = 2.5cm,
+    left   = 3.75cm,
+    right  = 2.5cm,
+  }
+
+  % Add List of Tables to the ToC
+  \addcontentsline{toc}{chapter}{\listtablename}
+
+  % Flag to detect first page
+  \newif\if@firstlotpage
+  \@firstlotpagetrue
+
+  \begingroup
+    % Patch \@opcol to inject headers for each page
+    \patchcmd{\@opcol}
+      {\@outputpage}
+      {%
+        \if@firstlotpage
+          \global\@firstlotpagefalse
+          \lotcontheader
+        \else
+          \lotcontheader
+        \fi
+        \@outputpage
+      }{}{}
+
+    % First page header
+    \lotheader
 
     % Generate the List of Tables
-    \begingroup
-        \@starttoc{lot}
-    \endgroup
+    \@starttoc{lot}%
+  \endgroup
 
-    % Restore original geometry after List of Tables
-    \restoregeometry
-    \clearpage
+  \restoregeometry
+  \clearpage
 }
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Format the List of Figures as the VISTEC Graduate School demands.
@@ -1227,51 +1259,66 @@
     \@dottedtocline{1}{0cm}{1.5cm}
 }
 
-% Header for the List of Figures
-\newcommand{\tofheader}{%
-    \vspace*{-3.7cm}
-    \begin{center}%
-        {\Large\bfseries{\listfigurename}}\\[2em]
-        {Figure}\hfill{Page}\par
-    \end{center}
-    \vspace*{-1em}
+% First page List of Figures header
+\newcommand{\lofheader}{%
+  \begin{center}
+    {\Large\bfseries \listfigurename} \\[2em]
+    Figure \hfill Page
+  \end{center}
 }
 
+% Continuation List of Figures header
+\newcommand{\lofcontheader}{%
+  \begin{center}
+    {\Large\bfseries \listfigurename\ (Cont.)} \\[2em]
+    Figure \hfill Page
+  \end{center}
+}
+
+% Custom List of Figures command
 \renewcommand\listoffigures{%
-    \clearpage
-    \pagestyle{plain}
-    \thispagestyle{firstpage} % No header/footer on the first page
-    \newgeometry{
-        left   = 3.75cm,
-        right  = 2.5cm,
-        top    = 7.5cm,
-        bottom = 2.5cm,
-    }
+  \clearpage
+  \pagestyle{plain}
+  \fancyfoot[c]{\thepage}
+  \thispagestyle{plain}
 
-    % Add List of Figures to the Table of Contents
-    \addcontentsline{toc}{chapter}{\listfigurename}
+  \newgeometry{
+    top    = 5cm,
+    bottom = 2.5cm,
+    left   = 3.75cm,
+    right  = 2.5cm,
+  }
 
-    % Header for Continuation Pages
-    \fancyhf[ch]{
-        \vspace*{-1.5cm}
-        \begin{center}%
-            {\Large\bfseries{\listfigurename{ (Cont.)}}}\\[1.2cm]
-            {Figure}\hfill{Page}\par
-        \end{center}
-        \vspace*{-1em}
-    }
-     % List of Figures Header
-    \tofheader
+  % Add List of Figures to the ToC
+  \addcontentsline{toc}{chapter}{\listfigurename}
+
+  % Flag to detect first page
+  \newif\if@firstlofpage
+  \@firstlofpagetrue
+
+  \begingroup
+    % Patch \@opcol to inject headers for each page
+    \patchcmd{\@opcol}
+      {\@outputpage}
+      {%
+        \if@firstlofpage
+          \global\@firstlofpagefalse
+          \lofcontheader
+        \else
+          \lofcontheader
+        \fi
+        \@outputpage
+      }{}{}
+
+    % First page header
+    \lofheader
 
     % Generate the List of Figures
-    \begingroup
-        \renewcommand\addvspace[1]{} % Remove extra vertical space between entries
-        \@starttoc{lof}
-    \endgroup
+    \@starttoc{lof}%
+  \endgroup
 
-    % Restore original page geometry after List of Figures
-    \restoregeometry
-    \clearpage
+  \restoregeometry
+  \clearpage
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% Source Code %%%%%%%%%%%%%%%%%%%%%%%%%%% 
@@ -1350,53 +1397,66 @@
     \@dottedtocline{1}{0.25cm}{1.5cm}{#1}{#2}%
 }
 
-% Header for the List of Algorithms
-\newcommand{\toaheader}{{%
-    \begin{center}%
-    \vspace*{-2.45cm}
-        {\Large\bfseries{\listalgorithmname} \normalsize\\[1em]}
-        {Algorithm} \hfill {\hfill{Page}}
-        \vspace{-1em}
-    \end{center}
-  }}
+% First page List of Algorithms header
+\newcommand{\loaheader}{%
+  \begin{center}
+    {\Large\bfseries \listalgorithmname} \\[2em]
+    Algorithm \hfill Page
+  \end{center}
+}
+
+% Continuation List of Algorithms header
+\newcommand{\loacontheader}{%
+  \begin{center}
+    {\Large\bfseries \listalgorithmname\ (Cont.)} \\[2em]
+    Algorithm \hfill Page
+  \end{center}
+}
 
 % Redefine List of Algorithms command
-\let\oldlistofalgorithms\listofalgorithms
-\renewcommand{\listofalgorithms}{
-    \clearpage
-    \thispagestyle{firstpage}
-    \newgeometry{
-        left = 3.75cm,
-        right = 2.5cm,
-        top = 6.85cm,
-        bottom = 2.5cm,
-    }
-    
-    % Remove dotted leaders for continuation pages
-    \renewcommand\@dotsep{10000}
+\renewcommand{\listofalgorithms}{%
+  \clearpage
+  \pagestyle{plain}
+  \fancyfoot[c]{\thepage}
+  \thispagestyle{plain}
 
-    % Add List of Algorithms to the Table of Contents
-    \addcontentsline{toc}{chapter}{\listalgorithmname}
+  \newgeometry{
+    top    = 5cm,
+    bottom = 2.5cm,
+    left   = 3.75cm,
+    right  = 2.5cm,
+  }
 
-    % Header for Continuation Pages of the List of Algorithms
-    \fancyhf[ch]{
-    \vspace*{-0.95cm}
-        \begin{center}%
-            {\Large\bfseries{\listalgorithmname{ }(Cont.)} \normalsize\\[1em]}
-            {Algorithm} \hfill{Page}
-        \end{center}
-    }
-    % Add the Main Header for List of Algorithms
-    \toaheader
+  % Add List of Algorithms to the Table of Contents
+  \addcontentsline{toc}{chapter}{\listalgorithmname}
 
-    % Start the Table of Algorithms
-    \begingroup
-        \@starttoc{loa}
-    \endgroup
+  % Flag to detect first page
+  \newif\if@firstloapage
+  \@firstloapagetrue
 
-    % Restore original page layout
-    \restoregeometry
-    \clearpage
+  \begingroup
+    % Patch \@opcol to inject headers for each page
+    \patchcmd{\@opcol}
+      {\@outputpage}
+      {%
+        \if@firstloapage
+          \global\@firstloapagefalse
+          \loacontheader
+        \else
+          \loacontheader
+        \fi
+        \@outputpage
+      }{}{}
+
+    % First page header
+    \loaheader
+
+    % Start the List of Algorithms
+    \@starttoc{loa}%
+  \endgroup
+
+  \restoregeometry
+  \clearpage
 }   
 
 %%%%%%%%%%%%%%%%%%% References page %%%%%%%%%%%%%%%%%%%%

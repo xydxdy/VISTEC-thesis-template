@@ -1,25 +1,88 @@
 %----------------------------------------
-\chapter{Template Usage Examples}
+\chapter{How to Use This Template}
 \label{chapter3}
 %----------------------------------------
 
 %========================
-\section{Heading}
+\section{Overview}
 %========================
 \begin{paragraph}
-This is a paragraph under the main section. It introduces the overall content of the section in a general manner.
+This chapter provides guidance on how to effectively use and customize the VISTEC {\LaTeX} thesis template. It explains the general structure, key files, recommended practices, and demonstrates common {\LaTeX} formatting examples such as inserting figures, tables, equations, algorithms, and citations.
 \end{paragraph}
 
 %========================
-\subsection{Sub-heading}
+\section{Directory Structure}
 %========================
-\begin{subparagraph}
-This is a subparagraph under the first subsection. It provides additional detail or clarification related to the subsection's topic.
-\end{subparagraph}
+\begin{paragraph}
+The template is organized into clearly separated folders and files to simplify management:
+
+\begin{itemize}[leftmargin=\paritemindent]
+    \item \texttt{main.tex} — The main file to compile your thesis.
+    \item \texttt{thesisinfo.tex} — Define your title, author information, advisor, and committee.
+    \item \texttt{contents/} — Contains all chapter, appendix, and special section files.
+    \item \texttt{figures/} — Store all figures, images, and plots used in the thesis.
+    \item \texttt{tables/} — Store external table files if needed.
+    \item \texttt{bibliography.bib} — Your BibTeX bibliography database.
+\end{itemize}
+\end{paragraph}
 
 %========================
-\subsubsection{Second-level Sub-heading}
+\section{Editing Thesis Metadata}
 %========================
+\begin{paragraph}
+Edit \texttt{thesisinfo.tex} to set your thesis title, author name, student ID, academic year, advisor, committee members, and program information. These metadata fields automatically populate the title page, approval page, and other formal sections.
+\end{paragraph}
+
+%========================
+\section{Adding Content to Chapters}
+%========================
+\begin{paragraph}
+Each main chapter (e.g., Introduction, Background, Investigation, Conclusion) should be placed under \texttt{contents/} and included using \verb|\include{}| in \texttt{main.tex}. You can create additional chapter files following the provided structure, and organize sections, figures, tables, algorithms, and citations inside them.
+\end{paragraph}
+
+%========================
+\section{How to Use {\LaTeX}}
+%========================
+\begin{paragraph}
+If you are new to {\LaTeX}, it is recommended to start with basic tutorials to understand fundamental concepts such as document structure, commands, environments, and referencing. A good starting point is the Overleaf online guide available at:
+
+\begin{center}
+\href{https://www.overleaf.com/learn}{\texttt{https://www.overleaf.com/learn}}
+\end{center}
+
+The Overleaf Learn platform provides comprehensive, beginner-friendly resources covering topics from basic document setup to advanced formatting and bibliography management. Familiarity with these concepts will significantly improve your ability to customize and work efficiently with this thesis template.
+\end{paragraph}
+
+%========================
+\section{Compiling the Thesis}
+%========================
+\begin{paragraph}
+Use \texttt{pdfLaTeX} as the compiler. A typical compilation sequence includes:
+\begin{itemize}[leftmargin=\paritemindent]
+    \item First, run \texttt{pdflatex main.tex} to generate auxiliary files.
+    \item Then, run \texttt{bibtex main} to generate the bibliography.
+    \item Finally, run \texttt{pdflatex main.tex} twice to resolve cross-references.
+\end{itemize}
+
+Alternatively, tools like \texttt{latexmk} or IDEs such as Overleaf, TeXShop, and VS Code with {\LaTeX} Workshop can automate this process.
+\end{paragraph}
+
+%========================
+\section{Basic Formatting Examples}
+%========================
+\begin{paragraph}
+This section illustrates basic {\LaTeX} formatting examples for headings, equations, algorithms, tables, figures, citations, and footnotes.
+\end{paragraph}
+
+%========================
+\subsection{Subheadings}
+%========================
+\begin{subparagraph}
+This subparagraph provides an example of text placed under a subsection heading. It serves to introduce and briefly describe the specific content or focus of the subsection.
+\end{subparagraph}
+
+
+\subsubsection{Second-Level Subheading}
 \begin{subsubparagraph}
 This is a subsubparagraph under the second-level subheading. It is typically used for listing or elaborating fine-grained points.
 \end{subsubparagraph}
@@ -31,13 +94,12 @@ This is a subsubparagraph under the second-level subheading. It is typically use
 \end{enumerate}
 
 %========================
-\section{Equation}
+\subsection{Equations}
 %========================
-\begin{paragraph}
-As an illustration of {\LaTeX}'s mathematics formatting, \autoref{ch3:eq:renyi} is the definition of {\em R\'enyi entropy} and \autoref{ch3:eq:total-loss} is the total loss function:
-\end{paragraph}
+\begin{subparagraph}
+The following is an example of formatting mathematical equations. As illustrated in \autoref{ch3:eq:renyi}, the {\em R\'enyi entropy} is defined as:
+\end{subparagraph}
 
-%----- Equation: Renyi Entropy -----
 \begin{equation}
 \label{ch3:eq:renyi}
 H_{\alpha}(X) =
@@ -45,54 +107,44 @@ H_{\alpha}(X) =
 \log \left(\sum_{x \in {\cal X}}P[X=x]^{\alpha} \right) .
 \end{equation}
 
-%----- Equation: Total Loss -----
-\begin{equation}
-\label{ch3:eq:total-loss}
-\begin{aligned}
-\mathcal{L}_{\textrm{total}} = \frac{1}{N}\sum_{i=1}^{N}\{w_i\mathcal{L}_i\}.
-\end{aligned}
-\end{equation}
-
 %========================
-\section{Algorithm}
+\subsection{Algorithms}
 %========================
-\begin{paragraph}
-This is an example of \autoref{ch3:algo:my-algo}.
-\end{paragraph}
+\begin{subparagraph}
+Algorithms can be presented using the \texttt{algorithmic} package, as shown in \autoref{ch3:algo:my-algo}.
+\end{subparagraph}
 
 \begin{algorithm}[h]
-\caption{An algorithm with caption.}
+\caption{An example algorithm with a caption.}
 \label{ch3:algo:my-algo}
 \normalsize\singlespacing
-\begin{algorithmic}[1] % [1] print number on all lines
+\begin{algorithmic}[1]
     \Require $n \geq 0$
     \Ensure $y = x^n$
     \State $y \gets 1$
     \State $X \gets x$
     \State $N \gets n$
     \While{$N \neq 0$}
-        \If{$N$ is even}
+        % \If{$N$ is even}
             \State $X \gets X \times X$
-            \State $N \gets \frac{N}{2}$ \Comment{This is a comment}
-        \ElsIf{$N$ is odd}
-            \State $y \gets y \times X$
-            \State $N \gets N - 1$
-        \EndIf
+            \State $N \gets \frac{N}{2}$ \Comment{example comment}
+        % \ElsIf{$N$ is odd}
+        %     \State $y \gets y \times X$
+        %     \State $N \gets N - 1$
+        % \EndIf
     \EndWhile
 \end{algorithmic}
 \end{algorithm}
 
 %========================
-\section{Table}
+\subsection{Tables}
 %========================
-\begin{paragraph}
-{\LaTeX} table generators, such as \href{https://www.tablesgenerator.com/}{TablesGenerator.com}\footnotemark{}, can help you easily create well-formatted tables\footnotetext{https://www.tablesgenerator.com/}.
-Here, \autoref{ch3:table:results} is an example of a table generated using the tool.
-\end{paragraph}
+\begin{subparagraph}
+{\LaTeX} table generators, such as \href{https://www.tablesgenerator.com/}{TablesGenerator.com}, can help you easily create well-formatted tables. See \autoref{ch3:table:results} for an example.
+\end{subparagraph}
 
-%----- Table: Classification Results -----
 \begin{table}[ht]
-\caption{Classification performance. An asterisk ($^*$) indicates values that are significantly different from the others ($p<0.05$).}
+\caption{Classification performance. An asterisk ($^*$) indicates statistically significant results ($p<0.05$).}
 \label{ch3:table:results}
 \centering
 \normalsize\singlespacingplus
@@ -100,24 +152,22 @@ Here, \autoref{ch3:table:results} is an example of a table generated using the t
 \end{table}
 
 %========================
-\section{Figure}
+\subsection{Figures}
 %========================
-\begin{paragraph}
-Here are examples of figures in a thesis: \autoref{ch3:fig:fig-A} illustrates a standard image inclusion, while \autoref{ch3:fig:mychemfig} shows a chemical reaction diagram generated with \texttt{chemfig}.
-\end{paragraph}
+\begin{subparagraph}
+Figures can be included using the \texttt{graphicx} package. Example shown in \autoref{ch3:fig:fig-A} and \autoref{ch3:fig:mychemfig}.
+\end{subparagraph}
 
-%----- Figure: Standard Image -----
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=1\columnwidth]{figures/ch3/A.pdf} % Could be .png or .jpg
-    \longcaption[This is a long figure caption example for an image.]{This figure demonstrates how to include a standard image (e.g., PDF, PNG, JPG) into your document. Captions longer than one line should be aligned left and indented after the first line.}
+    \includegraphics[width=1\columnwidth]{figures/ch3/A.pdf}
+    \longcaption[Example figure with long caption.]{This figure demonstrates how to include a standard image (e.g., PDF, PNG, JPG) into your document. Long captions should be aligned properly.}
     \label{ch3:fig:fig-A}
 \end{figure}
 
-%----- Figure: Chemfig Reaction -----
 \begin{figure}[ht]
     \centering
-    \chemnameinit{\chemfig{R-C(-[:-30]OH)=[:30]O}} % Optional molecule at the top
+    \chemnameinit{\chemfig{R-C(-[:-30]OH)=[:30]O}}
     \schemestart
         \chemname{\chemfig{R’OH}}{Alcohol}
         \+
@@ -133,32 +183,27 @@ Here are examples of figures in a thesis: \autoref{ch3:fig:fig-A} illustrates a 
 \end{figure}
 
 %========================
-\section{Citation}
+\subsection{Citations}
 %========================
-\begin{paragraph}
-This is an example of how to cite previous work, such as \cite{min2net}, or multiple sources like \cite{hu79, somework2020, tonio_paper}. Ensure that the corresponding BibTeX entries are added to the \texttt{bibliography.bib} file before citing.
+\begin{subparagraph}
+To cite references, use \verb|\cite{}|, such as \cite{min2net}, or multiple sources like \cite{hu79, somework2020, tonio_paper}. Ensure that the corresponding BibTeX entries are added to the \texttt{bibliography.bib} file before citing. Below is an example BibTeX entry:
+\end{subparagraph}
 
-Below is an example BibTeX entry:
 \begin{verbatim}
-    @ARTICLE{dummy2022example,
-      author  = {Doe, John and Smith, Jane and Roe, Richard},
-      journal = {Journal of Example Studies}, 
-      title   = {A Dummy Title for Demonstration Purposes}, 
-      year    = {2022},
-      volume  = {42},
-      number  = {1},
-      pages   = {1--10}
-    }
+@ARTICLE{dummy2022example,
+  author  = {Doe, John and Smith, Jane and Roe, Richard},
+  journal = {Journal of Example Studies},
+  title   = {A Dummy Title for Demonstration Purposes},
+  year    = {2022},
+  volume  = {42},
+  number  = {1},
+  pages   = {1--10}
+}
 \end{verbatim}
-\end{paragraph}
 
 %========================
-\section{Footnote}
+\subsection{Footnotes}
 %========================
-\begin{paragraph}
-I'm writing to test the \verb|\footnotemark| and \verb|\footnotetext| commands. 
-You can insert a footnote marker using the \verb|\footnotemark|\footnotemark{} command and later typeset the footnote text by writing 
-\verb|\footnotetext{Example footnote.}|. \footnotetext{Example footnote.}
-
-Let's do one more to see the result\footnotemark{}, which I'll comment on within the footnote.\footnotetext{Specifically, I'd write comments in this one.}
-\end{paragraph}
+\begin{subparagraph}
+You can insert a footnote marker using \verb|\footnotemark|\footnotemark{} and define the text later with \verb|\footnotetext{Example footnote.}|\footnotetext{Example footnote.}
+\end{subparagraph}

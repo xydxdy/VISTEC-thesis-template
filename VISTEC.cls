@@ -1,14 +1,13 @@
-% !TEX encoding = UTF-8 Unicode
-% Compiler: pdfLaTeX
-% Packages: TeX live version 2023
-%----------------------------------------------------------------------------
-% Author: Rattanaphon Chaisaen
-% Email: r.chaisaen@gmail.com
-% Last modified: April 23, 2025
-% version ='1.0'
+%% !TEX encoding = UTF-8 Unicode
+%% Compiler: pdfLaTeX
+%% Packages: TeX live version 2023
+%%----------------------------------------------------------------------------
+%% Author: Rattanaphon Chaisaen
+%% Email: r.chaisaen@gmail.com
+%% version ='1.0'
 
-% VISTEC Thesis Template © 2024 by Rattanaphon Chaisaen is licensed under CC BY-NC-SA 4.0 
-% ---------------------------------------------------------------------------
+%% VISTEC Thesis Template © 2024 by Rattanaphon Chaisaen is licensed under CC BY-NC-SA 4.0 
+%% ---------------------------------------------------------------------------
       
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%% Try to avoid editing this file %%%%%%%%%%%%%%%%%%%%%%
@@ -466,12 +465,13 @@
 \captionsetup[figure]{format=raggedcenterfig}
 
 % Define custom caption format for tables (ragged left alignment with hanging indent)
+
 \DeclareCaptionFormat{raggedlefthangtable}{%
-    \setlength{\columnsep}{\widthof{#1} + 2ex}%
+    \setlength{\columnsep}{\widthof{#1#2}}%
     \normalsize\singlespacingplus%
     \leftskip 0cm%
     \hangindent\columnsep%
-    \makebox[\columnsep-0.7ex][l]{\bfseries #1}#3%
+    \makebox[\columnsep][l]{\bfseries #1}#3%
     \par
 }
 \captionsetup[table]{format=raggedlefthangtable}
@@ -487,24 +487,6 @@
     \end{varwidth}\par%
 }
 \captionsetup[lstlisting]{format=raggedlefthanglst}
-
-% Removed redundant commented-out caption configurations for clarity
-% Uncomment and adjust these lines if further customization of figure or table captions is needed:
-
-% \captionsetup[figure]{
-%     labelfont=bf,
-%     format=raggedcenter,
-%     labelsep=space,
-%     singlelinecheck=false,
-% }
-
-% \captionsetup[table]{
-%     labelfont=bf,
-%     format=hang,
-%     labelsep=space,
-%     justification=justified,
-%     singlelinecheck=false,
-% }
 
 %%%%%%%%%%%%%%%%%%%% Code Style for Listings (Old) %%%%%%%%%%%%%%%%%%%% 
 
@@ -541,17 +523,7 @@
 % Customizing labels and captions for listings
 \renewcommand{\lstlistingname}{Algorithm}           % Change 'Listing' to 'Algorithm'
 \renewcommand{\lstlistlistingname}{List of \lstlistingname s} % Change 'List of Listings' to 'List of Algorithms'
-
-% Uncomment the following lines if further customization for captions is needed
-% \captionsetup[lstlisting]{
-%     labelfont=bf,
-%     format=hang,
-%     labelsep=space,
-%     justification=justified,
-%     singlelinecheck=false,
-%     % indention=1.8cm,
-% }
-              
+      
 %%%%%%%%%%%%%%%%%%% Section and Paragraph Format %%%%%%%%%%%%%%%%%%%%%%%
 
 % Custom hanging indent definition
@@ -831,11 +803,9 @@
 \newenvironment{keywords}[1]{
 \vfill
 \noindent
-    \begin{minipage}{\textwidth}
-    \noindent\hangindent=2cm
-    \hangafter=1
-    Keywords: #1.
-    \end{minipage}
+\begin{tabular}{@{}l p{0.85\textwidth}@{}} % l = label, p = paragraph box
+Keywords: & #1.
+\end{tabular}
 }{}
 
 
@@ -946,20 +916,6 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Appendix Page %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% \let\oldappendix\appendix
-% \renewcommand{\appendix}{%
-%     \clearpage
-%     \pagestyle{plain} % Set page style to plain for the appendix
-%     \thispagestyle{empty} % Remove header/footer from the first page of the appendix
-%     \oldappendix
-
-%     % Customize Appendix Sections and Numbering
-%     \renewcommand{\thesection}{\Alph{section}}
-    
-%     % Update Table of Contents Label for Appendix Sections
-%     \addtocontents{toc}{\protect\renewcommand{\protect\chaptername}{Appendix}}
-% }
-
 \let\oldappendix\appendix
 \renewcommand{\appendix}{%
     \clearpage
@@ -1040,8 +996,8 @@
 \renewcommand*\l@chapter[2]{%
 \ifnum \c@tocdepth >\m@ne
     \addpenalty{-\@highpenalty}%
-    \hangindent=1cm
-    \setlength\@tempdima{2em}%
+    % \hangindent=1cm
+    \setlength\@tempdima{0em}%
     \setlength\leftskip{0em}
     \begingroup
         \parindent
@@ -1056,6 +1012,11 @@
         \penalty\@highpenalty
     \endgroup
 \fi}
+
+\newcommand\splitarg[1]{%
+  \setsepchar{ }%
+  \readlist\myarg{#1}%
+}
 
 %% Customize ToC formatting for \section entries
 \renewcommand*\l@section[2]{%

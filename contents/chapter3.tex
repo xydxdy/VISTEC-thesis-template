@@ -1,11 +1,94 @@
+% %----------------------------------------
+% \chapter{Investigation 1}
+% \label{chapter3}
+% %----------------------------------------
+
+% %========================
+% \section{Section 1}
+% %========================
+% \begin{paragraph}
+% This section presents an overview of the initial investigation conducted in this study.
+% \end{paragraph}
+
+
 %----------------------------------------
-\chapter{Investigation 1}
+\chapter{How to Use This Template}
 \label{chapter3}
 %----------------------------------------
 
 %========================
-\section{Section 1}
+\section{Overview}
 %========================
 \begin{paragraph}
-This section presents an overview of the initial investigation conducted in this study.
+This chapter provides guidance on how to effectively use and customize the VISTEC \LaTeX{} thesis template. It explains the general structure, key files, and recommended practices to help users quickly adapt the template for their own thesis writing.
+\end{paragraph}
+
+%========================
+\section{Directory Structure}
+%========================
+\begin{paragraph}
+The template is organized into clearly separated folders and files to simplify management:
+
+\begin{itemize}[leftmargin=\paritemindent]
+    \item \texttt{main.tex} — The main file to compile your thesis.
+    \item \texttt{thesisinfo.tex} — Define your title, author information, advisor, and committee.
+    \item \texttt{contents/} — Contains all chapter, appendix, and special section files.
+    \item \texttt{figures/} — Store all figures, images, and plots used in the thesis.
+    \item \texttt{tables/} — Store external table files if needed.
+    \item \texttt{bibliography.bib} — Your BibTeX bibliography database.
+\end{itemize}
+\end{paragraph}
+
+%========================
+\section{Editing Thesis Metadata}
+%========================
+\begin{paragraph}
+Edit \texttt{thesisinfo.tex} to set your thesis title, author name, student ID, academic year, advisor, committee members, and program information. These metadata fields automatically populate the title page, approval page, and other formal sections.
+\end{paragraph}
+
+%========================
+\section{Adding Content to Chapters}
+%========================
+\begin{paragraph}
+Each main chapter (e.g., Introduction, Background, Investigations, Conclusion) should be placed under \texttt{contents/} and included using \verb|\include{}| in \texttt{main.tex}. You can create additional chapter files following the provided structure, and organize sections, figures, tables, algorithms, and citations inside them.
+\end{paragraph}
+
+%========================
+\section{Inserting Figures, Tables, and Equations}
+%========================
+\begin{paragraph}
+Use standard LaTeX environments to insert figures, tables, and equations. Examples are provided in \texttt{contents/chapter2.tex}. Figures and tables should include proper captions, labels, and cross-references using \verb|\autoref{}| to maintain consistency.
+\end{paragraph}
+
+%========================
+\section{Citing References}
+%========================
+\begin{paragraph}
+Manage your references in \texttt{bibliography.bib} using BibTeX format. Cite references in your chapters using \verb|\cite{}| for in-text citations and \verb|\fullcite{}| when listing complete citations. The Vancouver bibliography style is automatically applied.
+\end{paragraph}
+
+%========================
+\section{Compiling the Thesis}
+%========================
+\begin{paragraph}
+Use \texttt{pdfLaTeX} as the compiler. A typical compilation sequence includes:
+\begin{itemize}[leftmargin=\paritemindent]
+    \item First, run \texttt{pdflatex main.tex} to generate auxiliary files.
+    \item Then, run \texttt{bibtex main} to generate the bibliography.
+    \item Finally, run \texttt{pdflatex main.tex} twice to resolve cross-references.
+\end{itemize}
+
+Alternatively, tools like \texttt{latexmk} or IDEs like Overleaf, TeXShop, and VS Code with LaTeX Workshop can automate this process.
+\end{paragraph}
+
+%========================
+\section{Notes and Recommendations}
+%========================
+\begin{paragraph}
+\begin{itemize}[leftmargin=\paritemindent]
+    \item Regularly back up your files.
+    \item Keep figures and tables in separate folders to maintain a clean project.
+    \item Use consistent citation and figure labeling conventions.
+    \item Compile often to catch errors early.
+\end{itemize}
 \end{paragraph}

@@ -361,17 +361,20 @@
     }
 
     \begin{center}%
-        \vspace*{1\baselineskip}
-         {\Large\bfseries \@chapapp\space\thechapter} \normalsize\\[2em] 
-         {\Large\bfseries#1} 
-         \vspace*{1\baselineskip}
+        {\Large\bfseries
+        \vspace*{16pt}
+        \@chapapp\space\thechapter\\[2em]
+        % \vspace*{16pt}
+        #1
+        \vspace*{16pt}}
     \end{center}%
 }
 \def\@makeschapterhead#1{%
     \begin{center}%
-    \vspace*{1\baselineskip}
-        \Large\bfseries #1
-        \vspace*{1\baselineskip}
+    \Large\bfseries 
+    \vspace*{16pt}
+        #1
+    \vspace*{16pt}
     \end{center}%
 }
 
@@ -561,53 +564,53 @@
 
 % Custom Section Formatting
 \renewcommand\section{
-    \parskip 1.5ex
+    \parskip 1ex
     \leftskip 0pt\@startsection{section}{1}
     {\z@}% indent
-    {\baselineskip}% <space before>
+    {14pt}% <space before>
     {0.5pt}% <space after>
     {\large\bfseries}
 }
 
 % Custom Subsection Formatting
 \renewcommand\subsection{
-    \parskip 1.5ex
+    \parskip 1ex
     \leftskip 0pt\@startsection{subsection}{2}
     {\z@}% indent
-    {\baselineskip}% <space before>
+    {12pt}% <space before>
     {0.5pt}% <space after>
     {\normalsize\bfseries}
     }
 
 % Custom Subsubsection Formatting
 \renewcommand\subsubsection{
-    \parskip 1.5ex
+    \parskip 1ex
     \leftskip 0pt\@startsection{subsubsection}{2}
     {\z@}% indent
-    {\baselineskip}% <space before>
+    {12pt}% <space before>
     {0.5pt}% <space after>
     {\normalsize\bfseries}
 }
 
 % Custom Paragraph Formatting
 \renewcommand*\paragraph{%
-    \vspace{-1ex}%
+    % \vspace{-1ex}%
     \setlength{\parindent}{1.25cm}%
-    \setlength{\parskip}{1.5ex}%
+    % \setlength{\parskip}{1.5ex}%
 }
 
 % Custom Subparagraph Formatting
 \renewcommand*\subparagraph{%
-    \vspace{-1ex}%
+    % \vspace{-1ex}%
     \setlength{\parindent}{2.25cm}%
-    \setlength{\parskip}{1.5ex}%
+    % \setlength{\parskip}{1.5ex}%
 }
 
 % Custom Subsubparagraph Formatting
 \newcommand*\subsubparagraph{%
-    \vspace{-1ex}%
+    % \vspace{-1ex}%
     \setlength{\parindent}{3.5cm}%
-    \setlength{\parskip}{1.5ex}%
+    % \setlength{\parskip}{1.5ex}%
 }
 
 
@@ -628,18 +631,18 @@
     \begin{titlepage}
         \begin{center}
             % Logo
-            \includegraphics[height=2.18cm]{\@logo}
+            \includegraphics[height=2.19cm]{\@logo}
             \vspace{14pt}
             
             % Title
-            \large\normalfont\MakeUppercase{\@title}
+            \large\normalfont\singlespacingplus\MakeUppercase{\@title}
         \end{center}
         
         \vfill
         
         % Author Information
         \begin{center}
-            \large\normalfont\MakeUppercase{\@author} \\
+            \large\normalfont\singlespacingplus\MakeUppercase{\@author} \\
             ID \@studentid
         \end{center}
         
@@ -647,12 +650,12 @@
         
         % Thesis Information
         \begin{center}
-            \large\normalfont
+            \large\normalfont\singlespacingplus
             A THESIS SUBMITTED TO \\
             \MakeUppercase{\@institute} \\
             IN PARTIAL FULFILLMENT OF THE REQUIREMENTS FOR \\
             THE DEGREE OF \MakeUppercase{\@degreefield} \\
-            IN \MakeUppercase{\@program} \\
+            IN \MakeUppercase{\@program} \\\vspace{14pt}
             \@academicyear
         \end{center}
         
@@ -683,8 +686,9 @@
     \pagestyle{empty}
     % Approval Information Table
     \noindent
+    \doublespacing\normalfont\normalsize
     \begin{tabular}{p{0.1725\linewidth}p{0.7825\linewidth}}
-        \\~\\ % two line spaces
+        \\[2em] % two line spaces
         \leftskip-0.1in Title: & \@title \\
         \leftskip-0.1in Advisor: & \@advisor \\
         \leftskip-0.1in Name: & \@authortitle \ \@author \\
@@ -729,28 +733,28 @@
                 \begin{tabular}[c]{@{}l@{}} .......................................... Chairperson \\ (\@memberone) \end{tabular}
             }
             \ifthenelse{\equal\tmptwo\memtwo}{& \\[-1em]}{
-                & \begin{tabular}[c]{@{}l@{}} ................................................ Member \\ (\@membertwo) \end{tabular} \\~\\
+                & \begin{tabular}[c]{@{}l@{}} ................................................ Member \\ (\@membertwo) \end{tabular} \\[2em]
             }
 
             \ifthenelse{\equal\tmpthree\memthree}{}{
                 \begin{tabular}[c]{@{}l@{}} ................................................ Member \\ (\@memberthree) \end{tabular}
             }
             \ifthenelse{\equal\tmpfour\memfour}{& \\[-1em]}{
-                & \begin{tabular}[c]{@{}l@{}} ................................................ Member \\ (\@memberfour) \end{tabular} \\~\\
+                & \begin{tabular}[c]{@{}l@{}} ................................................ Member \\ (\@memberfour) \end{tabular} \\[2em]
             }
 
             \ifthenelse{\equal\tmpfive\memfive}{}{
                 \begin{tabular}[c]{@{}l@{}} ................................................ Member \\ (\@memberfive) \end{tabular}
             }
             \ifthenelse{\equal\tmpsix\memsix}{& \\[-1em]}{
-                & \begin{tabular}[c]{@{}l@{}} ................................................ Member \\ (\@membersix) \end{tabular} \\~\\
+                & \begin{tabular}[c]{@{}l@{}} ................................................ Member \\ (\@membersix) \end{tabular} \\[2em]
             }
 
             \ifthenelse{\equal\tmpseven\memseven}{}{
                 \begin{tabular}[c]{@{}l@{}} ................................................ Member \\ (\@memberseven) \end{tabular}
             }
             \ifthenelse{\equal\tmpeight\memeight}{& \\[-1em]}{
-                & \begin{tabular}[c]{@{}l@{}} ................................................ Member \\ (\@membereight) \end{tabular} \\~\\
+                & \begin{tabular}[c]{@{}l@{}} ................................................ Member \\ (\@membereight) \end{tabular} \\[2em]
             }
         \end{tabular}
     \end{table}
@@ -767,6 +771,7 @@
             & \multicolumn{1}{l}{}
         \end{tabular}
     \end{table}
+    \vspace{-1.5em}
 
     \clearpage
 }
@@ -787,15 +792,15 @@
 
     % Abstract Title Section
     \begin{center}
-        {\Large\normalfont{\@title}} \normalsize\\[2em]
-        {\Large\normalfont{\bfseries{Abstract}}} \normalsize\\[2em]
-        \normalsize\normalfont{\@author} \normalsize\\[2em]
+        {\singlespacingplus\Large\normalfont{\@title}\\[2em]}
+        {\singlespacingplus\large\normalfont{\bfseries{Abstract}} \\}
+        {\singlespacingplus\large\normalfont{\@author}} \normalsize\normalfont\doublespacing\\[2em]
     \end{center}
     
     % Abstract Text
-    \setlength\parindent{1.75cm}
-    \normalfont\normalsize\par
-    \input{contents/abstract}
+    {\setlength\parindent{1.75cm}
+    \normalfont\normalsize\singlespacingplus\par
+    \input{contents/abstract}}
     
     \clearpage
 }
@@ -803,7 +808,8 @@
 \newenvironment{keywords}[1]{
 \vfill
 \noindent
-\begin{tabular}{@{}l p{0.85\textwidth}@{}} % l = label, p = paragraph box
+\normalfont\normalsize\singlespacingplus
+\begin{tabular}{@{}p{0.1\textwidth} p{0.87\textwidth}@{}}%
 Keywords: & #1.
 \end{tabular}
 }{}
@@ -824,16 +830,16 @@ Keywords: & #1.
 
      % Acknowledgment Title Section
     \begin{center}%
-        {\normalfont\Large{\bfseries{Acknowledgment}}} \\[2em]
+        {\singlespacingplus\normalfont\Large\bfseries{Acknowledgment}\\[2em]}
     \end{center}
 
     % Acknowledgment Content
     \setlength\parindent{1.25cm}
-    \normalfont\normalsize\par
+    \normalfont\normalsize\singlespacingplus\par
     \input{contents/acknowledgment}
 
     % Author Signature Section
-    \vspace{24pt}
+    \vspace{4em}
     \parbox{0.7\textwidth}{}\hfill
     \parbox{0.3\textwidth}{
         \begin{center}
@@ -859,14 +865,14 @@ Keywords: & #1.
 % First page abbreviation header
 \newcommand{\abbreviationheader}{%
   \begin{center}
-    {\Large\bfseries List of Abbreviations} \\[2em]
+    {\singlespacingplus\Large\bfseries List of Abbreviations\\[2em]}
   \end{center}
 }
 
 % Continuation header
 \newcommand{\abbreviationcontheader}{%
   \begin{center}
-    {\Large\bfseries List of Abbreviations (Cont.)} \\[2em]
+    {\singlespacingplus\Large\bfseries List of Abbreviations (Cont.)\\[2em]}
   \end{center}
 }
 
@@ -906,6 +912,7 @@ Keywords: & #1.
     \abbreviationheader
 
     % Load abbreviations content file
+    \normalfont\normalsize\doublespacing
     \input{contents/abbreviations}
   \endgroup
 
@@ -1071,6 +1078,7 @@ Keywords: & #1.
   \begin{center}
     {\Large\bfseries Contents} \\[2em]
     {} \hfill Page
+    \vspace{-1em}
   \end{center}
 }
 
@@ -1079,6 +1087,7 @@ Keywords: & #1.
   \begin{center}
     {\Large\bfseries Contents (Cont.)} \\[2em]
     {} \hfill Page
+    \vspace{-1em}
   \end{center}
 }
 
@@ -1163,6 +1172,7 @@ Keywords: & #1.
   \begin{center}
     {\Large\bfseries \listtablename} \\[2em]
     Table \hfill Page
+    \vspace{-1em}
   \end{center}
 }
 
@@ -1171,6 +1181,7 @@ Keywords: & #1.
   \begin{center}
     {\Large\bfseries \listtablename\ (Cont.)} \\[2em]
     Table \hfill Page
+    \vspace{-1em}
   \end{center}
 }
 
@@ -1213,6 +1224,7 @@ Keywords: & #1.
     \lotheader
 
     % Generate the List of Tables
+    \doublespacing
     \@starttoc{lot}%
   \endgroup
 
@@ -1233,6 +1245,7 @@ Keywords: & #1.
   \begin{center}
     {\Large\bfseries \listfigurename} \\[2em]
     Figure \hfill Page
+    \vspace{-1em}
   \end{center}
 }
 
@@ -1241,6 +1254,7 @@ Keywords: & #1.
   \begin{center}
     {\Large\bfseries \listfigurename\ (Cont.)} \\[2em]
     Figure \hfill Page
+    \vspace{-1em}
   \end{center}
 }
 
@@ -1283,6 +1297,7 @@ Keywords: & #1.
     \lofheader
 
     % Generate the List of Figures
+    \doublespacing
     \@starttoc{lof}%
   \endgroup
 

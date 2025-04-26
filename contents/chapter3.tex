@@ -27,6 +27,69 @@ The template is organized into clearly separated folders and files to simplify m
 \end{paragraph}
 
 %========================
+\section{Setting Up Document Class Options}
+%========================
+\begin{paragraph}
+The \texttt{VISTEC} document class supports several options to customize the thesis according to the degree type, school, and program. Proper configuration of these options ensures that the generated thesis document meets the official formatting standards. 
+
+\textbf{The document class options must be specified in the \texttt{main.tex} file.}
+\end{paragraph}
+
+%========================
+\subsection{Required Options}
+%========================
+\begin{subparagraph}
+Two required options must be specified when declaring the document class in \texttt{main.tex}:
+
+\begin{itemize}[leftmargin=\subparitemindent]
+    \item \textbf{Degree Type:}
+    \begin{itemize}[leftmargin=1em]
+        \item \texttt{phd} — for \verb|\degreefield{Doctor of Philosophy}|
+        \item \texttt{master} — for \verb|\degreefield{Master of Engineering}|
+    \end{itemize}
+
+    \item \textbf{School and Program:}
+    \begin{itemize}[leftmargin=1em]
+        \item \texttt{ist} — School of Information Science and Technology \\ \quad\quad (Program: Information Science and Technology)
+        \item \texttt{mse} — School of Molecular Science and Engineering \\ \quad\quad (Program: Materials Science and Engineering)
+        \item \texttt{ese} — School of Energy Science and Engineering \\ \quad\quad (Program: Chemical Engineering)
+        \item \texttt{bse} — School of Biomolecular Science and Engineering \\ \quad\quad (Program: Biomolecular Science and Engineering)
+    \end{itemize}
+\end{itemize}
+
+If your program is not among the predefined options, you must manually specify the \verb|\degreefield|, \verb|\school|, and \verb|\program| fields in \texttt{thesisinfo.tex}.
+\end{subparagraph}
+
+%========================
+\subsection{Optional Options}
+%========================
+\begin{subparagraph}
+The document class also provides optional settings that control additional layout features:
+
+\begin{itemize}[leftmargin=\subparitemindent]
+    \item \texttt{final} — (default) Compiles the document in its final version.
+    \item \texttt{showframe} — Displays page layout frames (e.g., margins, headers, text block areas).
+    \item \texttt{showgrid} — Displays a background grid to help visualize element positioning.
+\end{itemize}
+
+These options are useful during the drafting and formatting stages but should be disabled for the final submission. They are set in the document class declaration line in \texttt{main.tex}.
+\end{subparagraph}
+
+%========================
+\subsection{Example Usage}
+%========================
+\begin{subparagraph}
+The document class options are configured in the preamble of the \texttt{main.tex} file. Example configurations include:
+
+\begin{itemize}[leftmargin=\subparitemindent]
+    \item \texttt{\textbackslash documentclass[phd, ist]\{VISTEC\}}\\Ph.D. thesis, IST School (Information Science and Technology Program)
+    \item \texttt{\textbackslash documentclass[master, mse]\{VISTEC\}}\\Master’s thesis, MSE School (Materials Science and Engineering Program)
+    \item \texttt{\textbackslash documentclass[phd, ese, showframe]\{VISTEC\}}\\Ph.D. thesis, ESE School (Chemical Engineering Program) with layout frames displayed
+\end{itemize}
+
+\end{subparagraph}
+
+%========================
 \section{Editing Thesis Metadata}
 %========================
 \begin{paragraph}

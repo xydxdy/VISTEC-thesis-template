@@ -912,7 +912,7 @@ Keywords: & #1.
     \abbreviationheader
 
     % Load abbreviations content file
-    \normalfont\normalsize\doublespacing
+    \normalfont\normalsize\singlespacingplus
     \input{contents/abbreviations}
   \endgroup
 
@@ -1224,7 +1224,7 @@ Keywords: & #1.
     \lotheader
 
     % Generate the List of Tables
-    \doublespacing
+    \singlespacingplus
     \@starttoc{lot}%
   \endgroup
 
@@ -1297,7 +1297,7 @@ Keywords: & #1.
     \lofheader
 
     % Generate the List of Figures
-    \doublespacing
+    \singlespacingplus
     \@starttoc{lof}%
   \endgroup
 

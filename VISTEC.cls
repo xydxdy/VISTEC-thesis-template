@@ -798,7 +798,7 @@
     \end{center}
     
     % Abstract Text
-    {\setlength\parindent{1.75cm}
+    {\setlength\parindent{1.25cm}
     \normalfont\normalsize\singlespacingplus\par
     \input{contents/abstract}}
     

@@ -1,77 +1,82 @@
 %% !TEX encoding = UTF-8 Unicode
 %% Compiler: pdfLaTeX
-%% Packages: TeX live version 2023
+%% Packages: TeX Live version 2023
 
 %% VISTEC Thesis Template © 2024 by Rattanaphon Chaisaen is licensed under CC BY-NC-SA 4.0 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%% VISTEC documentclass %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%% required options:
-    %% (1) 
-        %% phd:      %% \degreefield{Doctor of Philosophy}
-        %% master:   %% \degreefield{Master of Engineering}
-    %% (2)
-        %% ist:  %% \school{School of Information Science and Technology}  
-                %% \program{Information Science and Technology}
-        %% mse:  %% \school{School of Materials Science and Engineering}  
-                %% \program{Materials Science and Engineering}
-        %% ese:  %% \school{School of Energy Science and Engineering}  
-                %% \program{Chemical Engineering}
-        %% bse:  %% \school{School of Biomolecular Science and Engineering}  
-                %% \program{Biomolecular Science and Engineering}
-    %% otherwise: 
-        %% fill your \degreefield, \school and \program at `macro.tex`
-                
-%%%%%%% optional: (3) [final, showframe, showgrid]
-                %% default to final
-                %% showframe: display frame
-                %% showgrid: display grid
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% VISTEC documentclass %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%% example:                
+%% Required options:
+    %% (1) Degree type:
+        %% phd      → \degreefield{Doctor of Philosophy}
+        %% master   → \degreefield{Master of Engineering}
+    %% (2) School and program:
+        %% ist → School of Information Science and Technology
+        %% mse → School of Materials Science and Engineering
+        %% ese → School of Energy Science and Engineering
+        %% bse → School of Biomolecular Science and Engineering
+    %% Otherwise:
+        %% Fill \degreefield, \school, and \program manually in `thesisinfo.tex`
+                
+%% Optional options:
+    %% final      → (default) Final version
+    %% showframe  → Display frame boxes
+    %% showgrid   → Display a grid layout
+
+%% Example usage:                
 %%  \documentclass[phd, ist]{VISTEC}
-%%  \documentclass[master, ist]{VISTEC}
+%%  \documentclass[master, mse]{VISTEC}
+%%  \documentclass[phd, ist, showframe]{VISTEC}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \documentclass[phd, ist]{VISTEC}
-\input{macro} %% edit title and thesis approval pages at `macro.tex`
-\addbibresource{bibliography.bib} %% include the references from `bibliography.bib`
 
-%%%%%%%%%%%%%%%%%%%%%% declare usepackage %%%%%%%%%%%%%%%%%%%%%
-%% Add your use package here!
+%% Load thesisinfo.tex
+\input{thesisinfo} %% edit title, thesis approval, and committee at `thesisinfo.tex`
 
+%% Load bibliography file
+\addbibresource{bibliography.bib}
+
+%%%%%%%%%%%%%%%%%%%%%% Add your custom packages %%%%%%%%%%%%%%%%%%%%%
 \usepackage{booktabs}
 \usepackage{multirow}
 \usepackage[version=4]{mhchem}
 \usepackage{chemfig}
+
+%% Customize chemical bond printing
 \DeclareMathAlphabet{\foo}{OT1}{phv}{m}{n}
 \renewcommand*\printatom[1]{\ensuremath{\foo{#1}}}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document} 
 
-    %%  set line spacing
-    \singlespacingplus %1.5x
+    %% Set global line spacing
+    \singlespacingplus % 1.5x line spacing
 
-    %% edit and add your information at `macro.tex`
+    %% Title and approval pages
     \maketitle
     \makeapproval
-    
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%% prologue %%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-    %% set page numbering format
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%% Prologue %%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    %% Roman page numbering
     \fancyhf[cf]{\thepage}
     \pagenumbering{roman}
     \setcounter{page}{2}
     
-    \abstract                       %% add your content at `contents/abstract.tex`
-    \acknowledgment                 %% add your content at `contents/acknowledgment.tex`
+    %% Preliminary sections
+    \abstract                       %% Content at `contents/abstract.tex`
+    \acknowledgment                 %% Content at `contents/acknowledgment.tex`
     \tableofcontents
     \listoftables
     \listoffigures
-    \abbreviations                  %% add your content at `contents/abbreviations.tex`
+    \abbreviations                  %% Content at `contents/abbreviations.tex`
     
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%% main chapter %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %% set page numbering format
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%% Main Chapters %%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    %% Arabic page numbering
     \pagenumbering{arabic}
     \setcounter{page}{1}
     
@@ -81,10 +86,14 @@
     \include{contents/chapter4}
     \include{contents/chapter5}
     
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%% epilogue %%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-    %% References page: add your BibTeX of the references at `bibliography.bib`
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%% Epilogue %%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    %% References
     \vancouverbib
-    \include{contents/appendix}   %% add your content at `contents/appendix.tex`
-    \authorbiography                %% add your content at `contents/authorbiography.tex`
+
+    %% Appendices
+    \include{contents/appendix}   %% Content at `contents/appendix.tex`
+
+    %% Author Biography
+    \authorbiography                %% Content at `contents/authorbiography.tex`
 
 \end{document}

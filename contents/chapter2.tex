@@ -1,40 +1,43 @@
-\chapter{Background}		
+%----------------------------------------
+\chapter{Background}
 \label{chapter2}
+%----------------------------------------
 
+%========================
 \section{Heading}
-
+%========================
 \begin{paragraph}
 This is a paragraph under the main section. It introduces the overall content of the section in a general manner.
 \end{paragraph}
 
+%========================
 \subsection{Sub-heading}
-
+%========================
 \begin{subparagraph}
 This is a subparagraph under the first subsection. It provides additional detail or clarification related to the subsection's topic.
 \end{subparagraph}
 
+%========================
 \subsubsection{Second-level Sub-heading}
-
+%========================
 \begin{subsubparagraph}
 This is a subsubparagraph under the second-level subheading. It is typically used for listing or elaborating fine-grained points.
 \end{subsubparagraph}
 
 \begin{enumerate}[itemindent=\subsubparitemindent]
-\item This is the first item in the enumerated list.
-\item This is the second item in the enumerated list.
-\item This is the third item in the enumerated list.
+    \item This is the first item in the enumerated list.
+    \item This is the second item in the enumerated list.
+    \item This is the third item in the enumerated list.
 \end{enumerate}
 
-
-
-\section{Equation} 
-
+%========================
+\section{Equation}
+%========================
 \begin{paragraph}
-As an illustration of \LaTeX's mathematics formatting,
-\autoref{ch2:eq:renyi} is the definition of {\em R\'enyi entropy} and \autoref{ch2:eq:total-loss} is the total loss function:
+As an illustration of \LaTeX's mathematics formatting, \autoref{ch2:eq:renyi} is the definition of {\em R\'enyi entropy} and \autoref{ch2:eq:total-loss} is the total loss function:
 \end{paragraph}
 
-%%%%%%%%%%%%%%%%%%%%%%%%% EQUATION  %%%%%%%%%%%%%%%%%%%%%%%%% 
+%----- Equation: Renyi Entropy -----
 \begin{equation}
 \label{ch2:eq:renyi}
 H_{\alpha}(X) =
@@ -42,17 +45,17 @@ H_{\alpha}(X) =
 \log \left(\sum_{x \in {\cal X}}P[X=x]^{\alpha} \right) .
 \end{equation}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%  EQUATION %%%%%%%%%%%%%%%%%%%%%%%%% 
-\begin{equation} 
+%----- Equation: Total Loss -----
+\begin{equation}
 \label{ch2:eq:total-loss}
 \begin{aligned}
-\mathcal{L}_{\textrm{total}} = \frac{1}{N}\sum_{i=1}^{N}\{w_i\mathcal{L}_i\}. 
+\mathcal{L}_{\textrm{total}} = \frac{1}{N}\sum_{i=1}^{N}\{w_i\mathcal{L}_i\}.
 \end{aligned}
 \end{equation}
 
-
+%========================
 \section{Algorithm}
-
+%========================
 \begin{paragraph}
 This is an example of \autoref{ch2:algo:my-algo}.
 \end{paragraph}
@@ -61,36 +64,33 @@ This is an example of \autoref{ch2:algo:my-algo}.
 \caption{An algorithm with caption.}
 \label{ch2:algo:my-algo}
 \normalsize\singlespacing
-\begin{algorithmic}[1] % [1] print number all lines 
+\begin{algorithmic}[1] % [1] print number on all lines
     \Require $n \geq 0$
     \Ensure $y = x^n$
     \State $y \gets 1$
     \State $X \gets x$
     \State $N \gets n$
     \While{$N \neq 0$}
-    \If{$N$ is even}
-        \State $X \gets X \times X$
-        \State $N \gets \frac{N}{2}$  \Comment{This is a comment}
-    \ElsIf{$N$ is odd}
-        \State $y \gets y \times X$
-        \State $N \gets N - 1$
-    \EndIf
+        \If{$N$ is even}
+            \State $X \gets X \times X$
+            \State $N \gets \frac{N}{2}$ \Comment{This is a comment}
+        \ElsIf{$N$ is odd}
+            \State $y \gets y \times X$
+            \State $N \gets N - 1$
+        \EndIf
     \EndWhile
 \end{algorithmic}
 \end{algorithm}
 
-
-
+%========================
 \section{Table}
-
+%========================
 \begin{paragraph}
-LaTeX table generators, such as \href{https://www.tablesgenerator.com/}{TablesGenerator.com}\footnotemark{}, can help you easily create well-formatted tables\footnotetext{https://www.tablesgenerator.com/}. 
+LaTeX table generators, such as \href{https://www.tablesgenerator.com/}{TablesGenerator.com}\footnotemark{}, can help you easily create well-formatted tables\footnotetext{https://www.tablesgenerator.com/}.
 Here, \autoref{ch2:table:results} is an example of a table generated using the tool.
 \end{paragraph}
-    
 
-%%%%%%%%%%%%%%%%%%%%%%%%% TABLE BEGIN %%%%%%%%%%%%%%%%%%%%%%%%% 
-%%%%% Create LaTeX table from https://www.tablesgenerator.com/
+%----- Table: Classification Results -----
 \begin{table}[ht]
 \caption{Classification performance. An asterisk ($^*$) indicates values that are significantly different from the others ($p<0.05$).}
 \label{ch2:table:results}
@@ -98,37 +98,26 @@ Here, \autoref{ch2:table:results} is an example of a table generated using the t
 \normalsize\singlespacingplus
 \input{tables/table1}
 \end{table}
-%%%%%%%%%%%%%%%%%%%%%%%%% TABLE END %%%%%%%%%%%%%%%%%%%%%%%%%  
 
-
-
-
-
+%========================
 \section{Figure}
-
-\section{Figure}
-
+%========================
 \begin{paragraph}
 Here are examples of figures in a thesis: Figure~\ref{ch2:fig:fig-A} illustrates a standard image inclusion, while Figure~\ref{ch2:fig:mychemfig} shows a chemical reaction diagram generated with \texttt{chemfig}.
 \end{paragraph}
 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%% FIGURE BEGIN %%%%%%%%%%%%%%%%%%%%%%%%% 
+%----- Figure: Standard Image -----
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=1\columnwidth]{figures/ch2/A.pdf} % Or .png, .jpg
+    \includegraphics[width=1\columnwidth]{figures/ch2/A.pdf} % Could be .png or .jpg
     \longcaption[This is a long figure caption example for an image.]{This figure demonstrates how to include a standard image (e.g., PDF, PNG, JPG) into your document. Captions longer than one line should be aligned left and indented after the first line.}
     \label{ch2:fig:fig-A}
 \end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%% FIGURE END %%%%%%%%%%%%%%%%%%%%%%%%% 
 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%% FIGURE BEGIN %%%%%%%%%%%%%%%%%%%%%%%%% 
+%----- Figure: Chemfig Reaction -----
 \begin{figure}[ht]
     \centering
-    \chemnameinit{\chemfig{R-C(-[:-30]OH)=[:30]O}} % Optional display at top
+    \chemnameinit{\chemfig{R-C(-[:-30]OH)=[:30]O}} % Optional molecule at the top
     \schemestart
         \chemname{\chemfig{R’OH}}{Alcohol}
         \+
@@ -138,20 +127,18 @@ Here are examples of figures in a thesis: Figure~\ref{ch2:fig:fig-A} illustrates
         \+
         \chemname{\chemfig{H_2O}}{Water}
     \schemestop
-    \chemnameinit{} % Clear it
+    \chemnameinit{}
     \caption{An esterification reaction illustrated using the \texttt{chemfig} package.}
     \label{ch2:fig:mychemfig}
 \end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%% FIGURE END %%%%%%%%%%%%%%%%%%%%%%%%% 
 
-
-
+%========================
 \section{Citation}
+%========================
 \begin{paragraph}
 This is an example of how to cite previous work, such as \cite{min2net}, or multiple sources like \cite{hu79, somework2020, tonio_paper}. Ensure that the corresponding BibTeX entries are added to the \texttt{bibliography.bib} file before citing.
 
 Below is an example BibTeX entry:
-
 \begin{verbatim}
     @ARTICLE{dummy2022example,
       author  = {Doe, John and Smith, Jane and Roe, Richard},
@@ -162,20 +149,16 @@ Below is an example BibTeX entry:
       number  = {1},
       pages   = {1--10}
     }
-    \end{verbatim}
-
+\end{verbatim}
 \end{paragraph}
 
-
-
+%========================
 \section{Footnote}
-
+%========================
 \begin{paragraph}
 I'm writing to test the \verb|\footnotemark| and \verb|\footnotetext| commands. 
-You can insert a footnote marker using the \verb|\footnotemark|\footnotemark{}
-command and later, when you're ready, typeset the footnote text by writing 
-\verb|\footnotetext{Here's the footnote.}|. \footnotetext{Here's the footnote.}
+You can insert a footnote marker using the \verb|\footnotemark|\footnotemark{} command and later typeset the footnote text by writing 
+\verb|\footnotetext{Example footnote.}|. \footnotetext{Example footnote.}
 
-Let's do one more to see the result\footnotemark{} which I'll comment on within the
-footnote\footnotetext{Specifically, I'd write comments in this one.}.
+Let's do one more to see the result\footnotemark{}, which I'll comment on within the footnote.\footnotetext{Specifically, I'd write comments in this one.}
 \end{paragraph}

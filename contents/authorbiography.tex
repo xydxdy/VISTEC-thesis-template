@@ -1,31 +1,40 @@
-% \noindent
-% \normalsize
+%----------------------------------------
+% Author Information Table
+%----------------------------------------
+
+% Define superscript command
 \newcommand{\ts}{\textsuperscript}
 
-\renewcommand{\arraystretch}{1.5} % add space between rows 1.5x point
-\leftskip-0.29cm
-\begin{longtable}{p{0.31\linewidth}p{0.66\linewidth}}
+% Set line spacing in table rows
+\renewcommand{\arraystretch}{1.5}
 
-\textbf{Name:}                      &       \MakeUppercase{Author Name} \\
+\begin{longtable}{@{}p{0.34\linewidth} p{0.63\linewidth}@{}}
 
-\textbf{Date of Birth:}             &       February 19\ts{th}, 1993   \\
+%----- Name -----
+\textbf{Name:} & \MakeUppercase{Author Name} \\
 
-\textbf{Place of Birth:}            &       Bangkok, Thailand  \\
+%----- Date of Birth -----
+\textbf{Date of Birth:} & February 19\ts{th}, 1993 \\
 
-\textbf{Current Address:}           &       555 Vibhavadi Rangsit Road, Chatuchak, Bangkok 10900 \\
+%----- Place of Birth -----
+\textbf{Place of Birth:} & Bangkok, Thailand \\
 
-\textbf{Education:}                 &       Bachelor of Science in Computer Science, Lorem Ipsum University, Bangkok, Thailand (2011-2014) \\
-{}                                  &       Master of Science in Computer Science, Lorem Ipsum University, Bangkok, Thailand (2015-2017)   
- \\
- 
-\textbf{Scholarship:}               &       Recipient of the full scholarship from Vidyasirimedhi \break Institute of Science and Technology (VISTEC)  \\
+%----- Current Address -----
+\textbf{Current Address:} & 555 Vibhavadi Rangsit Road, Chatuchak, Bangkok 10900 \\
 
-\textbf{Academic Publication:}      & \fullcite{min2net}. \\
-{}                                  & \fullcite{tonio_paper}. \\
-{}                                  & \fullcite{7298682}. \\ %% will be excluded
+%----- Education -----
+\textbf{Education:} & Bachelor of Science in Computer Science, Lorem Ipsum University, Bangkok, Thailand (2011–2014) \\
+{} & Master of Science in Computer Science, Lorem Ipsum University, Bangkok, Thailand (2015–2017) \\
+
+%----- Scholarship -----
+\textbf{Scholarship:} & Recipient of the full scholarship from Vidyasirimedhi \break Institute of Science and Technology (VISTEC) \\
+
+%----- Academic Publications -----
+\textbf{Academic Publication:} & \fullcite{min2net}. \\
+{} & \fullcite{tonio_paper}. \\
+{} & \fullcite{7298682}. \\ %% Will be excluded
 
 \end{longtable}
 
-%% exclude any papers that are not relevant to this thesis
-%% exclude this paper from references page
+% Exclude non-relevant papers from references
 \addtocategory{exclude}{7298682}

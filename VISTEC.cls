@@ -127,6 +127,8 @@
 \usepackage{longtable}
 \usepackage{microtype}
 \usepackage{etoolbox}
+\usepackage{afterpage}
+
 
 \usepackage[version=4]{mhchem}
 \usepackage{chemfig}
@@ -354,10 +356,11 @@
     \thispagestyle{empty}
     
     \newgeometry{
-        left   = 3.75cm,
-        right  = 2.5cm,
-        top    = 3.75cm,
-        bottom = 2.5cm,
+        inner=3.75cm, % left on odd pages
+        outer=2.5cm,  % right on odd pages
+        top=3.75cm,
+        bottom=2.5cm,
+        twoside % <-- important: activate two-side margins (for books/thesis)
     }
 
     \begin{center}%
@@ -567,9 +570,9 @@
     \parskip 1ex
     \leftskip 0pt\@startsection{section}{1}
     {\z@}% indent
-    {14pt}% <space before>
+    {12pt}% <space before>
     {0.5pt}% <space after>
-    {\large\bfseries}
+    {\normalsize\bfseries}
 }
 
 % Custom Subsection Formatting
@@ -618,6 +621,21 @@
 %%%%%%%%%%%%%%%%%%%%%%%%% Page formatting %%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%% Blank Page %%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\realblankpage{%
+    \null
+    \thispagestyle{empty}%
+    \addtocounter{page}{-1}%
+    \newpage
+}
+
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{plain}%
+    \newpage
+}
+    
+%% \afterpage{\blankpage}
 
 %%%%%%%%%%%%%%%%%%%%% Title Page %%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -631,7 +649,7 @@
     \begin{titlepage}
         \begin{center}
             % Logo
-            \includegraphics[height=2.19cm]{\@logo}
+            \includegraphics[height=2.18cm]{\@logo}
             \vspace{14pt}
             
             % Title
@@ -657,10 +675,11 @@
             THE DEGREE OF \MakeUppercase{\@degreefield} \\
             IN \MakeUppercase{\@program} \\~\\
             \@academicyear
+            \\~\\
         \end{center}
         
         \vspace{-1em}
-    \end{titlepage}
+    \end{titlepage}  
 }
 
 % Title Page Environment Setup
@@ -669,6 +688,7 @@
     \pagestyle{empty}
 }{%
     \clearpage
+    \afterpage{\realblankpage}
 }
 
 %%%%%%%%%%%%%%%%%%%%% Approval Page %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -680,7 +700,7 @@
     \newgeometry{
         left   = 3.75cm,
         right  = 2.5cm,
-        top    = 2.5cm, 
+        top    = 5cm, 
         bottom = 2.5cm,
     }
     \pagestyle{empty}
@@ -688,7 +708,6 @@
     \noindent
     \normalfont\normalsize
     \begin{tabular}{p{0.1725\linewidth}p{0.7825\linewidth}}
-        \\~\\% two line spaces
         \leftskip-0.1in Title: & \@title \\
         \leftskip-0.1in Advisor: & \@advisor \\
         \leftskip-0.1in Name: & \@authortitle \ \@author \\
@@ -774,6 +793,7 @@
     \vspace{-1.5em}
 
     \clearpage
+    \afterpage{\realblankpage}
 }
 
 %%%%%%%%%%%%%%%%%%%%% Abstract Page %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -782,28 +802,33 @@
     \label{Abstract}
     \addcontentsline{toc}{chapter}{Abstract}
     \clearpage
-    \newgeometry{
-        left   = 3.75cm,
-        right  = 2.5cm,
-        top    = 5cm, 
-        bottom = 2.5cm,
+   \newgeometry{
+        inner=3.75cm, % left on odd pages
+        outer=2.5cm,  % right on odd pages
+        top=3.75cm,
+        bottom=2.5cm,
+        twoside % <-- important: activate two-side margins (for books/thesis)
     }
-    \pagestyle{plain} % show page numbering
-
+    \thispagestyle{empty} % <-- No page number on the first page of Abstract
     % Abstract Title Section
     \begin{center}
-        {\singlespacingplus\Large\normalfont{\@title}\\~\\}
-        {\singlespacingplus\Large\normalfont{\bfseries{Abstract}}\\~\\}
-        {\singlespacingplus\normalsize\normalfont{\@author}\\~\\}
+        \vspace*{16pt}
+        {\singlespacingplus\normalsize\normalfont{\@title}\\~\\}
+        {\singlespacingplus\Large\normalfont\bfseries{Abstract}}\\~\\
+        {\singlespacingplus\normalsize\normalfont{\@author}}
     \end{center}
     
+    % Switch to plain style after the first page
+    \pagestyle{plain}
+
     % Abstract Text
     {\setlength\parindent{1.25cm}
     \normalfont\normalsize\singlespacingplus\par
     \input{contents/abstract}}
     
     \clearpage
-}
+}{}
+
 
 \newenvironment{keywords}[1]{
 \vfill
@@ -816,40 +841,52 @@ Keywords: & #1.
 
 
 %%%%%%%%%%%%%%%%%%%%% Acknowledgment page %%%%%%%%%%%%%%%%%%%%%%%%%
+
 \newenvironment{acknowledgment}{%
     \clearpage
     \newgeometry{
-        left   = 3.75cm,
-        right  = 2.5cm,
-        top    = 5cm, 
-        bottom = 2.5cm,
+        inner=3.75cm, % left on odd pages
+        outer=2.5cm,  % right on odd pages
+        top=3.75cm,
+        bottom=2.5cm,
+        twoside % <-- important: activate two-side margins (for books/thesis)
     }
-    \pagestyle{plain} % show page numbering
-    \addcontentsline{toc}{chapter}{Acknowledgment}
-    \typeout{acknowledgment}
+    \thispagestyle{empty} % No page number on first page
 
-     % Acknowledgment Title Section
-    \begin{center}%
-        {\singlespacingplus\normalfont\Large\bfseries{Acknowledgment}\\~\\}
+    % Title
+    \begin{center}
+        {
+        \vspace*{16pt}
+        \singlespacingplus\normalfont\Large\bfseries{Acknowledgment}
+        \\~\\
+        }
     \end{center}
 
-    % Acknowledgment Content
+    % Content
     \setlength\parindent{1.25cm}
     \normalfont\normalsize\singlespacingplus\par
     \input{contents/acknowledgment}
 
-    % Author Signature Section
-    \vspace{54pt} % 3 line x 12 pt x 1.5
+    % Signature
+    \vspace{54pt} % 3 lines x 12pt x 1.5
     \parbox{0.7\textwidth}{}\hfill
     \parbox{0.3\textwidth}{
         \begin{center}
-                \@author \\  
-                {\@examinationday} {\@examinationmonth} {\@examinationyear} 
+            \@author \\  
+            {\@examinationday} {\@examinationmonth} {\@examinationyear} 
         \end{center}
     }
 
-     \clearpage
-}
+    % Reset margins after first page
+    \clearpage
+    \newgeometry{
+        inner=3.75cm,
+        outer=2.5cm,
+        top=2.5cm,
+        bottom=2.5cm,
+        twoside
+    }
+}{}
 
 
 %%%%%%%%%%%%%%%%%%%%% List of Abbreviations Page %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -884,11 +921,12 @@ Keywords: & #1.
   \thispagestyle{plain}
 
   \newgeometry{
-    left   = 3.75cm,
-    right  = 2.5cm,
-    top    = 5cm,
-    bottom = 2.5cm,
-  }
+        inner=3.75cm, % left on odd pages
+        outer=2.5cm,  % right on odd pages
+        top=5cm,
+        bottom=2.5cm,
+        twoside % <-- important: activate two-side margins (for books/thesis)
+    }
 
   \addcontentsline{toc}{chapter}{List of Abbreviations}
 
@@ -928,6 +966,7 @@ Keywords: & #1.
     \clearpage
     \pagestyle{plain}
     \thispagestyle{empty}
+    
     \oldappendix
     \inappendixtrue
     % Redefine the chapter name printed in headings and ToC
@@ -946,14 +985,16 @@ Keywords: & #1.
 
 \newenvironment{authorbiography}{
     \clearpage
-    \pagestyle{plain} % Show page numbering
+    % \pagestyle{plain} % Show page numbering
+    \pagestyle{empty} % Show page numbering
     \addcontentsline{toc}{chapter}{Author’s Biography}
     \typeout{authorbiography}
     
     % Author Biography Title
     \noindent
     \begin{center}
-        {\Large\normalfont\bfseries{Author’s Biography}\\~\\}
+        \vspace*{16pt}
+        {\Large\normalfont\bfseries{Author’s Biography}\\[12pt]}
     \end{center}
     
     % Author Biography Content
@@ -962,6 +1003,7 @@ Keywords: & #1.
     \input{contents/authorbiography}
     
     \clearpage
+    \afterpage{\realblankpage}
 }
 
 
@@ -1098,12 +1140,15 @@ Keywords: & #1.
   \fancyfoot[c]{\thepage}
   \thispagestyle{plain}
 
+  \addcontentsline{toc}{chapter}{Contents}
+
   \newgeometry{
-    top    = 5cm,
-    bottom = 2.5cm,
-    left   = 3.75cm,
-    right  = 2.5cm,
-  }
+        inner=3.75cm, % left on odd pages
+        outer=2.5cm,  % right on odd pages
+        top=5cm,
+        bottom=2.5cm,
+        twoside % <-- important: activate two-side margins (for books/thesis)
+    }
 
   % Flag to detect first page
   \newif\if@firsttocpage
@@ -1193,11 +1238,12 @@ Keywords: & #1.
   \thispagestyle{plain}
 
   \newgeometry{
-    top    = 5cm,
-    bottom = 2.5cm,
-    left   = 3.75cm,
-    right  = 2.5cm,
-  }
+        inner=3.75cm, % left on odd pages
+        outer=2.5cm,  % right on odd pages
+        top=5cm,
+        bottom=2.5cm,
+        twoside % <-- important: activate two-side margins (for books/thesis)
+    }
 
   % Add List of Tables to the ToC
   \addcontentsline{toc}{chapter}{\listtablename}
@@ -1266,11 +1312,12 @@ Keywords: & #1.
   \thispagestyle{plain}
 
   \newgeometry{
-    top    = 5cm,
-    bottom = 2.5cm,
-    left   = 3.75cm,
-    right  = 2.5cm,
-  }
+        inner=3.75cm, % left on odd pages
+        outer=2.5cm,  % right on odd pages
+        top=5cm,
+        bottom=2.5cm,
+        twoside % <-- important: activate two-side margins (for books/thesis)
+    }
 
   % Add List of Figures to the ToC
   \addcontentsline{toc}{chapter}{\listfigurename}
@@ -1405,11 +1452,12 @@ Keywords: & #1.
   \thispagestyle{plain}
 
   \newgeometry{
-    top    = 5cm,
-    bottom = 2.5cm,
-    left   = 3.75cm,
-    right  = 2.5cm,
-  }
+        inner=3.75cm, % left on odd pages
+        outer=2.5cm,  % right on odd pages
+        top=5cm,
+        bottom=2.5cm,
+        twoside % <-- important: activate two-side margins (for books/thesis)
+    }
 
   % Add List of Algorithms to the Table of Contents
   \addcontentsline{toc}{chapter}{\listalgorithmname}
@@ -1448,23 +1496,29 @@ Keywords: & #1.
 
 \newcommand{\vancouverbib}{
     \clearpage
+    \thispagestyle{empty} % No page number on first page of References
     \addcontentsline{toc}{chapter}{References}
 
-     % Title for References
+    % Title for References
     \begin{center}%
+        \vspace*{16pt}
         {\Large\bfseries{References}}
         \normalsize\\~\\
     \end{center}
-    
+
+    % Switch to plain pagestyle (numbered) for second+ pages
+    \pagestyle{plain}
+
     % Set formatting for the references
     \singlespacingplus\normalsize
     \setlength\bibitemsep{0pt}
     
     % Print the bibliography without an additional heading
     \printbibliography[heading=none, notcategory=exclude]
-    
+
     \clearpage
 }
+
 
 
 \endinput

@@ -32,7 +32,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[phd, ist]{VISTEC}
+\documentclass[phd, ist, showframe]{VISTEC}
 
 %% Load thesisinfo.tex
 \input{thesisinfo} %% edit title, thesis approval, and committee at `thesisinfo.tex`
@@ -62,14 +62,16 @@
     \makeapproval
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%% Prologue %%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-    %% Roman page numbering
-    \fancyhf[cf]{\thepage}
-    \pagenumbering{roman}
-    \setcounter{page}{2}
     
     %% Preliminary sections
-    \abstract                       %% Content at `contents/abstract.tex`
     \acknowledgment                 %% Content at `contents/acknowledgment.tex`
+    
+     %% Roman page numbering
+    \fancyhf[cf]{\thepage}
+    \pagenumbering{roman}
+    \setcounter{page}{1}
+    
+    \abstract                       %% Content at `contents/abstract.tex`
     \tableofcontents
     \listoftables
     \listoffigures
@@ -81,9 +83,12 @@
     \setcounter{page}{1}
     
     \include{contents/chapter1}
-    \include{contents/chapter2}
-    \include{contents/chapter3}
-    \include{contents/chapter4}
+    \include{contents/chapter2} 
+    \blankpage % Insert blank page so next chapter starts on odd (right-hand) page
+    \include{contents/chapter3} 
+    \blankpage % Insert blank page so next chapter starts on odd (right-hand) page
+    \include{contents/chapter4} 
+    \blankpage % Insert blank page so next chapter starts on odd (right-hand) page
     \include{contents/chapter5}
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%% Epilogue %%%%%%%%%%%%%%%%%%%%%%%%%%%% 

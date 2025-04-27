@@ -363,8 +363,8 @@
     \begin{center}%
         {\Large\bfseries
         \vspace*{16pt}
-        \@chapapp\space\thechapter\\[2em]
-        % \vspace*{16pt}
+        \@chapapp\space\thechapter\\
+        \vspace*{16pt}
         #1
         \vspace*{16pt}}
     \end{center}%
@@ -655,7 +655,7 @@
             \MakeUppercase{\@institute} \\
             IN PARTIAL FULFILLMENT OF THE REQUIREMENTS FOR \\
             THE DEGREE OF \MakeUppercase{\@degreefield} \\
-            IN \MakeUppercase{\@program} \\\vspace{14pt}
+            IN \MakeUppercase{\@program} \\~\\
             \@academicyear
         \end{center}
         
@@ -686,9 +686,9 @@
     \pagestyle{empty}
     % Approval Information Table
     \noindent
-    \doublespacing\normalfont\normalsize
+    \normalfont\normalsize
     \begin{tabular}{p{0.1725\linewidth}p{0.7825\linewidth}}
-        \\[2em] % two line spaces
+        \\~\\% two line spaces
         \leftskip-0.1in Title: & \@title \\
         \leftskip-0.1in Advisor: & \@advisor \\
         \leftskip-0.1in Name: & \@authortitle \ \@author \\
@@ -732,29 +732,29 @@
             \ifthenelse{\equal\tmpone\memone}{}{
                 \begin{tabular}[c]{@{}l@{}} .......................................... Chairperson \\ (\@memberone) \end{tabular}
             }
-            \ifthenelse{\equal\tmptwo\memtwo}{& \\[-1em]}{
-                & \begin{tabular}[c]{@{}l@{}} ................................................ Member \\ (\@membertwo) \end{tabular} \\[2em]
+            \ifthenelse{\equal\tmptwo\memtwo}{& \\}{
+                & \begin{tabular}[c]{@{}l@{}} ................................................ Member \\ (\@membertwo) \end{tabular} \\~\\
             }
 
             \ifthenelse{\equal\tmpthree\memthree}{}{
                 \begin{tabular}[c]{@{}l@{}} ................................................ Member \\ (\@memberthree) \end{tabular}
             }
-            \ifthenelse{\equal\tmpfour\memfour}{& \\[-1em]}{
-                & \begin{tabular}[c]{@{}l@{}} ................................................ Member \\ (\@memberfour) \end{tabular} \\[2em]
+            \ifthenelse{\equal\tmpfour\memfour}{& \\}{
+                & \begin{tabular}[c]{@{}l@{}} ................................................ Member \\ (\@memberfour) \end{tabular} \\~\\
             }
 
             \ifthenelse{\equal\tmpfive\memfive}{}{
                 \begin{tabular}[c]{@{}l@{}} ................................................ Member \\ (\@memberfive) \end{tabular}
             }
-            \ifthenelse{\equal\tmpsix\memsix}{& \\[-1em]}{
-                & \begin{tabular}[c]{@{}l@{}} ................................................ Member \\ (\@membersix) \end{tabular} \\[2em]
+            \ifthenelse{\equal\tmpsix\memsix}{& \\}{
+                & \begin{tabular}[c]{@{}l@{}} ................................................ Member \\ (\@membersix) \end{tabular} \\~\\
             }
 
             \ifthenelse{\equal\tmpseven\memseven}{}{
                 \begin{tabular}[c]{@{}l@{}} ................................................ Member \\ (\@memberseven) \end{tabular}
             }
-            \ifthenelse{\equal\tmpeight\memeight}{& \\[-1em]}{
-                & \begin{tabular}[c]{@{}l@{}} ................................................ Member \\ (\@membereight) \end{tabular} \\[2em]
+            \ifthenelse{\equal\tmpeight\memeight}{& \\}{
+                & \begin{tabular}[c]{@{}l@{}} ................................................ Member \\ (\@membereight) \end{tabular} \\~\\
             }
         \end{tabular}
     \end{table}
@@ -766,7 +766,7 @@
         \singlespacingplus
         \begin{tabular}{p{0.5\linewidth} p{0.5\linewidth}}
             \multicolumn{1}{l}{
-                \begin{tabular}[c]{@{}c@{}} \\[3em] ............................................................... \\ (\@gradcommittee) \\ Chairperson \\ Graduate Studies Committee \end{tabular}
+                \begin{tabular}[c]{@{}c@{}} \\~\\ ............................................................... \\ (\@gradcommittee) \\ Chairperson \\ Graduate Studies Committee \end{tabular}
             }
             & \multicolumn{1}{l}{}
         \end{tabular}
@@ -792,9 +792,9 @@
 
     % Abstract Title Section
     \begin{center}
-        {\singlespacingplus\Large\normalfont{\@title}\\[2em]}
-        {\singlespacingplus\large\normalfont{\bfseries{Abstract}} \\}
-        {\singlespacingplus\large\normalfont{\@author}} \normalsize\normalfont\doublespacing\\[2em]
+        {\singlespacingplus\Large\normalfont{\@title}\\~\\}
+        {\singlespacingplus\Large\normalfont{\bfseries{Abstract}}\\~\\}
+        {\singlespacingplus\normalsize\normalfont{\@author}\\~\\}
     \end{center}
     
     % Abstract Text
@@ -830,7 +830,7 @@ Keywords: & #1.
 
      % Acknowledgment Title Section
     \begin{center}%
-        {\singlespacingplus\normalfont\Large\bfseries{Acknowledgment}\\[2em]}
+        {\singlespacingplus\normalfont\Large\bfseries{Acknowledgment}\\~\\}
     \end{center}
 
     % Acknowledgment Content
@@ -839,7 +839,7 @@ Keywords: & #1.
     \input{contents/acknowledgment}
 
     % Author Signature Section
-    \vspace{4em}
+    \vspace{54pt} % 3 line x 12 pt x 1.5
     \parbox{0.7\textwidth}{}\hfill
     \parbox{0.3\textwidth}{
         \begin{center}
@@ -865,14 +865,14 @@ Keywords: & #1.
 % First page abbreviation header
 \newcommand{\abbreviationheader}{%
   \begin{center}
-    {\singlespacingplus\Large\bfseries List of Abbreviations\\[2em]}
+    {\singlespacingplus\Large\bfseries List of Abbreviations}\normalsize\\~\\
   \end{center}
 }
 
 % Continuation header
 \newcommand{\abbreviationcontheader}{%
   \begin{center}
-    {\singlespacingplus\Large\bfseries List of Abbreviations (Cont.)\\[2em]}
+    {\singlespacingplus\Large\bfseries List of Abbreviations (Cont.)}\normalsize\\~\\
   \end{center}
 }
 
@@ -953,7 +953,7 @@ Keywords: & #1.
     % Author Biography Title
     \noindent
     \begin{center}
-        \Large\normalfont\bfseries{Author’s Biography} \normalsize\\[2em]
+        {\Large\normalfont\bfseries{Author’s Biography}\\~\\}
     \end{center}
     
     % Author Biography Content
@@ -1076,7 +1076,7 @@ Keywords: & #1.
 % First page ToC header
 \newcommand{\tocheader}{%
   \begin{center}
-    {\Large\bfseries Contents} \\[2em]
+    {\Large\bfseries Contents} \normalsize\\~\\
     {} \hfill Page
     \vspace{-1em}
   \end{center}
@@ -1085,7 +1085,7 @@ Keywords: & #1.
 % Continuation ToC header
 \newcommand{\toccontheader}{%
   \begin{center}
-    {\Large\bfseries Contents (Cont.)} \\[2em]
+    {\Large\bfseries Contents (Cont.)} \normalsize\\~\\
     {} \hfill Page
     \vspace{-1em}
   \end{center}
@@ -1170,7 +1170,7 @@ Keywords: & #1.
 % First page List of Tables header
 \newcommand{\lotheader}{%
   \begin{center}
-    {\Large\bfseries \listtablename} \\[2em]
+    {\Large\bfseries \listtablename} \normalsize\\~\\
     Table \hfill Page
     \vspace{-1em}
   \end{center}
@@ -1179,7 +1179,7 @@ Keywords: & #1.
 % Continuation List of Tables header
 \newcommand{\lotcontheader}{%
   \begin{center}
-    {\Large\bfseries \listtablename\ (Cont.)} \\[2em]
+    {\Large\bfseries \listtablename\ (Cont.)} \normalsize\\~\\
     Table \hfill Page
     \vspace{-1em}
   \end{center}
@@ -1243,7 +1243,7 @@ Keywords: & #1.
 % First page List of Figures header
 \newcommand{\lofheader}{%
   \begin{center}
-    {\Large\bfseries \listfigurename} \\[2em]
+    {\Large\bfseries \listfigurename} \normalsize\\~\\
     Figure \hfill Page
     \vspace{-1em}
   \end{center}
@@ -1252,7 +1252,7 @@ Keywords: & #1.
 % Continuation List of Figures header
 \newcommand{\lofcontheader}{%
   \begin{center}
-    {\Large\bfseries \listfigurename\ (Cont.)} \\[2em]
+    {\Large\bfseries \listfigurename\ (Cont.)} \normalsize\\~\\
     Figure \hfill Page
     \vspace{-1em}
   \end{center}
@@ -1384,7 +1384,7 @@ Keywords: & #1.
 % First page List of Algorithms header
 \newcommand{\loaheader}{%
   \begin{center}
-    {\Large\bfseries \listalgorithmname} \\[2em]
+    {\Large\bfseries \listalgorithmname} \normalsize\\~\\
     Algorithm \hfill Page
   \end{center}
 }
@@ -1392,7 +1392,7 @@ Keywords: & #1.
 % Continuation List of Algorithms header
 \newcommand{\loacontheader}{%
   \begin{center}
-    {\Large\bfseries \listalgorithmname\ (Cont.)} \\[2em]
+    {\Large\bfseries \listalgorithmname\ (Cont.)} \normalsize\\~\\
     Algorithm \hfill Page
   \end{center}
 }
@@ -1453,7 +1453,7 @@ Keywords: & #1.
      % Title for References
     \begin{center}%
         {\Large\bfseries{References}}
-        \normalsize\\[2em]
+        \normalsize\\~\\
     \end{center}
     
     % Set formatting for the references

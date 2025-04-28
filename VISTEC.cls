@@ -805,6 +805,9 @@
     \label{Abstract}
     \addcontentsline{toc}{chapter}{Abstract}
     \clearpage
+    % \ifodd\value{page}\else
+    %     \blankpage
+    % \fi
    \newgeometry{
         inner=3.75cm, % left on odd pages
         outer=2.5cm,  % right on odd pages
@@ -880,15 +883,15 @@ Keywords: & #1.
         \end{center}
     }
 
-    % Reset margins after first page
     \clearpage
-    \newgeometry{
-        inner=3.75cm,
-        outer=2.5cm,
-        top=2.5cm,
-        bottom=2.5cm,
-        twoside
-    }
+
+    % Check if current page is even, insert blank page if needed
+    \ifodd\value{page}\relax
+        % Odd page, good, do nothing
+    \else
+        \blankpage
+    \fi
+
 }{}
 
 

@@ -867,15 +867,25 @@ Keywords: & #1.
     \normalfont\normalsize\singlespacingplus\par
     \input{contents/acknowledgment}
 
-    % Signature
+    % Signature block
     \vspace{54pt} % 3 lines x 12pt x 1.5
-    \parbox{0.7\textwidth}{}\hfill
-    \parbox{0.3\textwidth}{
-        \begin{center}
-            \@author \\  
-            {\@examinationday} {\@examinationmonth} {\@examinationyear} 
-        \end{center}
-    }
+
+    \newlength{\signaturewidth}
+    \settowidth{\signaturewidth}{\@author}
+    \settowidth{\@tempdima}{{\@examinationday} {\@examinationmonth} {\@examinationyear}}
+    \ifdim\@tempdima>\signaturewidth
+        \setlength{\signaturewidth}{\@tempdima}
+    \fi
+    
+    % Create dynamic layout
+    \noindent
+    \makebox[\dimexpr\textwidth-\signaturewidth\relax][l]{}%
+    \makebox[\signaturewidth][c]{%
+        \begin{tabular}{c}
+            \@author \\
+            {\@examinationday} {\@examinationmonth} {\@examinationyear}
+        \end{tabular}
+    }    
 
     \clearpage
 

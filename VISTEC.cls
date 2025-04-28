@@ -1,10 +1,10 @@
 %% !TEX encoding = UTF-8 Unicode
 %% Compiler: pdfLaTeX
-%% Packages: TeX live version 2023
+%% Packages: TeX live version 2024
 %%----------------------------------------------------------------------------
 %% Author: Rattanaphon Chaisaen
 %% Email: r.chaisaen@gmail.com
-%% version ='1.0'
+%% version ='2.0'
 
 %% VISTEC Thesis Template © 2024 by Rattanaphon Chaisaen is licensed under CC BY-NC-SA 4.0 
 %% ---------------------------------------------------------------------------
@@ -352,6 +352,9 @@
 
 \def\@makechapterhead#1{%
     \clearpage
+    \ifodd\value{page}\else
+        \blankpage
+    \fi
     \pagestyle{plain}
     \thispagestyle{empty}
     

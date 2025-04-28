@@ -1121,6 +1121,7 @@ Keywords: & #1.
 % First page ToC header
 \newcommand{\tocheader}{%
   \begin{center}
+    \vspace*{16pt}
     {\Large\bfseries Contents} \normalsize\\~\\
     {} \hfill Page
     \vspace{-1em}
@@ -1148,7 +1149,7 @@ Keywords: & #1.
   \newgeometry{
         inner=3.75cm, % left on odd pages
         outer=2.5cm,  % right on odd pages
-        top=5cm,
+        top=3.75cm,
         bottom=2.5cm,
         twoside % <-- important: activate two-side margins (for books/thesis)
     }
@@ -1218,6 +1219,7 @@ Keywords: & #1.
 % First page List of Tables header
 \newcommand{\lotheader}{%
   \begin{center}
+    \vspace*{16pt}
     {\Large\bfseries \listtablename} \normalsize\\~\\
     Table \hfill Page
     \vspace{-1em}
@@ -1243,7 +1245,7 @@ Keywords: & #1.
   \newgeometry{
         inner=3.75cm, % left on odd pages
         outer=2.5cm,  % right on odd pages
-        top=5cm,
+        top=3.75cm,
         bottom=2.5cm,
         twoside % <-- important: activate two-side margins (for books/thesis)
     }
@@ -1292,6 +1294,7 @@ Keywords: & #1.
 % First page List of Figures header
 \newcommand{\lofheader}{%
   \begin{center}
+    \vspace*{16pt}
     {\Large\bfseries \listfigurename} \normalsize\\~\\
     Figure \hfill Page
     \vspace{-1em}
@@ -1317,7 +1320,7 @@ Keywords: & #1.
   \newgeometry{
         inner=3.75cm, % left on odd pages
         outer=2.5cm,  % right on odd pages
-        top=5cm,
+        top=3.75cm,
         bottom=2.5cm,
         twoside % <-- important: activate two-side margins (for books/thesis)
     }
@@ -1434,6 +1437,7 @@ Keywords: & #1.
 % First page List of Algorithms header
 \newcommand{\loaheader}{%
   \begin{center}
+    \vspace*{16pt}
     {\Large\bfseries \listalgorithmname} \normalsize\\~\\
     Algorithm \hfill Page
   \end{center}
@@ -1457,7 +1461,7 @@ Keywords: & #1.
   \newgeometry{
         inner=3.75cm, % left on odd pages
         outer=2.5cm,  % right on odd pages
-        top=5cm,
+        top=3.75cm,
         bottom=2.5cm,
         twoside % <-- important: activate two-side margins (for books/thesis)
     }
@@ -1506,7 +1510,7 @@ Keywords: & #1.
     \begin{center}%
         \vspace*{16pt}
         {\Large\bfseries{References}}
-        \normalsize\\~\\
+        {\normalsize\\~\\}
     \end{center}
 
     % Switch to plain pagestyle (numbered) for second+ pages

@@ -152,7 +152,6 @@
 \DeclareFieldFormat[article]{journaltitle}{\mkbibbold{#1}}
 \DeclareFieldFormat{title}{\mkbibbold{#1}}
 \DeclareFieldFormat{booktitle}{\textnormal{#1}}
-\DeclareFieldFormat{pages}{#1}
 
 \renewcommand*{\finentrypunct}{.}
 
@@ -163,14 +162,14 @@
   \printfield{title}%
   \setunit{\addperiod\space}%
   \printfield[journaltitle]{journaltitle}%
-  \setunit{\addspace}%
+  \setunit{\addperiod\addspace}%
   \printfield{year}%
   \setunit*{\addsemicolon}%
   \printfield{volume}%
   \iffieldundef{number}
     {}
     {\printtext[parens]{\printfield{number}}}%
-  \setunit*{\addcolon}%
+%   \setunit*{\addcolon}%
   \printfield{pages}%
   \finentry%
 }
@@ -181,11 +180,18 @@
   \setunit{\labelnamepunct}\newblock
   \printfield{title}%
   \setunit{\addperiod\space}%
+  \printtext{In: }%
   \printfield{booktitle}%
-  \setunit{\addsemicolon\space}%
-  \printfield{year}%
+  \iffieldundef{eventdate}
+    {}
+    {\setunit*{\addspace}\printfield{eventdate}}%
+  \iffieldundef{venue}
+    {}
+    {\setunit*{\addcomma\space}\printfield{venue}}%
   \setunit{\addperiod\space}%
-  \printtext{p.\ }\printfield{pages}%
+  \printfield{year}%
+%   \setunit*{\addcolon}%
+  \printfield{pages}%
   \finentry%
 }
 

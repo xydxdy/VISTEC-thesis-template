@@ -165,7 +165,7 @@
   \printfield{title}%
   \setunit{\addperiod\space}%
   \printfield[journaltitle]{journaltitle}%
-  \setunit{\addspace}%
+  \setunit{\addperiod\addspace}%
   \printfield{year}%
   \setunit*{\addsemicolon}%
   \printfield{volume}%

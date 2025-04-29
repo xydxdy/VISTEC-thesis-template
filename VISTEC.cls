@@ -428,8 +428,8 @@
 \setlist[enumerate]{
     label={\arabic*)},
     leftmargin=0cm,
-    topsep=0ex,
-    itemsep=0ex,
+    topsep=-6pt,
+    itemsep=0pt,
     parsep=0ex,
     partopsep=0pt
 }
@@ -437,8 +437,8 @@
 % Itemize list settings
 \setlist[itemize]{
     leftmargin=0cm,
-    topsep=0ex,
-    itemsep=0ex,
+    topsep=-6pt,
+    itemsep=0pt,
     parsep=0ex,
     partopsep=0pt
 }
@@ -556,55 +556,62 @@
     \fi
 } % space between section number and text
 
+%----------------------------------------------------------
+% Custom Section Formatting
+%----------------------------------------------------------
+
 % Custom Section Formatting
 \renewcommand\section{
-    \parskip 1ex
+    \parskip 1.5ex
     \leftskip 0pt\@startsection{section}{1}
     {\z@}% indent
-    {14pt}% <space before>
-    {0.5pt}% <space after>
+    {6pt}% <space before>
+    {6pt}% <space after>
     {\large\bfseries}
 }
 
 % Custom Subsection Formatting
 \renewcommand\subsection{
-    \parskip 1ex
+    \parskip 1.5ex
     \leftskip 0pt\@startsection{subsection}{2}
     {\z@}% indent
-    {12pt}% <space before>
-    {0.5pt}% <space after>
+    {6pt}% <space before>
+    {6pt}% <space after>
     {\normalsize\bfseries}
-    }
+}
 
 % Custom Subsubsection Formatting
 \renewcommand\subsubsection{
-    \parskip 1ex
+   \parskip 1.5ex
     \leftskip 0pt\@startsection{subsubsection}{2}
     {\z@}% indent
-    {12pt}% <space before>
-    {0.5pt}% <space after>
+    {6pt}% <space before>
+    {6pt}% <space after>
     {\normalsize\bfseries}
 }
 
 % Custom Paragraph Formatting
-\renewcommand*\paragraph{%
-    % \vspace{-1ex}%
+\renewcommand\paragraph{%
+    \vspace{-6pt}
     \setlength{\parindent}{1.25cm}%
-    % \setlength{\parskip}{1.5ex}%
+    \setlength{\parskip}{6pt}%
+    \par%
 }
 
 % Custom Subparagraph Formatting
-\renewcommand*\subparagraph{%
-    % \vspace{-1ex}%
+\renewcommand\subparagraph{%
+  \vspace{-6pt}
     \setlength{\parindent}{2.25cm}%
-    % \setlength{\parskip}{1.5ex}%
+    \setlength{\parskip}{6pt}%
+    \par%
 }
 
 % Custom Subsubparagraph Formatting
-\newcommand*\subsubparagraph{%
-    % \vspace{-1ex}%
+\newcommand\subsubparagraph{%
+  \vspace{-6pt}
     \setlength{\parindent}{3.5cm}%
-    % \setlength{\parskip}{1.5ex}%
+    \setlength{\parskip}{6pt}%
+    \par%
 }
 
 

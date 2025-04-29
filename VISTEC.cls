@@ -567,7 +567,7 @@
     {\z@}% indent
     {6pt}% <space before>
     {0.1pt}% <space after>
-    {\normalsize\bfseries}
+    {\large\bfseries}
 }
 
 % Custom Subsection Formatting

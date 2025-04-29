@@ -902,7 +902,7 @@ Keywords: & #1.
     \ifodd\value{page}\relax
         % Odd page, good, do nothing
     \else
-        \blankpage
+        \realblankpage
     \fi
 
 }{}

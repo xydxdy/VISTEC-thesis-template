@@ -434,8 +434,8 @@
 \setlist[enumerate]{
     label={\arabic*)},
     leftmargin=0cm,
-    topsep=0ex,
-    itemsep=0ex,
+    topsep=0pt,
+    itemsep=0pt,
     parsep=0ex,
     partopsep=0pt
 }
@@ -443,8 +443,8 @@
 % Itemize list settings
 \setlist[itemize]{
     leftmargin=0cm,
-    topsep=0ex,
-    itemsep=0ex,
+    topsep=0pt,
+    itemsep=0pt,
     parsep=0ex,
     partopsep=0pt
 }
@@ -562,55 +562,60 @@
     \fi
 } % space between section number and text
 
+%----------------------------------------------------------
+ % Custom Section Formatting
+ %----------------------------------------------------------
+ 
 % Custom Section Formatting
 \renewcommand\section{
-    \parskip 1ex
+    \parskip 1.5ex
     \leftskip 0pt\@startsection{section}{1}
     {\z@}% indent
-    {12pt}% <space before>
-    {0.5pt}% <space after>
+    {6pt}% <space before>
+    {0.1pt}% <space after>
     {\normalsize\bfseries}
 }
 
 % Custom Subsection Formatting
 \renewcommand\subsection{
-    \parskip 1ex
+    \parskip 1.5ex
     \leftskip 0pt\@startsection{subsection}{2}
     {\z@}% indent
-    {12pt}% <space before>
-    {0.5pt}% <space after>
+    {6pt}% <space before>
+    {0.1pt}% <space after>
     {\normalsize\bfseries}
-    }
+  }
 
 % Custom Subsubsection Formatting
 \renewcommand\subsubsection{
-    \parskip 1ex
+    \parskip 1.5ex
     \leftskip 0pt\@startsection{subsubsection}{2}
     {\z@}% indent
-    {12pt}% <space before>
-    {0.5pt}% <space after>
+    {6pt}% <space before>
+    {0.1pt}% <space after>
     {\normalsize\bfseries}
 }
 
 % Custom Paragraph Formatting
-\renewcommand*\paragraph{%
-    % \vspace{-1ex}%
+\renewcommand\paragraph{%
+    % \vspace{-6pt}%
     \setlength{\parindent}{1.25cm}%
-    % \setlength{\parskip}{1.5ex}%
+    \setlength{\parskip}{6pt}%
+    \par%
 }
 
 % Custom Subparagraph Formatting
-\renewcommand*\subparagraph{%
-    % \vspace{-1ex}%
+\renewcommand\subparagraph{%
+    % \vspace{-6pt}%
     \setlength{\parindent}{2.25cm}%
-    % \setlength{\parskip}{1.5ex}%
+    \setlength{\parskip}{6pt}%
 }
 
 % Custom Subsubparagraph Formatting
-\newcommand*\subsubparagraph{%
-    % \vspace{-1ex}%
+\newcommand\subsubparagraph{%
+    % \vspace{-6pt}%
     \setlength{\parindent}{3.5cm}%
-    % \setlength{\parskip}{1.5ex}%
+    \setlength{\parskip}{6pt}%
 }
 
 
@@ -799,9 +804,6 @@
     \label{Abstract}
     \addcontentsline{toc}{chapter}{Abstract}
     \clearpage
-    % \ifodd\value{page}\else
-    %     \blankpage
-    % \fi
    \newgeometry{
         inner=3.75cm, % left on odd pages
         outer=2.5cm,  % right on odd pages
@@ -827,6 +829,13 @@
     \input{contents/abstract}}
     
     \clearpage
+
+    % Check if current page is even, insert blank page if needed
+    \ifodd\value{page}\relax
+        % Odd page, good, do nothing
+    \else
+        \blankpage
+    \fi
 }{}
 
 
@@ -994,6 +1003,13 @@ Keywords: & #1.
 %%%%%%%%%%%%%%%%%%%%% Author Biography Page %%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newenvironment{authorbiography}{
+    % Check if current page is even, insert blank page if needed
+    \ifodd\value{page}\relax
+      % Odd page, good, do nothing
+    \else
+      \blankpage
+    \fi
+
     \clearpage
     % \pagestyle{plain} % Show page numbering
     \pagestyle{empty} % Show page numbering
@@ -1013,7 +1029,7 @@ Keywords: & #1.
     \input{contents/authorbiography}
     
     \clearpage
-    \afterpage{\realblankpage}
+    \afterpage{\blankpage}
 }
 
 
@@ -1509,6 +1525,14 @@ Keywords: & #1.
 \DeclareBibliographyCategory{exclude}
 
 \newcommand{\vancouverbib}{
+
+    % Check if current page is even, insert blank page if needed
+    \ifodd\value{page}\relax
+    % Odd page, good, do nothing
+    \else
+    \blankpage
+    \fi
+    
     \clearpage
     \thispagestyle{empty} % No page number on first page of References
     \addcontentsline{toc}{chapter}{References}

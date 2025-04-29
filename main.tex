@@ -32,7 +32,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[phd, ist, showframe]{VISTEC}
+\documentclass[phd, ist]{VISTEC}
 
 %% Load thesisinfo.tex
 \input{thesisinfo} %% edit title, thesis approval, and committee at `thesisinfo.tex`
@@ -57,10 +57,15 @@
     %% Set global line spacing
     \singlespacingplus % 1.5x line spacing
 
+    %% Roman page numbering
+    \fancyhf[cf]{\thepage}
+    \pagenumbering{roman}
+    \setcounter{page}{1}
+
     %% Title and approval pages
     \maketitle
     \makeapproval
-    \clearpage
+   
     %% Acnowledgment
     \acknowledgment                 %% Content at `contents/acknowledgment.tex`
     

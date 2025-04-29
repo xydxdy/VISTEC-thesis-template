@@ -428,7 +428,7 @@
 \setlist[enumerate]{
     label={\arabic*)},
     leftmargin=0cm,
-    topsep=-6pt,
+    topsep=0pt,
     itemsep=0pt,
     parsep=0ex,
     partopsep=0pt
@@ -437,7 +437,7 @@
 % Itemize list settings
 \setlist[itemize]{
     leftmargin=0cm,
-    topsep=-6pt,
+    topsep=0pt,
     itemsep=0pt,
     parsep=0ex,
     partopsep=0pt
@@ -566,8 +566,8 @@
     \leftskip 0pt\@startsection{section}{1}
     {\z@}% indent
     {6pt}% <space before>
-    {6pt}% <space after>
-    {\large\bfseries}
+    {0.1pt}% <space after>
+    {\normalsize\bfseries}
 }
 
 % Custom Subsection Formatting
@@ -576,23 +576,23 @@
     \leftskip 0pt\@startsection{subsection}{2}
     {\z@}% indent
     {6pt}% <space before>
-    {6pt}% <space after>
+    {0.1pt}% <space after>
     {\normalsize\bfseries}
-}
+  }
 
 % Custom Subsubsection Formatting
 \renewcommand\subsubsection{
-   \parskip 1.5ex
+    \parskip 1.5ex
     \leftskip 0pt\@startsection{subsubsection}{2}
     {\z@}% indent
     {6pt}% <space before>
-    {6pt}% <space after>
+    {0.1pt}% <space after>
     {\normalsize\bfseries}
 }
 
 % Custom Paragraph Formatting
 \renewcommand\paragraph{%
-    \vspace{-6pt}
+    % \vspace{-6pt}%
     \setlength{\parindent}{1.25cm}%
     \setlength{\parskip}{6pt}%
     \par%
@@ -600,18 +600,16 @@
 
 % Custom Subparagraph Formatting
 \renewcommand\subparagraph{%
-  \vspace{-6pt}
+    % \vspace{-6pt}%
     \setlength{\parindent}{2.25cm}%
     \setlength{\parskip}{6pt}%
-    \par%
 }
 
 % Custom Subsubparagraph Formatting
 \newcommand\subsubparagraph{%
-  \vspace{-6pt}
+    % \vspace{-6pt}%
     \setlength{\parindent}{3.5cm}%
     \setlength{\parskip}{6pt}%
-    \par%
 }
 
 

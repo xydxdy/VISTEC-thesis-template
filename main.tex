@@ -50,6 +50,12 @@
 \DeclareMathAlphabet{\foo}{OT1}{phv}{m}{n}
 \renewcommand*\printatom[1]{\ensuremath{\foo{#1}}}
 
+%% Solve "Overfull \hbox" warnings by customizing hyphenation rules
+%% Use this when the default hyphenation is imperfect
+\hyphenation{neurorehabi-litation} %% See result on page 1
+\hyphenation{inherent} %% See result on page 1
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document} 

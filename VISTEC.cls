@@ -195,6 +195,9 @@
 \preto\fullcite{\AtNextCite{\defcounter{maxnames}{99}}}
 \preto\fullcite{\AtNextCite{\defcounter{minnames}{6}}}
 
+%% solve Ref overfull hbox
+\appto\bibsetup{\sloppy}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%% Global formatting %%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

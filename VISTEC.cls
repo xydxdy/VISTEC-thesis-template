@@ -128,7 +128,7 @@
 \usepackage{microtype}
 \usepackage{etoolbox}
 \usepackage{afterpage}
-
+\usepackage{comment}
 
 \usepackage[version=4]{mhchem}
 \usepackage{chemfig}
@@ -905,7 +905,7 @@ Keywords: & #1.
     \ifodd\value{page}\relax
         % Odd page, good, do nothing
     \else
-        \realblankpage
+        \blankpage
     \fi
 
 }{}
@@ -938,9 +938,8 @@ Keywords: & #1.
 % Abbreviations Environment
 \newenvironment{abbreviations}{%
   \clearpage
-  \pagestyle{plain}
   \fancyfoot[c]{\thepage}
-  \thispagestyle{plain}
+  \thispagestyle{empty}
 
   \newgeometry{
         inner=3.75cm, % left on odd pages
@@ -1166,9 +1165,8 @@ Keywords: & #1.
 % Custom Table of Contents Command
 \renewcommand\tableofcontents{%
   \clearpage
-  \pagestyle{plain}
   \fancyfoot[c]{\thepage}
-  \thispagestyle{plain}
+  \thispagestyle{empty} % No page number on first page
 
   \addcontentsline{toc}{chapter}{Contents}
 
@@ -1264,9 +1262,8 @@ Keywords: & #1.
 % Custom List of Tables command
 \renewcommand\listoftables{%
   \clearpage
-  \pagestyle{plain}
   \fancyfoot[c]{\thepage}
-  \thispagestyle{plain}
+  \thispagestyle{empty}
 
   \newgeometry{
         inner=3.75cm, % left on odd pages
@@ -1282,7 +1279,7 @@ Keywords: & #1.
   % Flag to detect first page
   \newif\if@firstlotpage
   \@firstlotpagetrue
-
+  
   \begingroup
     % Patch \@opcol to inject headers for each page
     \patchcmd{\@opcol}
@@ -1339,9 +1336,8 @@ Keywords: & #1.
 % Custom List of Figures command
 \renewcommand\listoffigures{%
   \clearpage
-  \pagestyle{plain}
   \fancyfoot[c]{\thepage}
-  \thispagestyle{plain}
+  \thispagestyle{empty}
 
   \newgeometry{
         inner=3.75cm, % left on odd pages
@@ -1480,9 +1476,8 @@ Keywords: & #1.
 % Redefine List of Algorithms command
 \renewcommand{\listofalgorithms}{%
   \clearpage
-  \pagestyle{plain}
   \fancyfoot[c]{\thepage}
-  \thispagestyle{plain}
+  \thispagestyle{empty}
 
   \newgeometry{
         inner=3.75cm, % left on odd pages

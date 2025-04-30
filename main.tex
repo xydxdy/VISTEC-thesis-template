@@ -50,6 +50,14 @@
 \DeclareMathAlphabet{\foo}{OT1}{phv}{m}{n}
 \renewcommand*\printatom[1]{\ensuremath{\foo{#1}}}
 
+%%%%%%%%%%%%%%%%%%%%%% Hyphenation Fix / Overflow Text Fix %%%%%%%%%%%%%%%%%%%%%
+%% Fix "Overfull \hbox" warnings by defining custom hyphenation points.
+%% Use when default hyphenation breaks words improperly or causes layout issues.
+\hyphenation{neurorehabi-litation} %% Applied to resolve issue on page 1
+\hyphenation{inherent}             %% Applied to resolve issue on page 1
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document} 
@@ -95,5 +103,16 @@
 
     %% Author Biography
     \authorbiography                %% Content at `contents/authorbiography.tex`
+
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%% Fix "List of XXXXXX (Cont.)" Header Issue %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % If the continuation header (e.g., "List of Tables (Cont.)") fails to appear on the second page,
+    % uncomment the corresponding dummy entry below to manually trigger a page break or layout update.
+    %
+    % \addtocontents{toc}{\protect\contentsline{content}{\phantom{Dummy Invisible Content Entry}}{\phantom{\thepage}}{}}
+    \addtocontents{lot}{\protect\contentsline{table}{\phantom{Dummy Invisible Table Entry}}{\phantom{\thepage}}{}}
+    \addtocontents{lof}{\protect\contentsline{figure}{\phantom{Dummy Invisible Figure Entry}}{\phantom{\thepage}}{}}
+    % \addtocontents{loa}{\protect\contentsline{algorithm}{\phantom{Dummy Invisible Algorithm Entry}}{\phantom{\thepage}}{}}
+
 
 \end{document}

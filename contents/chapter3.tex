@@ -4,128 +4,378 @@
 %----------------------------------------
 
 %========================
-\section{Overview}
+\section{Introduction to Template Usage}
+\label{ch3:template-overview}
 %========================
+
 \begin{paragraph}
-This chapter provides guidance on how to effectively use and customize the VISTEC {\LaTeX} thesis template. It explains the general structure, key files, recommended practices, and demonstrates common {\LaTeX} formatting examples such as inserting figures, tables, equations, algorithms, and citations.
+This chapter introduces how to use and customize the VISTEC {\LaTeX} thesis template. It outlines the overall file structure, class options, metadata configuration, and common formatting examples.
 \end{paragraph}
 
 %========================
-\section{Directory Structure}
+\section{Getting Started with {\LaTeX}}
+\label{ch3:latex-getting-started}
 %========================
-\begin{paragraph}
-The template is organized into clearly separated folders and files to simplify management:
 
-\begin{itemize}[leftmargin=\paritemindent]
-    \item \texttt{main.tex} — The main file to compile your thesis.
-    \item \texttt{thesisinfo.tex} — Define your title, author information, advisor, and committee.
-    \item \texttt{contents/} — Contains all chapter, appendix, and special section files.
-    \item \texttt{figures/} — Store all figures, images, and plots used in the thesis.
-    \item \texttt{tables/} — Store external table files if needed.
-    \item \texttt{bibliography.bib} — Your BibTeX bibliography database.
-\end{itemize}
+\begin{paragraph}
+If you are new to {\LaTeX}, it is recommended to start by learning its core concepts—such as document structure, environments, referencing, and compilation. A comprehensive beginner resource is available on the Overleaf Learn platform:
 \end{paragraph}
-
-%========================
-\section{Setting Up Document Class Options}
-%========================
-\begin{paragraph}
-The \texttt{VISTEC} document class supports several options to customize the thesis according to the degree type, school, and program. Proper configuration of these options ensures that the generated thesis document meets the official formatting standards. 
-
-\textbf{The document class options must be specified in the \texttt{main.tex} file.}
-\end{paragraph}
-
-%========================
-\subsection{Required Options}
-%========================
-\begin{subparagraph}
-Two required options must be specified when declaring the document class in \texttt{main.tex}:
-
-\begin{itemize}[leftmargin=\subparitemindent]
-    \item \textbf{Degree Type:}
-    \begin{itemize}[leftmargin=1em]
-        \item \texttt{phd} — for \verb|\degreefield{Doctor of Philosophy}|
-        \item \texttt{master} — for \verb|\degreefield{Master of Engineering}|
-    \end{itemize}
-
-    \item \textbf{School and Program:}
-    \begin{itemize}[leftmargin=1em]
-        \item \texttt{ist} — School of Information Science and Technology \\ \quad\quad (Program: Information Science and Technology)
-        \item \texttt{mse} — School of Molecular Science and Engineering \\ \quad\quad (Program: Materials Science and Engineering)
-        \item \texttt{ese} — School of Energy Science and Engineering \\ \quad\quad (Program: Chemical Engineering)
-        \item \texttt{bse} — School of Biomolecular Science and Engineering \\ \quad\quad (Program: Biomolecular Science and Engineering)
-    \end{itemize}
-\end{itemize}
-
-If your program is not among the predefined options, you must manually specify the \verb|\degreefield|, \verb|\school|, and \verb|\program| fields in \texttt{thesisinfo.tex}.
-\end{subparagraph}
-
-%========================
-\subsection{Optional Options}
-%========================
-\begin{subparagraph}
-The document class also provides optional settings that control additional layout features:
-
-\begin{itemize}[leftmargin=\subparitemindent]
-    \item \texttt{final} — (default) Compiles the document in its final version.
-    \item \texttt{showframe} — Displays page layout frames (e.g., margins, headers, text block areas).
-    \item \texttt{showgrid} — Displays a background grid to help visualize element positioning.
-\end{itemize}
-
-These options are useful during the drafting and formatting stages but should be disabled for the final submission. They are set in the document class declaration line in \texttt{main.tex}.
-\end{subparagraph}
-
-%========================
-\subsection{Example Usage}
-%========================
-\begin{subparagraph}
-The document class options are configured in the preamble of the \texttt{main.tex} file. Example configurations include:
-
-\begin{itemize}[leftmargin=\subparitemindent]
-    \item \texttt{\textbackslash documentclass[phd, ist]\{VISTEC\}}\\Ph.D. thesis, IST School (Information Science and Technology Program)
-    \item \texttt{\textbackslash documentclass[master, mse]\{VISTEC\}}\\Master’s thesis, MSE School (Materials Science and Engineering Program)
-    \item \texttt{\textbackslash documentclass[phd, ese, showframe]\{VISTEC\}}\\Ph.D. thesis, ESE School (Chemical Engineering Program) with layout frames displayed
-\end{itemize}
-
-\end{subparagraph}
-
-%========================
-\section{Editing Thesis Metadata}
-%========================
-\begin{paragraph}
-Edit \texttt{thesisinfo.tex} to set your thesis title, author name, student ID, academic year, advisor, committee members, and program information. These metadata fields automatically populate the title page, approval page, and other formal sections.
-\end{paragraph}
-
-%========================
-\section{Adding Content to Chapters}
-%========================
-\begin{paragraph}
-Each main chapter (e.g., Introduction, Background, Investigation, Conclusion) should be placed under \texttt{contents/} and included using \verb|\include{}| in \texttt{main.tex}. You can create additional chapter files following the provided structure, and organize sections, figures, tables, algorithms, and citations inside them.
-\end{paragraph}
-
-%========================
-\section{How to Use {\LaTeX}}
-%========================
-\begin{paragraph}
-If you are new to {\LaTeX}, it is recommended to start with basic tutorials to understand fundamental concepts such as document structure, commands, environments, and referencing. A good starting point is the Overleaf online guide available at:
 
 \begin{center}
 \href{https://www.overleaf.com/learn}{\texttt{https://www.overleaf.com/learn}}
 \end{center}
 
-The Overleaf Learn platform provides comprehensive, beginner-friendly resources covering topics from basic document setup to advanced formatting and bibliography management. Familiarity with these concepts will significantly improve your ability to customize and work efficiently with this thesis template.
+%========================
+\section{Directory Structure}
+\label{ch3:directory-structure}
+%========================
+
+\begin{paragraph}
+The template is organized into modular directories to simplify file management and collaboration. The key components include:
 \end{paragraph}
 
-%========================
-\section{Compiling the Thesis}
-%========================
-\begin{paragraph}
-Use \texttt{pdfLaTeX} as the compiler. A typical compilation sequence includes:
 \begin{itemize}[leftmargin=\paritemindent]
-    \item First, run \texttt{pdflatex main.tex} to generate auxiliary files.
-    \item Then, run \texttt{bibtex main} to generate the bibliography.
-    \item Finally, run \texttt{pdflatex main.tex} twice to resolve cross-references.
+    \item \texttt{main.tex} — The central file to compile the thesis.
+    \item \texttt{thesisinfo.tex} — Metadata: title, author, advisors, program, etc.
+    \item \texttt{contents/} — Main chapters, appendices, abstract, and other body text.
+    \item \texttt{figures/} — All figures and illustrations used throughout the thesis.
+    \item \texttt{tables/} — External table files (optional).
+    \item \texttt{bibliography.bib} — BibTeX reference database.
 \end{itemize}
 
-Alternatively, tools like \texttt{latexmk} or IDEs such as Overleaf, TeXShop, and VS Code with {\LaTeX} Workshop can automate this process.
+%========================
+\section{Configuring Document Class Options}
+\label{ch3:class-options}
+%========================
+
+\begin{paragraph}
+The \texttt{VISTEC} document class provides configurable options to adapt the template for different degree levels and academic programs. These options must be declared in \texttt{main.tex} using the \verb|\documentclass| command.
 \end{paragraph}
+
+%------------------------
+\subsection{Required Options}
+\label{ch3:class-required}
+%------------------------
+
+\begin{subparagraph}
+You must specify both degree type and school/program. The supported values include:
+\end{subparagraph}
+
+\begin{itemize}[leftmargin=\subparitemindent]
+  \item \textbf{Degree Type:}
+  \begin{itemize}[leftmargin=1em]
+    \item \texttt{phd} — For doctoral degrees
+    \item \texttt{master} — For master's degrees
+  \end{itemize}
+  \item \textbf{School and Program:}
+  \begin{itemize}[leftmargin=1em]
+    \item \texttt{ist} — Information Science and Technology
+    \item \texttt{ese} — Energy Science and Engineering (e.g., Chemical Engineering)
+    \item \texttt{mse} — Molecular Science and Engineering
+    \item \texttt{bse} — Biomolecular Science and Engineering
+  \end{itemize}
+\end{itemize}
+
+\begin{subparagraph}
+If your school or program is not predefined, manually set \verb|\degreefield|, \verb|\school|, and \verb|\program| in \texttt{thesisinfo.tex}.
+\end{subparagraph}
+
+%------------------------
+\subsection{Optional Layout Options}
+\label{ch3:class-optional}
+%------------------------
+
+\begin{subparagraph}
+You may also enable optional class features to assist in layout checking:
+\end{subparagraph}
+
+\begin{itemize}[leftmargin=\subparitemindent]
+  \item \texttt{final} — Compiles the document in final form (default).
+  \item \texttt{showframe} — Draws visible layout frames (e.g., margins).
+  \item \texttt{showgrid} — Displays a background grid to assist element alignment.
+\end{itemize}
+
+\begin{subparagraph}
+Use these options for visual debugging during drafting. Disable them for final submission.
+\end{subparagraph}
+
+%------------------------
+\subsection{Example Declaration}
+\label{ch3:class-example}
+%------------------------
+
+\begin{subparagraph}
+Below is an example for a Ph.D. student in the ESE school enabling layout frames:
+\end{subparagraph}
+\newpage
+\noindent\textbf{File: \texttt{main.text}}\vspace{-1em}
+\begin{minted}[breaklines, fontsize=\small]{latex}
+\documentclass[phd, ese, showframe]{VISTEC}
+\end{minted}
+
+%========================
+\section{Editing Thesis Metadata}
+\label{ch3:metadata}
+%========================
+
+\begin{paragraph}
+All metadata (title, author, year, student ID, advisors, etc.) is stored in \texttt{thesisinfo.tex}. These values populate the title page, approval page, and headers/footers as required.
+\end{paragraph}
+
+%------------------------
+\subsection{Manual Line Break in Title}
+\label{ch3:metadata-linebreak}
+%------------------------
+
+\begin{subparagraph}
+If your title is too long or includes a natural division (e.g., a colon), insert \verb|\linebreak| with an optional strength value \texttt{[0]–[4]}:
+\end{subparagraph}
+
+\begin{itemize}[leftmargin=\subparitemindent]
+    \item 0 : Suggest break if needed
+    \item 1-3: Increasing strength
+    \item 4: Force break
+\end{itemize}
+
+\begin{subparagraph}
+Example: breaking after the colon in the title.
+\end{subparagraph}
+
+\noindent\textbf{File: \texttt{thesisinfo.tex}}\vspace{-1em}
+\begin{minted}[breaklines, fontsize=\small]{latex}
+\title{VISTEC Thesis Template:\linebreak[2] A Complete LaTeX Thesis Preparation Version 2}
+\authortitle{Mr.}
+\author{Author Name}
+\studentid{1888888}
+\end{minted}
+
+\begin{subparagraph}
+This formatting improves layout on the title page and avoids overfull lines or unbalanced text.
+\end{subparagraph}
+
+
+%========================
+\section{Organizing Chapter Content}
+\label{ch3:chapters}
+%========================
+
+\begin{paragraph}
+Each main chapter—such as \textit{Introduction}, \textit{Background}, \textit{Investigation}, and \textit{Conclusion}—should be placed in a separate file under the \texttt{contents/} directory. These files are included in the main document using the \verb|\include{}| command within \texttt{main.tex}. You may add additional chapters as needed while keeping consistent structure across sections, figures, tables, and citations.
+\end{paragraph}
+
+\begin{paragraph}
+For instance, to add an abstract page, create a new file named \texttt{contents/abstract\newline .tex} with the following content:
+\end{paragraph}
+
+\noindent\textbf{File: \texttt{contents/abstract.tex}}\vspace{-1em}
+\begin{minted}[breaklines, fontsize=\small]{latex}
+This is a placeholder abstract. Summarize your research goals, methods, results, and conclusions concisely.
+
+\keywords{LaTeX formatting, Thesis template, Abstract, Hanging indent, Research summary}
+\end{minted}
+
+\begin{paragraph}
+Then, include it in \texttt{main.tex} before the first chapter:
+\end{paragraph}
+
+\noindent\textbf{File: \texttt{main.tex}}\vspace{-1em}
+\begin{minted}[breaklines, fontsize=\small]{latex}
+\include{contents/abstract}
+\end{minted}
+
+%========================
+\section{Structuring Headings and References}
+\label{ch3:headings}
+%========================
+
+\begin{paragraph}
+To maintain consistent formatting and referencing throughout the thesis, each section, subsection, and subsubsection should be labeled using \verb|\label|. These can be referenced using \verb|\autoref| for automatic prefixing (e.g., ``Section'', ``Figure'', ``Table'', etc.). See \autoref{ch3:headings} for an example of heading structure and references.
+\end{paragraph}
+
+\noindent\textbf{File: \texttt{contents/xxx.tex}}\vspace{-1em}
+\begin{minted}[fontsize=\small, breaklines]{latex}
+% Section
+\section{Introduction}
+\label{sec:intro}
+
+% Paragraph
+\begin{paragraph}
+This is a paragraph. Refer to \autoref{sec:background}.
+\end{paragraph}
+
+% Subsection
+\subsection{Background}
+\label{sec:background}
+
+% Subparagraph
+\begin{subparagraph}
+This is a subparagraph expanding on background context.
+\end{subparagraph}
+
+% Subsubsection
+\subsubsection{Detailed Context}
+\label{subsec:detailed}
+
+% Subsubparagraph
+\begin{subsubparagraph}
+This subsubparagraph elaborates on the discussion in \autoref{sec:background}.
+\end{subsubparagraph}
+\end{minted}
+
+%========================
+\section{Customizing List Indentation}
+\label{ch3:indentation}
+%========================
+
+\begin{paragraph}
+List indentation enhances hierarchy and readability, especially in technical writing. This template defines three custom indentation levels using macros: \verb|\paritemindent|, \verb|\subparitemindent|, and \verb|\subsubparitemindent|. You may also use explicit units (e.g., \texttt{cm}, \texttt{pt}) for fine-grained control.
+\end{paragraph}
+
+\begin{subparagraph}
+The following code demonstrates how to use these indentation settings in \texttt{enumerate} and \texttt{itemize} environments:
+\end{subparagraph}
+
+\noindent\textbf{File: \texttt{contents/xxx.tex}}\vspace{-1em}
+\begin{minted}[fontsize=\small, breaklines]{latex}
+% Custom indentation using predefined macros
+\begin{enumerate}[itemindent=\paritemindent]
+  \item First-level list item (using paritemindent)
+\end{enumerate}
+
+\begin{enumerate}[itemindent=\subparitemindent]
+  \item Second-level list item (using subparitemindent)
+\end{enumerate}
+
+\begin{enumerate}[itemindent=\subsubparitemindent]
+  \item Third-level list item (using subsubparitemindent)
+\end{enumerate}
+
+% Manual indentation using fixed units
+\begin{itemize}[itemindent=2cm]
+  \item Manually indented item using 2cm
+\end{itemize}
+
+\begin{enumerate}[itemindent=20pt]
+  \item Manually indented item using 20pt
+\end{enumerate}
+\end{minted}
+
+
+
+%========================
+\section{Formatting Tips and Layout Troubleshooting}
+%========================
+
+\begin{paragraph}
+This section provides practical tips to resolve common LaTeX formatting issues in your thesis, including overfull lines, missing continuation headers in lists, and manual page breaks.
+\end{paragraph}
+
+%========================
+\subsection{Fixing Overfull \texttt{\textbackslash hbox} Warnings}
+\label{ch3:overflow-fix}
+%========================
+
+\begin{subparagraph}
+If LaTeX produces an ``Overfull \verb|\hbox|'' warning, it typically means that a word or line is too long to break naturally. You can fix this in two main ways:
+\end{subparagraph}
+
+\begin{itemize}[leftmargin=\subparitemindent]
+  \item \textbf{Define custom hyphenation points} using \verb|\hyphenation{}| in the preamble.
+  \item \textbf{Insert a manual line break} in the body using \verb|\newline| where appropriate.
+\end{itemize}
+
+%------------------------
+\subsubsection{Example 1: Hyphenation Rule in Preamble}
+\begin{subparagraph}
+This method lets LaTeX know how to break specific long words when needed:
+\end{subparagraph}
+
+\noindent\textbf{File: \texttt{main.tex}}\vspace{-1em}
+\begin{minted}[breaklines, fontsize=\small]{latex}
+\hyphenation{neurorehabi-litation} %% Will break as neurorehabi-litation
+\hyphenation{inherent}             %% Applied to resolve issue on page 1
+\end{minted}
+
+%------------------------
+\subsubsection{Example 2: Manual Line Break with \texttt{\textbackslash newline}}
+\begin{subparagraph}
+You may also manually split overly long lines or sentences using \verb|\newline|:
+\end{subparagraph}
+
+\noindent\textbf{File: \texttt{contents/xxx.tex}}\vspace{-1em}
+\begin{minted}[breaklines, fontsize=\small]{latex}
+% Within a paragraph environment
+This sentence is getting too long and exceeds the margin, so we insert a break.\newline
+Here is the continuation on the next line with proper indentation.
+\end{minted}
+
+\begin{subparagraph}
+Note that \verb|\newline| should be used sparingly and only in body text—not inside math or figure captions—unless absolutely necessary.
+\end{subparagraph}
+
+
+%------------------------
+\subsection{Forcing a Page Break}
+%------------------------
+
+\begin{subparagraph}
+To manually start a new page, you can use:
+\end{subparagraph}
+
+\begin{minted}[breaklines, fontsize=\small]{latex}
+\newpage
+\end{minted}
+
+%------------------------
+\subsection{Fixing Missing Continuation Headers in Lists}
+%------------------------
+
+\begin{subparagraph}
+If the continuation header (e.g., \texttt{List of Tables (Cont.)}) does not appear correctly on the second or subsequent pages, you can insert a dummy entry into the list to force a layout update. This dummy entry is invisible but helps LaTeX trigger the continuation header logic properly.
+\end{subparagraph}
+
+\begin{subparagraph}
+To apply this fix, add the following line at the very end of your \texttt{main.tex} file:
+\end{subparagraph}
+
+\noindent\textbf{File: \texttt{contents/main.tex}}\vspace{-1em}
+\begin{minted}[breaklines, fontsize=\small]{latex}
+% main.tex (at the very end)
+\addtocontents{lot}{\protect\contentsline{table}{\phantom{Dummy Invisible Table Entry}}{\phantom{\thepage}}{}}
+\addtocontents{lof}{\protect\contentsline{figure}{\phantom{Dummy Invisible Figure Entry}}{\phantom{\thepage}}{}}
+\addtocontents{toc}{\protect\contentsline{chapter}{\phantom{Dummy Invisible TOC Entry}}{\phantom{\thepage}}{}}
+% \addtocontents{loa}{\protect\contentsline{algorithm}{\phantom{Dummy Invisible Algorithm Entry}}{\phantom{\thepage}}{}}
+\end{minted}
+
+\begin{subparagraph}
+These dummy entries do not produce any visible output, but they help ensure that continuation headers such as “List of Tables (Cont.)” or “Contents (Cont.)” appear on subsequent pages. You can uncomment or adjust the relevant lines depending on which list is affected.
+\end{subparagraph}
+
+%========================
+\subsection{Forcing Continuation Headers in the List of Abbreviations}
+%========================
+
+\begin{subparagraph}
+If the continuation header (e.g., \texttt{List of Abbreviations (Cont.)}) does not appear on the second page, you can force a page break manually using \verb|\newpage| between entries. This is necessary because most abbreviation packages do not support dummy entries through \verb|\addtocontents|.
+\end{subparagraph}
+
+\begin{subparagraph}
+For example:
+\end{subparagraph}
+
+\noindent\textbf{File: \texttt{contents/abbreviations.tex}}\vspace{-1em}
+\begin{minted}[breaklines, fontsize=\small]{latex}
+% contents/abbreviations.tex
+\newabbr{EEG}{Electroencephalogram}
+\newabbr{MI}{Motor Imagery}
+\newabbr{CNN}{Convolutional Neural Network}
+\newabbr{\ce{H2O}}{Water} 
+\newpage % Force second page (to trigger continuation header)
+\newabbr{DBU}{1,8-diazabicyclo[5.4.0]-7-undecene}
+\end{minted}
+
+\newpage
+\begin{subparagraph}
+Insert \verb|\newpage| where a page break is needed to trigger the second-page header. Use it only when the list flows beyond one page and the continuation header fails to render automatically.
+\end{subparagraph}
+

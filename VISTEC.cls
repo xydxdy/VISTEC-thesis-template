@@ -213,25 +213,33 @@
 %%%%%%%%%%%%%%%%%%%%% font size and spacing %%%%%%%%%%%%%%%%%%%%% 
 
 % Redefine font sizes
-\renewcommand\Large{\normalfont\fontsize{16pt}{16pt}}
-\renewcommand\large{\normalfont\fontsize{14pt}{14pt}}
-\renewcommand\normalsize{\normalfont\fontsize{12pt}{12pt}}
-\renewcommand\small{\normalfont\fontsize{11pt}{11pt}}
-\renewcommand\footnotesize{\normalfont\fontsize{10pt}{10pt}}
-\renewcommand\scriptsize{\normalfont\fontsize{8pt}{8pt}}
-\renewcommand\tiny{\normalfont\fontsize{6pt}{6pt}}
+\newcommand\HUGE{\normalfont\fontsize{24pt}{24pt}\selectfont}
+\renewcommand\huge{\normalfont\fontsize{20pt}{20pt}\selectfont}
+\renewcommand\LARGE{\normalfont\fontsize{18pt}{18pt}\selectfont}
+\renewcommand\Large{\normalfont\fontsize{16pt}{16pt}\selectfont}
+\renewcommand\large{\normalfont\fontsize{14pt}{14pt}\selectfont}
+\renewcommand\normalsize{\normalfont\fontsize{12pt}{12pt}\selectfont}
+\renewcommand\small{\normalfont\fontsize{11pt}{11pt}\selectfont}
+\renewcommand\footnotesize{\normalfont\fontsize{10pt}{10pt}\selectfont}
+\renewcommand\scriptsize{\normalfont\fontsize{9pt}{9pt}\selectfont}
+\renewcommand\tiny{\normalfont\fontsize{8pt}{8pt}\selectfont}
 
 % Spacing commands
 \newcommand{\realsinglespacing}{%
-  \let\CS=\@currsize\renewcommand{\baselinestretch}{1.0}\CS}
+  \let\CS=\@currsize
+  \renewcommand{\baselinestretch}{1.0}\CS\selectfont}
 \renewcommand{\singlespacing}{%
-  \let\CS=\@currsize\renewcommand{\baselinestretch}{1.0}\CS}
+  \let\CS=\@currsize
+  \renewcommand{\baselinestretch}{1.0}\CS\selectfont}
 \newcommand{\singlespacingplus}{%
-  \let\CS=\@currsize\renewcommand{\baselinestretch}{1.5}\CS}
+  \let\CS=\@currsize
+  \renewcommand{\baselinestretch}{1.5}\CS\selectfont}
 \renewcommand{\doublespacing}{%
-  \let\CS=\@currsize\renewcommand{\baselinestretch}{2.0}\CS}
+  \let\CS=\@currsize
+  \renewcommand{\baselinestretch}{2.0}\CS\selectfont}
 \newcommand{\realdoublespacing}{%
-  \let\CS=\@currsize\renewcommand{\baselinestretch}{2.0}\CS}
+  \let\CS=\@currsize
+  \renewcommand{\baselinestretch}{2.0}\CS\selectfont}
   
 \newcommand{\normalspacing}{\singlespacingplus}
 \newcommand{\footnotespacing}{\singlespacing}
@@ -240,7 +248,7 @@
 % Change spacing dynamically
 \newcommand{\changespacing}[2]{%
   \renewcommand{#1}{%
-    \let\CS=\@currsize\renewcommand{\baselinestretch}{#2}\CS}%
+    \let\CS=\@currsize\renewcommand{\baselinestretch}{#2}\CS\selectfont}%
 }
 
 \newcommand{\changenormalspacing}[1]{\renewcommand{\normalspacing}{#1}}
@@ -399,6 +407,7 @@
     \parindent 1em%
     \noindent
     \footnotespacing
+    \footnotesize
     \hbox to 5em{\hss\@makefnmark}#1
     \par
 }
@@ -595,24 +604,26 @@
 
 % Custom Paragraph Formatting
 \renewcommand\paragraph{%
-    % \vspace{-6pt}%
+    \par%
     \setlength{\parindent}{1.25cm}%
     \setlength{\parskip}{6pt}%
-    \par%
+    \normalfont\selectfont%
 }
 
 % Custom Subparagraph Formatting
 \renewcommand\subparagraph{%
-    % \vspace{-6pt}%
+    \par%
     \setlength{\parindent}{2.25cm}%
     \setlength{\parskip}{6pt}%
+    \normalfont\selectfont%
 }
 
 % Custom Subsubparagraph Formatting
 \newcommand\subsubparagraph{%
-    % \vspace{-6pt}%
+    \par%
     \setlength{\parindent}{3.5cm}%
     \setlength{\parskip}{6pt}%
+    \normalfont\selectfont%
 }
 
 

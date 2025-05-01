@@ -689,6 +689,7 @@
     \clearpage
     \hyphenation{technology}
     \hyphenation{international}
+    \hyphenation{engineering}
     
     \newgeometry{
         left   = 3.75cm,

@@ -7,11 +7,10 @@
 \renewcommand{\thesection}{\arabic{section}}
 
 \newgeometry{
-        inner=3.75cm, % left on odd pages
-        outer=2.5cm,  % right on odd pages
-        top=3.75cm,
+        left=2.5cm,
+        right=2.5cm,
+        top=2.5cm,
         bottom=2.5cm,
-        twoside % <-- important: activate two-side margins (for books/thesis)
     }
 
 \begin{document} 
@@ -156,6 +155,8 @@ This example sets the document class for a Ph.D. student in the ist school and e
 All thesis metadata—such as the title, author name, student ID, advisor, and academic year—is defined in \texttt{thesisinfo.tex}. These values are used in the title page, approval page, and other formal sections.
 \end{paragraph}
 
+\newpage
+
 \noindent\textbf{File: \texttt{thesisinfo.tex}}\vspace{-1.5em}
 \begin{minted}[breaklines, fontsize=\small]{latex}
 \title{VISTEC Thesis Template: A Complete LaTeX Thesis Preparation Version 2}
@@ -289,6 +290,8 @@ This is a subparagraph that expands on background context.
 This subsubparagraph elaborates on the content in \autoref{sec:background}.
 \end{subsubparagraph}
 \end{minted}
+
+\newpage
 
 \textbf{Output:}\vspace{0.5em}
 

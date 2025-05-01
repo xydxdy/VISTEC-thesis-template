@@ -1,12 +1,15 @@
 # custom
+*.aux
+*.fls
+*.log
+*.pygtex
+*.pygstyle
+
 main.pdf
 main-blx.bib
 main.fdb_latexmk
 main.run.xml
 main.synctex.gz
-*.aux
-*.fls
-*.log
 main.synctex(busy)
 main.bbl
 main.lof
@@ -14,6 +17,19 @@ main.lot
 main.out
 main.toc
 main.blg
+
+manual.pdf
+manual-blx.bib
+manual.fdb_latexmk
+manual.run.xml
+manual.synctex.gz
+manual.synctex(busy)
+manual.bbl
+manual.lof
+manual.lot
+manual.out
+manual.toc
+manual.blg
 
 _minted-main
 

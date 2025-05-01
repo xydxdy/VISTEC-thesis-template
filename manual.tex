@@ -1,0 +1,626 @@
+\documentclass{VISTEC}
+
+
+\usepackage[most]{tcolorbox}
+\usepackage{array}
+
+\renewcommand{\thesection}{\arabic{section}}
+
+\newgeometry{
+        inner=3.75cm, % left on odd pages
+        outer=2.5cm,  % right on odd pages
+        top=3.75cm,
+        bottom=2.5cm,
+        twoside % <-- important: activate two-side margins (for books/thesis)
+    }
+
+\begin{document} 
+
+%----------------------------------------
+\chapter*{How to Use This Template}
+\label{manual}
+%----------------------------------------
+
+%========================
+\section{Getting Started with {\LaTeX}}
+\label{manual:latex-getting-started}
+%========================
+
+\begin{paragraph}
+If you are new to {\LaTeX}, start by learning the basics such as document structure, environments, referencing, and how to compile a file. A good place to begin is the Overleaf Learn website:
+\end{paragraph}
+
+\begin{center}
+\href{https://www.overleaf.com/learn}{\texttt{https://www.overleaf.com/learn}}
+\end{center}
+
+%========================
+\section{Directory Structure}
+\label{manual:directory-structure}
+%========================
+
+\begin{paragraph}
+The template uses a folder-based structure to keep things organized. The main files and folders are:
+\end{paragraph}
+
+\begin{itemize}[leftmargin=\paritemindent]
+    \item \texttt{main.tex} — The main file used to compile your thesis.
+    \item \texttt{thesisinfo.tex} — Stores your title, name, advisor, program, etc.
+    \item \texttt{contents/} — Contains all chapters, appendices, and special sections.
+    \item \texttt{figures/} — Stores all images used in the thesis.
+    \item \texttt{tables/} — (Optional) Stores separate table files.
+    \item \texttt{bibliography.bib} — Contains all BibTeX references.
+\end{itemize}
+
+
+
+
+
+
+%========================
+\section{Configuring Document Class Options}
+\label{manual:class-options}
+%========================
+
+\begin{paragraph}
+The \texttt{VISTEC} document class supports options to set your degree level, school, and optional layout helpers. These options must be declared in the \texttt{main.tex} file using the \verb|\documentclass| command.
+\end{paragraph}
+
+%------------------------
+\subsection{Required Options}
+\label{manual:class-required}
+%------------------------
+
+\begin{subparagraph}
+You must provide two required options: your degree type and school/program. The valid values are shown in the table below:
+\end{subparagraph}
+
+\begin{table}[ht]
+\centering
+\caption{Required \texttt{documentclass} options for degree type and school/program}
+\small\singlespacingplus
+\begin{tabular}{ll}
+\toprule
+\textbf{Option} & \textbf{Description} \\
+\midrule
+\texttt{phd}    & Doctor of Philosophy \\
+\texttt{master} & Master of Engineering \\
+\midrule
+\texttt{ist}    & Information Science and Technology \\
+               & (Program: Information Science and Technology) \\
+\texttt{ese}    & Energy Science and Engineering \\
+               & (Program: Chemical Engineering) \\
+\texttt{mse}    & Molecular Science and Engineering \\
+               & (Program: Materials Science and Engineering) \\
+\texttt{bse}    & Biomolecular Science and Engineering \\
+               & (Program: Biomolecular Science and Engineering) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\begin{subparagraph}
+If your program is not listed, you can manually define \verb|\degreefield|, \verb|\school|, and \verb|\program| in \texttt{thesisinfo.tex}.
+\end{subparagraph}
+
+%------------------------
+\subsection{Optional Layout Options}
+\label{manual:class-optional}
+%------------------------
+
+\begin{subparagraph}
+These optional settings help with layout debugging. Use them while editing, but disable them before final submission.
+\end{subparagraph}
+
+\begin{table}[ht]
+\centering
+\caption{Optional \texttt{documentclass} options for layout assistance}
+\small\singlespacingplus
+\begin{tabular}{ll}
+\toprule
+\textbf{Option} & \textbf{Purpose} \\
+\midrule
+\texttt{final}     & Final output (default) \\
+\texttt{showframe} & Show page margins and layout boxes \\
+\texttt{showgrid}  & Show grid background for positioning \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%------------------------
+\subsection{Example Declaration}
+\label{manual:class-example}
+%------------------------
+
+\begin{subparagraph}
+This example sets the document class for a Ph.D. student in the ist school and enables layout frames for debugging:
+\end{subparagraph}
+
+\noindent\textbf{File: \texttt{main.tex}}\vspace{-1.5em}
+\begin{minted}[breaklines, fontsize=\small]{latex}
+\documentclass[phd, ist, showframe]{VISTEC}
+\end{minted}
+
+
+
+
+
+
+
+%========================
+\section{Editing Thesis Metadata}
+\label{manual:metadata}
+%========================
+
+\begin{paragraph}
+All thesis metadata—such as the title, author name, student ID, advisor, and academic year—is defined in \texttt{thesisinfo.tex}. These values are used in the title page, approval page, and other formal sections.
+\end{paragraph}
+
+\noindent\textbf{File: \texttt{thesisinfo.tex}}\vspace{-1.5em}
+\begin{minted}[breaklines, fontsize=\small]{latex}
+\title{VISTEC Thesis Template: A Complete LaTeX Thesis Preparation Version 2}
+\authortitle{Mr.}
+\author{Author Name}
+\studentid{1888888}
+\examinationdate{18}{August}{2025}
+\academicyear{2025}
+\advisor{Asst. Prof. Dr. Advisor Name}
+\memberone{Asst. Prof. Dr. Committee Member 1}
+\membertwo{Asst. Prof. Dr. Committee Member 2}
+\memberthree{Asst. Prof. Dr. Committee Member 3}
+\gradcommittee{Prof. Dr. Pimchai Chaiyen}
+\end{minted}
+
+%------------------------
+\section{Manual Line Break in Title}
+\label{manual:metadata-linebreak}
+%------------------------
+
+\begin{paragraph}
+If your title is too long, it may not break naturally on the title page, approval page, or abstract page. You can insert a manual line break using \verb|\linebreak| to improve the layout. The number controls how strongly LaTeX tries to break the line.
+\end{paragraph}
+
+\begin{table}[ht]
+\small\singlespacingplus
+\centering
+\caption{Values for \texttt{\textbackslash linebreak} and their meaning}
+\begin{tabular}{cl}
+\toprule
+\textbf{Value} & \textbf{Effect} \\
+\midrule
+0 & Weak suggestion only \\
+1–3 & Increasing strength of break \\
+4 & Forced line break \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{paragraph}
+The example below breaks the title after the colon for better layout:
+\end{paragraph}
+
+\noindent\textbf{File: \texttt{thesisinfo.tex}}\vspace{-1.5em}
+\begin{minted}[breaklines, fontsize=\small]{latex}
+\title{VISTEC Thesis Template:\linebreak[2] A Complete LaTeX Thesis Preparation Version 2}
+\end{minted}
+
+
+%========================
+\section{Organizing Chapter and Front Matter Files}
+\label{manual:chapters}
+%========================
+
+\begin{paragraph}
+Each part of your thesis—such as chapters, abstract, acknowledgments, and appendices—should be saved as a separate file in the \texttt{contents/} folder. These files are included in \texttt{main.tex} using the \verb|\include{}| command.
+\end{paragraph}
+
+\begin{paragraph}
+The recommended structure is:
+\end{paragraph}
+
+\begin{itemize}[leftmargin=\paritemindent]
+    \item \textbf{Front matter pages:}
+    \begin{itemize}[leftmargin=0.5cm]
+        \item \texttt{abstract.tex}
+        \item \texttt{acknowledgment.tex}
+        \item \texttt{abbreviations.tex}
+        \item \texttt{authorbiography.tex}
+    \end{itemize}
+    
+    \item \textbf{Main chapters:}
+    \begin{itemize}[leftmargin=0.5cm]
+        \item \texttt{chapter1.tex}, \texttt{chapter2.tex}, ..., \texttt{chapter5.tex}
+    \end{itemize}
+    
+    \item \textbf{Additional sections:}
+    \begin{itemize}[leftmargin=0.5cm]
+        \item \texttt{appendix.tex}
+    \end{itemize}
+\end{itemize}
+
+\begin{paragraph}
+To include any file, use the \verb|\include{}| command in \texttt{main.tex}, like this:
+\end{paragraph}
+
+\noindent\textbf{File: \texttt{main.tex}}\vspace{-1.5em}
+\begin{minted}[breaklines, fontsize=\small]{latex}
+\include{contents/abstract}
+\include{contents/acknowledgment}
+\include{contents/chapter1}
+...
+\include{contents/appendix}
+\end{minted}
+
+
+
+
+
+
+
+%========================
+\section{Structuring Headings and References}
+\label{manual:headings}
+%========================
+
+\begin{paragraph}
+To keep your document well-organized, use headings consistently: \verb|\section|, \verb|\subsection|, \verb|\subsubsection|. Add \verb|\label| after each heading to create a reference target. Use \verb|\autoref| to reference them automatically with the correct prefix (e.g., ``Section'').
+\end{paragraph}
+
+\noindent\textbf{File: \texttt{contents/chapter1.tex}}\vspace{-1.5em}
+\begin{minted}[fontsize=\small, breaklines]{latex}
+\section{Introduction}
+\label{sec:intro}
+
+\begin{paragraph}
+This is a paragraph. Refer to \autoref{sec:background}.
+\end{paragraph}
+
+\subsection{Background}
+\label{sec:background}
+
+\begin{subparagraph}
+This is a subparagraph that expands on background context.
+\end{subparagraph}
+
+\subsubsection{Detailed Context}
+\label{subsec:detail}
+
+\begin{subsubparagraph}
+This subsubparagraph elaborates on the content in \autoref{sec:background}.
+\end{subsubparagraph}
+\end{minted}
+
+\textbf{Output:}\vspace{0.5em}
+
+\begin{tcolorbox}[colback=white, colframe=black, sharp corners, boxrule=0.4pt]
+
+\textbf{1\hspace{1.1cm}Introduction}\vspace{6pt}
+
+\hspace{1.25cm}This is a paragraph. Refer to Section 1.2.\vspace{6pt}
+
+\hspace{1.25cm}\textbf{1.2 Background}\vspace{6pt}
+
+\hspace{1.95cm}This is a subparagraph that expands on background context.\vspace{6pt}
+
+\hspace{1.95cm}\textbf{1.2.1 Detailed Context}\vspace{6pt}
+
+\hspace{2.95cm}This subsubparagraph elaborates on the content in Section 1.2.
+
+\end{tcolorbox}
+
+%------------------------
+\subsection{Referencing Tables, Figures, and Equations}
+\label{manual:ref-table-figure}
+%------------------------
+
+\begin{subparagraph}
+To reference tables, figures, or equations, use \verb|\label| and \verb|\autoref|. Always place the \verb|\label| right after the \verb|\caption| or at the end of the equation environment. This ensures correct automatic prefixing like ``Table'', ``Figure'', or ``Equation''.
+\end{subparagraph}
+
+\noindent\textbf{File: \texttt{contents/chapter1.tex}}\vspace{-1.5em}
+\begin{minted}[fontsize=\small, breaklines]{latex}
+% Referencing a table, figure, and equation
+As shown in \autoref{tab:summary}, \autoref{fig:sample}, and \autoref{eq:loss}, our results are consistent.
+
+% Table example
+\begin{table}[ht]
+\small\singlespacingplus
+\centering
+\caption{Summary of accuracy across datasets.}
+\label{tab:summary}
+    \begin{tabular}{lll}
+        \toprule
+        Dataset & Subjects & Accuracy \\
+        \midrule
+        A & 10 & 85.2\% \\
+        B & 12 & 88.6\% \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+% Figure example
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.9\linewidth]{figures/sample_plot.pdf}
+    \caption{Accuracy comparison between models.}
+    \label{fig:sample}
+\end{figure}
+
+% Equation (not shown in output box)
+\begin{equation}
+\mathcal{L}_{\text{total}} = \sum_{t=1}^{T} \alpha_t \cdot \mathcal{L}_t
+\label{eq:loss}
+\end{equation}
+\end{minted}
+
+\textbf{Output:}\vspace{0.5em}
+
+\begin{tcolorbox}[colback=white, colframe=black, sharp corners, boxrule=0.4pt]
+\hspace{1.25cm}As shown in Table 1, Figure 1, and \autoref{eq:loss}, our results are consistent.
+
+\vspace{6pt}
+\textbf{Table 1} Summary of accuracy across datasets.
+
+\vspace{-6pt}
+\begin{center}
+[SAMPLE TABLE]
+\end{center}
+
+\begin{center}
+[SAMPLE PLOT]
+\end{center}
+\vspace{-6pt}
+\textbf{Figure 1} Accuracy comparison between models.
+
+\begin{equation}
+\mathcal{L}_{\text{total}} = \sum_{t=1}^{T} \alpha_t \cdot \mathcal{L}_t
+\label{eq:loss}
+\end{equation}
+
+\end{tcolorbox}
+
+
+
+
+%========================
+\section{Customizing List Indentation}
+\label{manual:indentation}
+%========================
+
+\begin{paragraph}
+List indentation improves readability by visually separating content by level. This template provides three predefined indentation lengths:
+\end{paragraph}
+
+\begin{table}[ht]
+\small\singlespacingplus
+\centering
+\caption{Predefined macros for list indentation}
+\begin{tabular}{ll}
+\toprule
+\textbf{Macro} & \textbf{Indent Size} \\
+\midrule
+\verb|\paritemindent| & 1.65cm — First-level lists (main paragraph level) \\
+\verb|\subparitemindent| & 2.8cm — Second-level lists (nested or subparagraph level) \\
+\verb|\subsubparitemindent| & 4cm — Third-level lists (deeply nested content) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{paragraph}
+Below is an example of how to apply these indentation macros in \texttt{enumerate} and \texttt{itemize} environments. You can also use specific units like \texttt{cm} or \texttt{pt} when more control is needed.
+\end{paragraph}
+\newpage
+
+\noindent\textbf{File: \texttt{contents/xxx.tex}}\vspace{-1.5em}
+\begin{minted}[fontsize=\small, breaklines]{latex}
+% Custom indentation using predefined macros
+\begin{enumerate}[itemindent=\paritemindent]
+  \item First-level list item (using paritemindent)
+\end{enumerate}
+
+\begin{enumerate}[itemindent=\subparitemindent]
+  \item Second-level list item (using subparitemindent)
+\end{enumerate}
+
+\begin{enumerate}[itemindent=\subsubparitemindent]
+  \item Third-level list item (using subsubparitemindent)
+\end{enumerate}
+
+% Manual indentation using fixed units
+\begin{itemize}[itemindent=2cm]
+  \item Manually indented item using 2cm
+\end{itemize}
+
+\end{minted}
+
+%--- Visual Output Box ---
+\textbf{Output:}\vspace{0.5em}
+
+\begin{tcolorbox}[colback=white, colframe=black, sharp corners, boxrule=0.4pt]
+% Custom indentation using predefined macros
+\begin{enumerate}[itemindent=\paritemindent]
+  \item First-level list item (using paritemindent)
+\end{enumerate}
+
+\begin{enumerate}[itemindent=\subparitemindent]
+  \item Second-level list item (using subparitemindent)
+\end{enumerate}
+
+\begin{enumerate}[itemindent=\subsubparitemindent]
+  \item Third-level list item (using subsubparitemindent)
+\end{enumerate}
+
+% Manual indentation using fixed units
+\begin{itemize}[itemindent=2cm]
+  \item Manually indented item using 2cm
+\end{itemize}
+
+\end{tcolorbox}
+
+
+
+
+
+%========================
+\section{Font Size}
+\label{manual:font-size}
+%========================
+
+\begin{paragraph}
+This template customizes the default font settings for improved readability. The default font size is \textbf{12pt}. You may override it using any of the commands below.
+\end{paragraph}
+
+\begin{table}[h]
+\centering
+\caption{Font size commands with visual examples}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{ll>{\raggedright\arraybackslash}p{5cm}}
+\toprule
+\textbf{Command} & \textbf{Font Size (pt)} & \textbf{Example Text} \\
+\midrule
+\verb|\HUGE|         & 24pt & {\HUGE Some text} \\
+\verb|\huge|         & 20pt & {\huge Some text} \\
+\verb|\LARGE|        & 18pt & {\LARGE Some text} \\
+\verb|\Large|        & 16pt & {\Large Some text} \\
+\verb|\large|        & 14pt & {\large Some text} \\
+\verb|\normalsize|   & 12pt (default) & Some text \\
+\verb|\small|        & 11pt & {\small Some text} \\
+\verb|\footnotesize| & 10pt & {\footnotesize Some text} \\
+\verb|\scriptsize|   & 9pt  & {\scriptsize Some text} \\
+\verb|\tiny|         & 8pt  & {\tiny Some text} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\newpage
+
+\noindent\textbf{File: \texttt{contents/xxx.tex}}\vspace{-1.5em}
+\begin{minted}[fontsize=\small]{latex}
+{\Large This should appear larger.}
+
+{\small This should appear smaller.}
+\end{minted}
+
+\textbf{Output:}\vspace{0.5em}
+
+\begin{tcolorbox}[colback=white, colframe=black, sharp corners, boxrule=0.4pt]
+{\Large This should appear larger.}
+
+{\small This should appear smaller.}
+\end{tcolorbox}
+
+
+
+
+
+%========================
+\section{Formatting Tips and Layout Troubleshooting}
+%========================
+
+\begin{paragraph}
+This section provides helpful solutions to common formatting issues in your thesis, such as overfull lines, missing continuation headers, and manual page breaks.
+\end{paragraph}
+
+%------------------------
+\subsection{Fixing Overfull \texttt{\textbackslash hbox} Warnings}
+\label{manual:overflow-fix}
+%------------------------
+
+\begin{subparagraph}
+An \textcolor{orange}{``Overfull \texttt{\textbackslash hbox}''} warning occurs when LaTeX cannot break a long word or line within the page margins. There are two typical solutions:
+\end{subparagraph}
+
+\begin{itemize}[leftmargin=\subparitemindent]
+  \item Use \verb|\hyphenation{}| in the preamble to define custom word break points.
+  \item Insert a manual line break using \verb|\newline| in the document body.
+\end{itemize}
+
+%------------------------
+\begin{subparagraph}
+\textbf{Example 1: Using Hyphenation Rules \textcolor{red}{(recommend)}}
+
+Place these commands in the preamble to help LaTeX break long words:
+\end{subparagraph}
+
+\noindent\textbf{File: \texttt{main.tex}}\vspace{-1.5em}
+\begin{minted}[breaklines, fontsize=\small]{latex}
+\hyphenation{neurorehabi-litation} % Breaks as neurorehabi-litation
+\hyphenation{multi-modal}          % Breaks as multi-modal
+\hyphenation{inherent}             % Do not hyphenate this word
+\end{minted}
+
+
+%------------------------
+\begin{subparagraph}
+\textbf{Example 2: Manual Line Break}
+
+Insert \verb|\newline| at the desired point in a long sentence:
+\end{subparagraph}
+
+\noindent\textbf{File: \texttt{contents/xxx.tex}}\vspace{-1.5em}
+\begin{minted}[breaklines, fontsize=\small]{latex}
+This sentence is too long and exceeds the margin, so we insert a break.\newline
+Here is the continuation on the next line with proper indentation.
+\end{minted}
+
+\begin{subparagraph}
+Use \verb|\newline| only in body text. Avoid using it in math mode, figure captions, or references unless absolutely necessary.
+\end{subparagraph}
+
+%------------------------
+\subsection{Forcing a Page Break}
+%------------------------
+
+\begin{subparagraph}
+To manually start a new page, use:
+\end{subparagraph}
+
+\begin{minted}[breaklines, fontsize=\small]{latex}
+\newpage
+\end{minted}
+
+%------------------------
+\subsection{Fixing Missing Continuation Headers in Lists}
+%------------------------
+
+
+\begin{subparagraph}
+If a continuation header (e.g., \texttt{(Cont.)}) does not appear on the second page of a list, insert a dummy entry to trigger it. These entries are invisible but ensure correct layout. Uncomment the relevant lines based on the list affected.
+\end{subparagraph}
+
+\begin{subparagraph}
+Add this at the end of your \texttt{main.tex}:
+\end{subparagraph}
+
+\noindent\textbf{File: \texttt{main.tex}}\vspace{-1.5em}
+\begin{minted}[breaklines, fontsize=\small]{latex}
+\addtocontents{lot}{\protect\contentsline{table}{\phantom{Dummy Invisible Table Entry}}{\phantom{\thepage}}{}}
+\addtocontents{lof}{\protect\contentsline{figure}{\phantom{Dummy Invisible Figure Entry}}{\phantom{\thepage}}{}}
+\addtocontents{toc}{\protect\contentsline{chapter}{\phantom{Dummy Invisible TOC Entry}}{\phantom{\thepage}}{}}
+% \addtocontents{loa}{\protect\contentsline{algorithm}{\phantom{Dummy Invisible Algorithm Entry}}{\phantom{\thepage}}{}}
+\end{minted}
+
+%------------------------
+\subsection{Forcing Continuation Headers in the List of Abbreviations}
+%------------------------
+
+\begin{subparagraph}
+If the continuation header in the List of Abbreviations does not appear automatically, use \verb|\newpage| to manually break the page.
+\end{subparagraph}
+
+\begin{subparagraph}
+Example:
+\end{subparagraph}
+
+\noindent\textbf{File: \texttt{contents/abbreviations.tex}}\vspace{-1.5em}
+\begin{minted}[breaklines, fontsize=\small]{latex}
+\newabbr{EEG}{Electroencephalogram}
+\newabbr{MI}{Motor Imagery}
+\newabbr{CNN}{Convolutional Neural Network}
+\newabbr{\ce{H2O}}{Water}
+\newpage % Force second page
+\newabbr{DBU}{1,8-diazabicyclo[5.4.0]-7-undecene}
+\end{minted}
+
+
+\end{document} 

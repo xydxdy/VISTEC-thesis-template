@@ -5,7 +5,6 @@
 *.pygtex
 *.pygstyle
 
-main.pdf
 main-blx.bib
 main.fdb_latexmk
 main.run.xml
@@ -18,7 +17,6 @@ main.out
 main.toc
 main.blg
 
-manual.pdf
 manual-blx.bib
 manual.fdb_latexmk
 manual.run.xml

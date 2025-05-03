@@ -127,6 +127,8 @@
 \usepackage{longtable}
 \usepackage{microtype}
 \usepackage{etoolbox}
+\usepackage{afterpage}
+\usepackage{comment}
 
 \usepackage[version=4]{mhchem}
 \usepackage{chemfig}
@@ -631,6 +633,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%% Page formatting %%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%% Blank Page %%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\realblankpage{%
+    \null
+    \thispagestyle{empty}%
+    \addtocounter{page}{-1}%
+    \newpage
+}
+
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{plain}%
+    \newpage
+}
 
 %%%%%%%%%%%%%%%%%%%%% Title Page %%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -986,6 +1001,7 @@ Keywords: & #1.
     \input{contents/authorbiography}
     
     \clearpage
+    \afterpage{\realblankpage}
 }
 
 

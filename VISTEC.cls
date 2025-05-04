@@ -663,7 +663,6 @@
   \renewcommand{\subsectionautorefname}{Section}%
   \renewcommand{\subsubsectionautorefname}{Section}%
 }
-
 % Custom section numbering format
 \DeclareRobustCommand{\@seccntformat}[1]{%
   \def\temp@@a{#1}%
@@ -910,14 +909,14 @@
 %% --------------------------------------------------------------------------
 \newcommand\realblankpage{%
   \null
-  \thispagestyle{empty}%
-  \addtocounter{page}{-1}%
+  \thispagestyle{empty}% no page number
+  \addtocounter{page}{-1}% not counted in this page
   \newpage
 }
 
 \newcommand\blankpage{%
   \null
-  \thispagestyle{plain}%
+  \thispagestyle{plain}% show page numbering
   \newpage
 }
 
@@ -927,8 +926,8 @@
 
 \def\@makechapterhead#1{%
   \clearpage
-  \pagestyle{plain}
-  \thispagestyle{empty}
+  \pagestyle{plain} % page number in the footer
+  \thispagestyle{empty} % no page number on the first page of the chapter
   
   \newgeometry{
     left   = 3.75cm,
@@ -1005,7 +1004,7 @@
 % Title Page Environment Setup
 \renewenvironment{titlepage}{%
   \typeout{Title page}
-  \pagestyle{empty}
+  \pagestyle{empty} % no page number
 }{%
   \clearpage
 }
@@ -1026,7 +1025,7 @@
     top    = 2.5cm, 
     bottom = 2.5cm,
   }
-  \pagestyle{empty}
+  \pagestyle{empty} % no page number
   % Approval Information Table
   \noindent
   \normalfont\normalsize
@@ -1216,8 +1215,8 @@ Keywords: & #1.
 \let\oldappendix\appendix
 \renewcommand{\appendix}{%
   \clearpage
-  \pagestyle{plain}
-  \thispagestyle{empty}
+  \pagestyle{plain} % show page numbering
+  \thispagestyle{empty} % no page number on the first page
   \oldappendix
   \inappendixtrue
   % Redefine the chapter name printed in headings and ToC
@@ -1306,9 +1305,8 @@ Keywords: & #1.
 % Custom Table of Contents Command
 \renewcommand\tableofcontents{%
   \clearpage
-  \pagestyle{plain}
+  \pagestyle{plain} % show page numbering
   \fancyfoot[c]{\thepage}
-  \thispagestyle{plain}
 
   \newgeometry{
     top    = 5cm,
@@ -1372,9 +1370,8 @@ Keywords: & #1.
 % Custom List of Tables command
 \renewcommand\listoftables{%
   \clearpage
-  \pagestyle{plain}
+  \pagestyle{plain} % show page numbering
   \fancyfoot[c]{\thepage}
-  \thispagestyle{plain}
 
   \newgeometry{
     top    = 5cm,
@@ -1446,9 +1443,8 @@ Keywords: & #1.
 % Custom List of Figures command
 \renewcommand\listoffigures{%
   \clearpage
-  \pagestyle{plain}
+  \pagestyle{plain} % show page numbering
   \fancyfoot[c]{\thepage}
-  \thispagestyle{plain}
 
   \newgeometry{
     top    = 5cm,
@@ -1537,9 +1533,8 @@ Keywords: & #1.
 % Redefine List of Listings command
 \renewcommand{\lstlistoflistings}{%
   \clearpage
-  \pagestyle{plain}
+  \pagestyle{plain} % show page numbering
   \fancyfoot[c]{\thepage}
-  \thispagestyle{plain}
 
   \newgeometry{
     top    = 5cm,
@@ -1627,9 +1622,8 @@ Keywords: & #1.
 % Redefine List of Algorithms command
 \renewcommand{\listofalgorithms}{%
   \clearpage
-  \pagestyle{plain}
+  \pagestyle{plain} % show page numbering
   \fancyfoot[c]{\thepage}
-  \thispagestyle{plain}
 
   \newgeometry{
     top    = 5cm,
@@ -1701,9 +1695,8 @@ Keywords: & #1.
 % Abbreviations Environment
 \newenvironment{abbreviations}{%
   \clearpage
-  \pagestyle{plain}
+  \pagestyle{plain} % show page numbering
   \fancyfoot[c]{\thepage}
-  \thispagestyle{plain}
 
   \newgeometry{
     left   = 3.75cm,

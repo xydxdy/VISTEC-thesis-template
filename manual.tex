@@ -212,7 +212,7 @@ The example below breaks the title after the colon for better layout:
 %========================
 
 \begin{paragraph}
-Each part of your thesis—such as chapters, abstract, acknowledgments, and appendices—should be saved as a separate file in the \texttt{contents/} folder. These files are included in \texttt{main.tex} using the \verb|\include{}| command.
+Each part of your thesis—such as chapters, abstract, acknowledgments, and appendices—should be saved as a separate file in the \texttt{contents/} folder. These files are included in \texttt{main.tex} using the \verb|\includechapter{}| command.
 \end{paragraph}
 
 \begin{paragraph}
@@ -240,16 +240,16 @@ The recommended structure is:
 \end{itemize}
 
 \begin{paragraph}
-To include any file, use the \verb|\include{}| command in \texttt{main.tex}, like this:
+To include any file, use the \verb|\includechapter{}| command in \texttt{main.tex}, like this:
 \end{paragraph}
 
 \noindent\textbf{File: \texttt{main.tex}}\vspace{-1.5em}
 \begin{minted}[breaklines, fontsize=\small]{latex}
-\include{contents/abstract}
-\include{contents/acknowledgment}
-\include{contents/chapter1}
+\includechapter{contents/abstract}
+\includechapter{contents/acknowledgment}
+\includechapter{contents/chapter1}
 ...
-\include{contents/appendix}
+\includechapter{contents/appendix}
 \end{minted}
 
 
@@ -344,7 +344,7 @@ As shown in \autoref{tab:summary}, \autoref{fig:sample}, and \autoref{eq:loss}, 
 % Figure example
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.9\linewidth]{figures/sample_plot.pdf}
+    \includechaptergraphics[width=0.9\linewidth]{figures/sample_plot.pdf}
     \caption{Accuracy comparison between models.}
     \label{fig:sample}
 \end{figure}

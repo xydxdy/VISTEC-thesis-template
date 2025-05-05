@@ -911,8 +911,7 @@
 
 %% --------------------------------------------------------------------------
 %% Chapter Page Formatting
-%% --------------------------------------------------------------------------
-
+% %% --------------------------------------------------------------------------
 \def\@makechapterhead#1{%
   \clearpage
   \pagestyle{plain} % page number in the footer
@@ -937,6 +936,12 @@
 }
 
 \def\@makeschapterhead#1{%
+  \ifodd\value{page}\relax\else
+    \blankpage
+  \fi
+  
+  \addcontentsline{toc}{chapter}{#1}%
+  
   \begin{center}%
   \Large\bfseries 
   \vspace*{16pt}
@@ -945,17 +950,23 @@
   \end{center}%
 }
 
+% Add a blank page if the page does not end with an even number
+\newcommand{\includechapter}[1]{%
+  \include{#1}%
+  \ifodd\value{page}\relax\else\blankpage\fi
+}
+
+
 %% --------------------------------------------------------------------------
 %% Title Page Formatting
 %% --------------------------------------------------------------------------
 
 \renewcommand{\maketitle}{
   \newgeometry{
-    inner  = 3.75cm,
-    outer  = 2.5cm,
+    left   = 3.75cm,
+    right  = 2.5cm,
     top    = 2.5cm,
-    bottom = 2.5cm,
-    twoside
+    bottom = 2.5cm
   }
   \begin{titlepage}
     \begin{center}
@@ -1013,11 +1024,10 @@
   \hyphenation{engineering}
   
   \newgeometry{
-    inner  = 3.75cm,
-    outer  = 2.5cm,
+    left   = 3.75cm,
+    right  = 2.5cm,
     top    = 5cm, 
-    bottom = 2.5cm,
-    twoside
+    bottom = 2.5cm
   }
   \pagestyle{empty} % no page number
   % Approval Information Table
@@ -1231,9 +1241,13 @@ Keywords: & #1.
 
 \let\oldappendix\appendix
 \renewcommand{\appendix}{%
+  \ifodd\value{page}\relax\else
+    \blankpage % inserts a blank page, which doesn't get counted
+  \fi
   \clearpage
   \pagestyle{plain} % show page numbering
   \thispagestyle{empty} % no page number on the first page
+  % \addcontentsline{toc}{chapter}{#1}%
   \oldappendix
   \inappendixtrue
   % Redefine the chapter name printed in headings and ToC
@@ -1251,13 +1265,6 @@ Keywords: & #1.
 %% --------------------------------------------------------------------------
 
 \newenvironment{authorbiography}{
-  % Check if current page is even, insert blank page if needed
-  \ifodd\value{page}\relax
-    % Odd page, good, do nothing
-  \else
-    \blankpage
-  \fi
-
   \clearpage
   \pagestyle{plain} % Show page numbering
   \thispagestyle{empty} % No page number on the first page
@@ -1292,14 +1299,6 @@ Keywords: & #1.
 \DeclareBibliographyCategory{exclude}
 
 \newcommand{\vancouverbib}{
-
-  % Check if current page is even, insert blank page if needed
-  \ifodd\value{page}\relax
-    % Odd page, good, do nothing
-  \else
-    \blankpage
-  \fi
-
   \clearpage
   \pagestyle{plain} % Show page numbering
   \thispagestyle{empty} % No page number on first page of References
@@ -1318,7 +1317,11 @@ Keywords: & #1.
   
   % Print the bibliography without an additional heading
   \printbibliography[heading=none, notcategory=exclude]
-  
+  \ifodd\value{page}\relax
+    % Odd page, good, do nothing
+  \else
+    \blankpage
+  \fi
   \clearpage
 }
 

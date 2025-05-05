@@ -91,18 +91,18 @@
     \pagenumbering{arabic}
     \setcounter{page}{1}
     
-    \include{contents/chapter1}
-    \include{contents/chapter2} 
-    \include{contents/chapter3} 
-    \include{contents/chapter4} 
-    \include{contents/chapter5}
+    \includechapter{contents/chapter1}
+    \includechapter{contents/chapter2} 
+    \includechapter{contents/chapter3} 
+    \includechapter{contents/chapter4} 
+    \includechapter{contents/chapter5}
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%% Epilogue %%%%%%%%%%%%%%%%%%%%%%%%%%%% 
     %% References
     \vancouverbib
 
     %% Appendices
-    \include{contents/appendix}   %% Content at `contents/appendix.tex`
+    \includechapter{contents/appendix}   %% Content at `contents/appendix.tex`
 
     %% Author Biography
     \authorbiography                %% Content at `contents/authorbiography.tex`

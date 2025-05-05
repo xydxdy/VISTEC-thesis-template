@@ -5,31 +5,21 @@
 *.pygtex
 *.pygstyle
 
-main-blx.bib
-main.fdb_latexmk
-main.run.xml
-main.synctex.gz
-main.synctex(busy)
-main.bbl
-main.lof
-main.lot
-main.out
-main.toc
-main.blg
+*-blx.bib
+*.fdb_latexmk
+*.run.xml
+*.synctex.gz
+*.synctex(busy)
+*.bbl
+*.lof
+*.lot
+*.lol
+*.loa
+*.out
+*.toc
+*.blg
 
-manual-blx.bib
-manual.fdb_latexmk
-manual.run.xml
-manual.synctex.gz
-manual.synctex(busy)
-manual.bbl
-manual.lof
-manual.lot
-manual.out
-manual.toc
-manual.blg
-
-_minted-main
+_minted-*
 
 # xypic precompiled matrices and outlines
 *.xyc

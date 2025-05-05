@@ -65,13 +65,14 @@
     %% Set global line spacing
     \singlespacingplus % 1.5x line spacing
 
+    %% Title and approval pages
+    \maketitle
+
     %% Roman page numbering
     \fancyhf[cf]{\thepage}
     \pagenumbering{roman}
     \setcounter{page}{1}
 
-    %% Title and approval pages
-    \maketitle
     \makeapproval
    
     %% Acnowledgment
@@ -111,11 +112,9 @@
     %%%%%%%%%%%%%%%%%%%%%%%%%%%% Fix "List of XXXXXX (Cont.)" Header Issue %%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % If the continuation header (e.g., "List of Tables (Cont.)") fails to appear on the second page,
     % uncomment the corresponding dummy entry below to manually trigger a page break or layout update.
-    %
+
     % \addtocontents{toc}{\protect\contentsline{content}{\phantom{Dummy Invisible Content Entry}}{\phantom{\thepage}}{}}
     \addtocontents{lot}{\protect\contentsline{table}{\phantom{Dummy Invisible Table Entry}}{\phantom{\thepage}}{}}
     \addtocontents{lof}{\protect\contentsline{figure}{\phantom{Dummy Invisible Figure Entry}}{\phantom{\thepage}}{}}
-    % \addtocontents{loa}{\protect\contentsline{algorithm}{\phantom{Dummy Invisible Algorithm Entry}}{\phantom{\thepage}}{}}
-
 
 \end{document}

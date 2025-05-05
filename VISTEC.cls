@@ -853,30 +853,28 @@
 
 % Custom definition of dotted ToC line for the list of tables.
 \def\@dottedtocline#1#2#3#4#5{%
+  \ifnum #1>\c@tocdepth \else
+    \vspace{-18pt}%
+    \setlength{\parskip}{0pt}%
+    \setlength{\tabcolsep}{0pt}%
+    \renewcommand{\arraystretch}{1.0}%
 
-    \ifnum 
-      #1>\c@tocdepth 
-    \else
-      \setlength{\parskip}{1.5pt}
-      \leftskip0cm
-      \begin{tabular}{p{0.80\linewidth}p{0.12\linewidth}}
-        \begingroup
-          \leftskip #2\relax \rightskip 
-          \@tocrmarg \parfillskip -\rightskip \parindent #2\relax 
-          \@afterindenttrue \interlinepenalty \@M \leavevmode 
-          \@tempdima #3\relax 
-          \advance \leftskip \@tempdima \null \nobreak 
-          \hskip -\leftskip {#4}\nobreak %
-          \hfill \nobreak 
-          \hb@xt@ \@pnumwidth {\hfil}%     
-        \endgroup
-        & 
-        \begingroup
-        {\hfil#5}
-        \endgroup
-      \end{tabular}
-      \vspace{-6pt}
-    \fi
+    \begin{tabular}[t]{@{}p{0.25cm}@{}p{0.78\linewidth}@{}p{0.115\linewidth}@{}}
+      {} &
+      \begingroup
+        \@tempdima #3\relax
+        \advance \leftskip \@tempdima \null \nobreak
+        \hskip -\leftskip #4\nobreak
+      \endgroup
+      &
+      \begingroup
+        \vbox to 2.2ex{%
+          \hfill\strut\par
+          \hfill #5%
+        }%
+      \endgroup
+    \end{tabular}%
+  \fi
 }
 
 

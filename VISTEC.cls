@@ -899,7 +899,7 @@
 \newcommand\realblankpage{%
   \null
   \thispagestyle{empty}% no page number
-  % \addtocounter{page}{-1}% not counted in this page
+  \addtocounter{page}{-1}% not counted in this page
   \newpage
 }
 
@@ -919,10 +919,11 @@
   \thispagestyle{empty} % no page number on the first page of the chapter
   
   \newgeometry{
-    left   = 3.75cm,
-    right  = 2.5cm,
+    inner  = 3.75cm,
+    outer  = 2.5cm,
     top    = 3.75cm,
     bottom = 2.5cm,
+    twoside
   }
 
   \begin{center}%
@@ -950,10 +951,11 @@
 
 \renewcommand{\maketitle}{
   \newgeometry{
-    left   = 3.75cm,
-    right  = 2.5cm,
+    inner  = 3.75cm,
+    outer  = 2.5cm,
     top    = 2.5cm,
     bottom = 2.5cm,
+    twoside
   }
   \begin{titlepage}
     \begin{center}
@@ -1011,10 +1013,11 @@
   \hyphenation{engineering}
   
   \newgeometry{
-    left   = 3.75cm,
-    right  = 2.5cm,
+    inner  = 3.75cm,
+    outer  = 2.5cm,
     top    = 5cm, 
     bottom = 2.5cm,
+    twoside
   }
   \pagestyle{empty} % no page number
   % Approval Information Table

@@ -600,19 +600,7 @@
 %% Listing Caption Settings / Source Code Caption Settings
 %% --------------------------------------------------------------------------
 
-% Define custom caption format for listings (ragged left alignment)
-\DeclareCaptionFormat{raggedlefthanglst}{%
-  \setlength{\columnsep}{\widthof{#1#2}}%
-  \begin{varwidth}[t]{\textwidth}%
-    \normalsize\singlespacingplus%
-    \leftskip\columnsep%
-    \parindent -\columnsep%
-    \makebox[\columnsep][l]{\bfseries #1}#3%
-  \end{varwidth}\par%
-}
-\captionsetup[lstlisting]{format=raggedlefthanglst}
-
-% Custom Caption Format for Code Listings
+% Custom Caption Format for Code Listings (ragged left alignment)
 \DeclareCaptionFormat{raggedlefthangcode}{%
   \setlength{\columnsep}{\widthof{#1#2}}
   \begin{varwidth}[t]{\textwidth}%
@@ -621,6 +609,7 @@
     \parindent -\columnsep
     \makebox[\columnsep][l]{\bfseries #1}#3%
   \end{varwidth}\par%
+  \vspace{-1em} % Adjust vertical space after caption
 }
 
 % Apply the custom caption format to listings (Source Code)
@@ -1508,8 +1497,8 @@ Keywords: & #1.
   \addtocontents}{}{}%=
 
 % Define the formatting for each listing in the List of Listings
-\renewcommand{\l@listing}[2]{
-  \@dottedtocline{1}{0.25cm}{1.5cm}{#1}{#2}%
+\renewcommand{\l@listing}{
+  \@dottedtocline{1}{0cm}{1.5cm}%
 }
 
 % First page List of Listings header
@@ -1579,27 +1568,27 @@ Keywords: & #1.
 %% List of Algorithms Page Formatting
 %% --------------------------------------------------------------------------
 
-% Custom Algorithm Naming
-\newcommand{\algorithmname}{Algorithm}
-% Rename the List of Algorithms title
-\renewcommand{\listalgorithmname}{List of \algorithmname s}
+% Define List of Algorithms based on List of Tables
+\let\l@algorithm\l@table
+\let\listofalgorithms\listoftables
 
-% Define List of Algorithms based on List of Figures
-\let\l@algorithm\l@figure
-\let\listofalgorithms\listoffigures
-
-% Modify the list to use "loa" instead of "lof"
-\patchcmd{\listofalgorithms}{\@starttoc{lof}}{\@starttoc{loa}}{}{}%
+% Modify the list to use "loa" instead of "lot"
+\patchcmd{\listofalgorithms}{\@starttoc{lot}}{\@starttoc{loa}}{}{}%
 
 % Adjust how the List of Algorithms is added to the Table of Contents
 \patchcmd{\@chapter}{\addtocontents}{%
   \addtocontents{loa}{}%
   \addtocontents}{}{}%=
-
+    
 % Define the formatting for each algorithm in the List of Algorithms
-\renewcommand{\l@algorithm}[2]{
-  \@dottedtocline{1}{0.25cm}{1.5cm}{#1}{#2}%
+\renewcommand{\l@algorithm}{
+  \@dottedtocline{1}{0cm}{1.5cm}%
 }
+
+% Custom Algorithm Naming
+\newcommand{\algorithmname}{Algorithm}
+% Rename the List of Algorithms title
+\renewcommand{\listalgorithmname}{List of \algorithmname s}
 
 % First page List of Algorithms header
 \newcommand{\loaheader}{%
@@ -1620,7 +1609,7 @@ Keywords: & #1.
 }
 
 % Redefine List of Algorithms command
-\renewcommand{\listofalgorithms}{%
+\renewcommand\listofalgorithms{%
   \clearpage
   \pagestyle{plain} % show page numbering
   \fancyfoot[c]{\thepage}
@@ -1632,7 +1621,7 @@ Keywords: & #1.
     right  = 2.5cm,
   }
 
-  % Add List of Algorithms to the Table of Contents
+  % Add List of Algorithms to the ToC
   \addcontentsline{toc}{chapter}{\listalgorithmname}
 
   % Flag to detect first page
@@ -1656,13 +1645,15 @@ Keywords: & #1.
     % First page header
     \loaheader
 
-    % Start the List of Algorithms
+    % Generate the List of Algorithms
+    \singlespacingplus
     \@starttoc{loa}%
   \endgroup
 
   \restoregeometry
   \clearpage
-}   
+}
+
 
 %%%%%%%%%%%%%%%%%%%%% List of Abbreviations Page %%%%%%%%%%%%%%%%%%%%%%%%%
 %% --------------------------------------------------------------------------

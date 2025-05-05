@@ -857,9 +857,9 @@
     \ifnum 
       #1>\c@tocdepth 
     \else
-      \leftskip0.1cm
       \setlength{\parskip}{1.5pt}
-      \begin{tabular}{p{0.80\linewidth}p{0.10\linewidth}}
+      \leftskip0cm
+      \begin{tabular}{p{0.80\linewidth}p{0.12\linewidth}}
         \begingroup
           \leftskip #2\relax \rightskip 
           \@tocrmarg \parfillskip -\rightskip \parindent #2\relax 
@@ -875,6 +875,7 @@
         {\hfil#5}
         \endgroup
       \end{tabular}
+      \vspace{-6pt}
     \fi
 }
 
@@ -1728,9 +1729,9 @@ Keywords: & #1.
 
 % Abbreviation Entry Environment
 \newenvironment{newabbr}[2]{
-  \myindent{0.425cm}
-  \makebox[7.05cm][l]{#1}
-  \hangindent=7.8cm
+  \myindent{0.75cm}
+  \makebox[5cm][l]{#1}
+  \hangindent=6.05cm
   \capitalisewords{#2}\par
 }
 

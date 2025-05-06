@@ -20,7 +20,7 @@ Please confirm formatting requirements with VISTEC Graduate Studies before final
 
 ## ⚙️ Prerequisites
 
-- **Compiler**: `pdfLaTeX`
+- **Compiler**: ~~`pdfLaTeX` (mathptmx)~~ `XeLaTeX` (Times New Roman)
 - **TeX Distribution**:
   - TeX Live 2023 **or**
   - TeX Live 2024

@@ -1662,7 +1662,7 @@ Keywords: & #1.
 \newenvironment{newabbr}[2]{
   \myindent{0.75cm}
   \makebox[5cm][l]{#1}
-  \hangindent=6.05cm
+  \hangindent=6.1cm
   \capitalisewords{#2}\par
 }
 

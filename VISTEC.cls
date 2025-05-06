@@ -180,9 +180,9 @@
 %% Font Setup: Times New Roman
 %% --------------------------------------------------------------------------
 
-\usepackage{mathptmx} % Times font for pdfLaTeX
-% \usepackage{fontspec} % Uncomment if using XeLaTeX
-% \setmainfont{Times New Roman}
+% \usepackage{mathptmx} % Times font for pdfLaTeX
+\usepackage{fontspec} % Uncomment if using XeLaTeX
+\setmainfont{Times New Roman}
 
 %% --------------------------------------------------------------------------
 %% General Packages
@@ -853,32 +853,29 @@
 
 % Custom definition of dotted ToC line for the list of tables.
 \def\@dottedtocline#1#2#3#4#5{%
+  \ifnum #1>\c@tocdepth \else
+    \vspace{-18pt}%
+    \setlength{\parskip}{0pt}%
+    \setlength{\tabcolsep}{0pt}%
+    \renewcommand{\arraystretch}{1.0}%
 
-    \ifnum 
-      #1>\c@tocdepth 
-    \else
-      \setlength{\parskip}{1.5pt}
-      \leftskip0cm
-      \begin{tabular}{p{0.80\linewidth}p{0.12\linewidth}}
-        \begingroup
-          \leftskip #2\relax \rightskip 
-          \@tocrmarg \parfillskip -\rightskip \parindent #2\relax 
-          \@afterindenttrue \interlinepenalty \@M \leavevmode 
-          \@tempdima #3\relax 
-          \advance \leftskip \@tempdima \null \nobreak 
-          \hskip -\leftskip {#4}\nobreak %
-          \hfill \nobreak 
-          \hb@xt@ \@pnumwidth {\hfil}%     
-        \endgroup
-        & 
-        \begingroup
-        {\hfil#5}
-        \endgroup
-      \end{tabular}
-      \vspace{-6pt}
-    \fi
+    \begin{tabular}[t]{@{}p{0.25cm}@{}p{0.78\linewidth}@{}p{0.115\linewidth}@{}}
+      {} &
+      \begingroup
+        \@tempdima #3\relax
+        \advance \leftskip \@tempdima \null \nobreak
+        \hskip -\leftskip #4\nobreak
+      \endgroup
+      &
+      \begingroup
+        \vbox to 2.2ex{%
+          \hfill\strut\par
+          \hfill #5%
+        }%
+      \endgroup
+    \end{tabular}%
+  \fi
 }
-
 
 
 
@@ -1019,7 +1016,7 @@
   % Approval Information Table
   \noindent
   \normalfont\normalsize
-  \begin{tabular}{p{0.1725\linewidth}p{0.7825\linewidth}}
+  \begin{tabular}{p{0.16\linewidth}p{0.8\linewidth}}
     \\~\\% two line spaces
     \leftskip-0.1in Title: & \@title \\
     \leftskip-0.1in Advisor: & \@advisor \\
@@ -1665,7 +1662,7 @@ Keywords: & #1.
 \newenvironment{newabbr}[2]{
   \myindent{0.75cm}
   \makebox[5cm][l]{#1}
-  \hangindent=6.05cm
+  \hangindent=6.1cm
   \capitalisewords{#2}\par
 }
 

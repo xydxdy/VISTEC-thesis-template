@@ -180,9 +180,9 @@
 %% Font Setup: Times New Roman
 %% --------------------------------------------------------------------------
 
-\usepackage{mathptmx} % Times font for pdfLaTeX
-% \usepackage{fontspec} % Uncomment if using XeLaTeX
-% \setmainfont{Times New Roman}
+% \usepackage{mathptmx} % Times font for pdfLaTeX
+\usepackage{fontspec} % Uncomment if using XeLaTeX
+\setmainfont{Times New Roman}
 
 %% --------------------------------------------------------------------------
 %% General Packages
@@ -1032,7 +1032,7 @@
   % Approval Information Table
   \noindent
   \normalfont\normalsize
-  \begin{tabular}{p{0.1725\linewidth}p{0.7825\linewidth}}
+  \begin{tabular}{p{0.16\linewidth}p{0.8\linewidth}}
     \leftskip-0.1in Title: & \@title \\
     \leftskip-0.1in Advisor: & \@advisor \\
     \leftskip-0.1in Name: & \@authortitle \ \@author \\

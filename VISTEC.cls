@@ -1,6 +1,6 @@
 %% !TEX encoding = UTF-8 Unicode
-%% Compiler: pdfLaTeX
-%% Packages: TeX live version 2023
+%% Compiler: XeLaTeX
+%% Packages: TeX live version 2023/2024
 %% --------------------------------------------------------------------------
 %% Author: Rattanaphon Chaisaen
 %% Email: r.chaisaen@gmail.com
@@ -1005,6 +1005,7 @@
   \hyphenation{technology}
   \hyphenation{international}
   \hyphenation{engineering}
+  \hyphenation{fulfillment}
   
   \newgeometry{
     left   = 3.75cm,

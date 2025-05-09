@@ -1,10 +1,10 @@
 %% !TEX encoding = UTF-8 Unicode
-%% Compiler: pdfLaTeX
-%% Packages: TeX live version 2023
+%% Compiler: XeLaTeX
+%% Packages: TeX live version 2023/2024
 %% --------------------------------------------------------------------------
 %% Author: Rattanaphon Chaisaen
 %% Email: r.chaisaen@gmail.com
-%% version ='1.0'
+%% version = 2
 
 %% VISTEC Thesis Template © 2024 by Rattanaphon Chaisaen is licensed under CC BY-NC-SA 4.0 
 %% --------------------------------------------------------------------------
@@ -1021,6 +1021,7 @@
   \hyphenation{technology}
   \hyphenation{international}
   \hyphenation{engineering}
+  \hyphenation{fulfillment}
   
   \newgeometry{
     left   = 3.75cm,

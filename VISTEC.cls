@@ -4,7 +4,7 @@
 %% --------------------------------------------------------------------------
 %% Author: Rattanaphon Chaisaen
 %% Email: r.chaisaen@gmail.com
-%% version ='1.0'
+%% version = 2
 
 %% VISTEC Thesis Template © 2024 by Rattanaphon Chaisaen is licensed under CC BY-NC-SA 4.0 
 %% --------------------------------------------------------------------------
@@ -692,7 +692,7 @@
   {\z@}% indent
   {6pt}% <space before>
   {0.1pt}% <space after>
-  {\large\bfseries}
+  {\normalsize\bfseries}
 }
 
 % Custom Subsection Formatting
@@ -885,6 +885,7 @@
 
 
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% 6. Page Templates
 %%    - Title page, pproval page, list of figures/tables (cont.), TOC
@@ -909,18 +910,18 @@
 
 %% --------------------------------------------------------------------------
 %% Chapter Page Formatting
-%% --------------------------------------------------------------------------
-
+% %% --------------------------------------------------------------------------
 \def\@makechapterhead#1{%
   \clearpage
   \pagestyle{plain} % page number in the footer
   \thispagestyle{empty} % no page number on the first page of the chapter
   
   \newgeometry{
-    left   = 3.75cm,
-    right  = 2.5cm,
+    inner  = 3.75cm,
+    outer  = 2.5cm,
     top    = 3.75cm,
     bottom = 2.5cm,
+    twoside
   }
 
   \begin{center}%
@@ -934,6 +935,12 @@
 }
 
 \def\@makeschapterhead#1{%
+  \ifodd\value{page}\relax\else
+    \blankpage
+  \fi
+  
+  \addcontentsline{toc}{chapter}{#1}%
+  
   \begin{center}%
   \Large\bfseries 
   \vspace*{16pt}
@@ -941,6 +948,13 @@
   \vspace*{16pt}
   \end{center}%
 }
+
+% Add a blank page if the page does not end with an even number
+\newcommand{\includechapter}[1]{%
+  \include{#1}%
+  \ifodd\value{page}\relax\else\blankpage\fi
+}
+
 
 %% --------------------------------------------------------------------------
 %% Title Page Formatting
@@ -951,7 +965,7 @@
     left   = 3.75cm,
     right  = 2.5cm,
     top    = 2.5cm,
-    bottom = 2.5cm,
+    bottom = 2.5cm
   }
   \begin{titlepage}
     \begin{center}
@@ -982,18 +996,20 @@
       THE DEGREE OF \MakeUppercase{\@degreefield} \\
       IN \MakeUppercase{\@program} \\~\\
       \@academicyear
+      \\~\\
     \end{center}
     
     \vspace{-1em}
-  \end{titlepage}
+  \end{titlepage}  
 }
 
 % Title Page Environment Setup
 \renewenvironment{titlepage}{%
   \typeout{Title page}
-  \pagestyle{empty} % no page number
+  \pagestyle{empty}
 }{%
   \clearpage
+  \afterpage{\realblankpage}
 }
 
 %% --------------------------------------------------------------------------
@@ -1010,15 +1026,14 @@
   \newgeometry{
     left   = 3.75cm,
     right  = 2.5cm,
-    top    = 2.5cm, 
-    bottom = 2.5cm,
+    top    = 5cm, 
+    bottom = 2.5cm
   }
   \pagestyle{empty} % no page number
   % Approval Information Table
   \noindent
   \normalfont\normalsize
   \begin{tabular}{p{0.16\linewidth}p{0.8\linewidth}}
-    \\~\\% two line spaces
     \leftskip-0.1in Title: & \@title \\
     \leftskip-0.1in Advisor: & \@advisor \\
     \leftskip-0.1in Name: & \@authortitle \ \@author \\
@@ -1104,6 +1119,7 @@
   \vspace{-1.5em}
 
   \clearpage
+  \afterpage{\realblankpage}
 }
 
 %% --------------------------------------------------------------------------
@@ -1116,15 +1132,18 @@
   \addcontentsline{toc}{chapter}{Abstract}
   \clearpage
   \newgeometry{
-    left   = 3.75cm,
-    right  = 2.5cm,
-    top    = 5cm, 
-    bottom = 2.5cm,
+    inner=3.75cm, % left on odd pages
+    outer=2.5cm,  % right on odd pages
+    top=3.75cm,
+    bottom=2.5cm,
+    twoside % important: activate two-side margins (for books/thesis)
   }
   \pagestyle{plain} % show page numbering
+  \thispagestyle{empty} % No page number on the first page
 
   % Abstract Title Section
   \begin{center}
+    \vspace*{16pt}
     {\singlespacingplus\Large\normalfont{\@title}\\~\\}
     {\singlespacingplus\Large\normalfont{\bfseries{Abstract}}\\~\\}
     {\singlespacingplus\normalsize\normalfont{\@author}\\~\\}
@@ -1136,7 +1155,14 @@
   \input{contents/abstract}}
   
   \clearpage
-}
+
+  % Check if current page is even, insert blank page if needed
+  \ifodd\value{page}\relax
+    % Odd page, good, do nothing
+  \else
+    \blankpage
+  \fi
+}{}
 
 \newenvironment{keywords}[1]{
 \vfill
@@ -1154,18 +1180,24 @@ Keywords: & #1.
 \newenvironment{acknowledgment}{%
   \clearpage
   \newgeometry{
-    left   = 3.75cm,
-    right  = 2.5cm,
-    top    = 5cm, 
-    bottom = 2.5cm,
+    inner=3.75cm, % left on odd pages
+    outer=2.5cm,  % right on odd pages
+    top=3.75cm,
+    bottom=2.5cm,
+    twoside % important: activate two-side margins (for books/thesis)
   }
   \pagestyle{plain} % show page numbering
-  \addcontentsline{toc}{chapter}{Acknowledgment}
-  \typeout{acknowledgment}
+  \thispagestyle{empty} % No page number on first page
+  % \addcontentsline{toc}{chapter}{Acknowledgment}
+  % \typeout{acknowledgment}
 
-    % Acknowledgment Title Section
-  \begin{center}%
-    {\singlespacingplus\normalfont\Large\bfseries{Acknowledgment}\\~\\}
+  % Title
+  \begin{center}
+    {
+    \vspace*{16pt}
+    \singlespacingplus\normalfont\Large\bfseries{Acknowledgment}
+    \\~\\
+    }
   \end{center}
 
   % Acknowledgment Content
@@ -1194,7 +1226,14 @@ Keywords: & #1.
   }
 
   \clearpage
-}
+
+  % Check if current page is even, insert blank page if needed
+  \ifodd\value{page}\relax
+    % Odd page, good, do nothing
+  \else
+    \blankpage
+  \fi
+}{}
 
 %% --------------------------------------------------------------------------
 %% Appendix Page Formatting
@@ -1202,9 +1241,13 @@ Keywords: & #1.
 
 \let\oldappendix\appendix
 \renewcommand{\appendix}{%
+  \ifodd\value{page}\relax\else
+    \blankpage % inserts a blank page, which doesn't get counted
+  \fi
   \clearpage
   \pagestyle{plain} % show page numbering
   \thispagestyle{empty} % no page number on the first page
+  % \addcontentsline{toc}{chapter}{#1}%
   \oldappendix
   \inappendixtrue
   % Redefine the chapter name printed in headings and ToC
@@ -1224,13 +1267,15 @@ Keywords: & #1.
 \newenvironment{authorbiography}{
   \clearpage
   \pagestyle{plain} % Show page numbering
+  \thispagestyle{empty} % No page number on the first page
   \addcontentsline{toc}{chapter}{Author’s Biography}
   \typeout{authorbiography}
   
-  % Author's Biography Title
+  % Author Biography Title
   \noindent
   \begin{center}
-    {\Large\normalfont\bfseries{Author’s Biography}\\~\\}
+    \vspace*{16pt}
+    {\Large\normalfont\bfseries{Author’s Biography}\\[12pt]}
   \end{center}
   
   % Author's Biography Content
@@ -1239,7 +1284,12 @@ Keywords: & #1.
   \input{contents/authorbiography}
   
   \clearpage
-  \afterpage{\realblankpage}
+
+  \ifodd\value{page}\relax
+    % Odd page, good, do nothing
+  \else
+    \blankpage
+  \fi
 }
 
 %% --------------------------------------------------------------------------
@@ -1250,12 +1300,15 @@ Keywords: & #1.
 
 \newcommand{\vancouverbib}{
   \clearpage
+  \pagestyle{plain} % Show page numbering
+  \thispagestyle{empty} % No page number on first page of References
   \addcontentsline{toc}{chapter}{References}
 
-    % Title for References
+  % Title for References
   \begin{center}%
+    \vspace*{16pt}
     {\Large\bfseries{References}}
-    \normalsize\\~\\
+    {\normalsize\\~\\}
   \end{center}
   
   % Set formatting for the references
@@ -1264,7 +1317,11 @@ Keywords: & #1.
   
   % Print the bibliography without an additional heading
   \printbibliography[heading=none, notcategory=exclude]
-  
+  \ifodd\value{page}\relax
+    % Odd page, good, do nothing
+  \else
+    \blankpage
+  \fi
   \clearpage
 }
 
@@ -1275,6 +1332,7 @@ Keywords: & #1.
 % First page Table of Contents header
 \newcommand{\tocheader}{%
   \begin{center}
+    \vspace*{16pt}
     {\Large\bfseries \contentsname} \normalsize\\~\\
     {} \hfill Page
     \vspace{-1em}
@@ -1294,13 +1352,14 @@ Keywords: & #1.
 \renewcommand\tableofcontents{%
   \clearpage
   \pagestyle{plain} % show page numbering
-  \fancyfoot[c]{\thepage}
+  \thispagestyle{empty} % No page number on first page
 
   \newgeometry{
-    top    = 5cm,
-    bottom = 2.5cm,
-    left   = 3.75cm,
-    right  = 2.5cm,
+    inner=3.75cm, % left on odd pages
+    outer=2.5cm,  % right on odd pages
+    top=3.75cm,
+    bottom=2.5cm,
+    twoside % important: activate two-side margins (for books/thesis)
   }
 
   % Flag to detect first page
@@ -1340,6 +1399,7 @@ Keywords: & #1.
 % First page List of Tables header
 \newcommand{\lotheader}{%
   \begin{center}
+    \vspace*{16pt}
     {\Large\bfseries \listtablename} \normalsize\\~\\
     \tablename \hfill Page
     \vspace{-1em}
@@ -1359,13 +1419,14 @@ Keywords: & #1.
 \renewcommand\listoftables{%
   \clearpage
   \pagestyle{plain} % show page numbering
-  \fancyfoot[c]{\thepage}
+  \thispagestyle{empty} % no page number on the first page
 
   \newgeometry{
-    top    = 5cm,
-    bottom = 2.5cm,
-    left   = 3.75cm,
-    right  = 2.5cm,
+    inner=3.75cm, % left on odd pages
+    outer=2.5cm,  % right on odd pages
+    top=3.75cm,
+    bottom=2.5cm,
+    twoside % important: activate two-side margins (for books/thesis)
   }
 
   % Add List of Tables to the ToC
@@ -1413,6 +1474,7 @@ Keywords: & #1.
 % First page List of Figures header
 \newcommand{\lofheader}{%
   \begin{center}
+    \vspace*{16pt}
     {\Large\bfseries \listfigurename} \normalsize\\~\\
     \figurename \hfill Page
     \vspace{-1em}
@@ -1432,13 +1494,14 @@ Keywords: & #1.
 \renewcommand\listoffigures{%
   \clearpage
   \pagestyle{plain} % show page numbering
-  \fancyfoot[c]{\thepage}
+  \thispagestyle{empty} % no page number on the first page
 
   \newgeometry{
-    top    = 5cm,
-    bottom = 2.5cm,
-    left   = 3.75cm,
-    right  = 2.5cm,
+    inner=3.75cm, % left on odd pages
+    outer=2.5cm,  % right on odd pages
+    top=3.75cm,
+    bottom=2.5cm,
+    twoside % important: activate two-side margins (for books/thesis)
   }
 
   % Add List of Figures to the ToC
@@ -1503,6 +1566,7 @@ Keywords: & #1.
 % First page List of Listings header
 \newcommand{\lolheader}{%
   \begin{center}
+    \vspace*{16pt}
     {\Large\bfseries \listlistingname} \normalsize\\~\\
     \listingname \hfill Page
     \vspace{-1em}
@@ -1522,13 +1586,14 @@ Keywords: & #1.
 \renewcommand{\lstlistoflistings}{%
   \clearpage
   \pagestyle{plain} % show page numbering
-  \fancyfoot[c]{\thepage}
+  \thispagestyle{empty} % no page number on the first page
 
   \newgeometry{
-    top    = 5cm,
-    bottom = 2.5cm,
-    left   = 3.75cm,
-    right  = 2.5cm,
+    inner=3.75cm, % left on odd pages
+    outer=2.5cm,  % right on odd pages
+    top=3.75cm,
+    bottom=2.5cm,
+    twoside % important: activate two-side margins (for books/thesis)
   }
 
   % Add List of Listings to the Table of Contents
@@ -1592,6 +1657,7 @@ Keywords: & #1.
 % First page List of Algorithms header
 \newcommand{\loaheader}{%
   \begin{center}
+    /vspace*{16pt}
     {\Large\bfseries \listalgorithmname} \normalsize\\~\\
     \algorithmname \hfill Page
     \vspace{-1em}
@@ -1611,13 +1677,14 @@ Keywords: & #1.
 \renewcommand\listofalgorithms{%
   \clearpage
   \pagestyle{plain} % show page numbering
-  \fancyfoot[c]{\thepage}
+  \thispagestyle{empty} % no page number on the first page
 
   \newgeometry{
-    top    = 5cm,
-    bottom = 2.5cm,
-    left   = 3.75cm,
-    right  = 2.5cm,
+    inner=3.75cm, % left on odd pages
+    outer=2.5cm,  % right on odd pages
+    top=3.75cm,
+    bottom=2.5cm,
+    twoside % important: activate two-side margins (for books/thesis)
   }
 
   % Add List of Algorithms to the ToC
@@ -1686,13 +1753,14 @@ Keywords: & #1.
 \newenvironment{abbreviations}{%
   \clearpage
   \pagestyle{plain} % show page numbering
-  \fancyfoot[c]{\thepage}
+  \thispagestyle{empty} % no page number on the first page
 
   \newgeometry{
-    left   = 3.75cm,
-    right  = 2.5cm,
-    top    = 5cm,
-    bottom = 2.5cm,
+    inner=3.75cm, % left on odd pages
+    outer=2.5cm,  % right on odd pages
+    top=5cm,
+    bottom=2.5cm,
+    twoside % important: activate two-side margins (for books/thesis)
   }
 
   \addcontentsline{toc}{chapter}{List of Abbreviations}

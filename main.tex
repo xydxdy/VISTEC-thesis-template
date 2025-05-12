@@ -1,5 +1,5 @@
 %% !TEX encoding = UTF-8 Unicode
-%% Compiler: pdfLaTeX
+%% Compiler: XeLatex
 %% Packages: TeX Live version 2023/2024
 
 %% VISTEC Thesis Template © 2024 by Rattanaphon Chaisaen is licensed under CC BY-NC-SA 4.0 
@@ -56,6 +56,8 @@
 \hyphenation{version}       %% Applied to resolve Approval page (title)
 \hyphenation{disabili-ties} %% Applied to resolve issue on page 1
 
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document} 
@@ -63,33 +65,37 @@
     %% Set global line spacing
     \singlespacingplus % 1.5x line spacing
 
-    %% Title and approval pages
-    \maketitle
-    \makeapproval
-
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%% Prologue %%%%%%%%%%%%%%%%%%%%%%%%%%%% 
     %% Roman page numbering
     \fancyhf[cf]{\thepage}
     \pagenumbering{roman}
-    \setcounter{page}{2}
-    
-    %% Preliminary sections
-    \abstract                       %% Content at `contents/abstract.tex`
+    \setcounter{page}{1}
+
+    %% Title and approval pages
+    \maketitle
+    \makeapproval
+   
+    %% Acnowledgment
     \acknowledgment                 %% Content at `contents/acknowledgment.tex`
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%% Prologue %%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+    
+    \abstract                       %% Content at `contents/abstract.tex`
     \tableofcontents
     \listoftables
     \listoffigures
     \abbreviations                  %% Content at `contents/abbreviations.tex`
+    % \blankpage                    %% add \blankpage if you don't have list of abbreviations
+    
     %%%%%%%%%%%%%%%%%%%%%%%%%%%% Main Chapters %%%%%%%%%%%%%%%%%%%%%%%%%%%% 
     %% Arabic page numbering
     \pagenumbering{arabic}
     \setcounter{page}{1}
     
-    \include{contents/chapter1}
-    \include{contents/chapter2}
-    \include{contents/chapter3}
-    \include{contents/chapter4}
-    \include{contents/chapter5}
+    \includechapter{contents/chapter1}
+    \includechapter{contents/chapter2} 
+    \includechapter{contents/chapter3} 
+    \includechapter{contents/chapter4} 
+    \includechapter{contents/chapter5}
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%% Epilogue %%%%%%%%%%%%%%%%%%%%%%%%%%%% 
     %% References
@@ -97,7 +103,7 @@
 
     %% Appendices
     \appendix
-    \include{contents/appendix}   %% Content at `contents/appendix.tex`
+    \includechapter{contents/appendix}   %% Content at `contents/appendix.tex`
 
     %% Author Biography
     \authorbiography                %% Content at `contents/authorbiography.tex`
@@ -106,7 +112,6 @@
     %%%%%%%%%%%%%%%%%%%%%%%%%%%% Fix "List of XXXXXX (Cont.)" Header Issue %%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % If the continuation header (e.g., "List of Tables (Cont.)") fails to appear on the second page,
     % uncomment the corresponding dummy entry below to manually trigger a page break or layout update.
-    
     % \addtocontents{toc}{\protect\contentsline{content}{\phantom{Dummy Invisible Content Entry}}{\phantom{\thepage}}{}}
     \addtocontents{lot}{\protect\contentsline{table}{\phantom{Dummy Invisible Table Entry}}{\phantom{\thepage}}{}}
     \addtocontents{lof}{\protect\contentsline{figure}{\phantom{Dummy Invisible Figure Entry}}{\phantom{\thepage}}{}}

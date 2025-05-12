@@ -33,6 +33,45 @@ If you are new to {\LaTeX}, start by learning the basics such as document struct
 \href{https://www.overleaf.com/learn}{\texttt{https://www.overleaf.com/learn}}
 \end{center}
 
+
+
+
+%========================
+\section{Download and Installation}
+\label{manual:download}
+%========================
+\begin{paragraph}
+\begin{enumerate}[leftmargin=\paritemindent, itemsep=6pt]
+\item To use this template, download the \texttt{VISTEC\_Thesis\_Template.zip} file from the GitHub repository: \href{https://github.com/xydxdy/VISTEC-thesis-template/releases}{\texttt{https://github.com/xydxdy/VISTEC-thesis-template/releases}}.
+
+  \begin{itemize}[leftmargin=0.5cm]
+    \item For thesis submissions \textbf{before August 2025}, use version \texttt{v1.1.0}.
+    \item For submissions \textbf{after August 2025}, use version \texttt{v2.0.0} or later.
+    \item It is recommended to always use the latest available version.
+  \end{itemize}
+
+\item To use the template on Overleaf (or locally with a LaTeX distribution), upload the entire template folder to your project workspace:
+
+  \begin{itemize}[leftmargin=0.5cm]
+    \item Create a new project on Overleaf.
+    \item Click on \texttt{New Project > Upload Project} in the top-left corner.
+    \item Select the \texttt{VISTEC\_Thesis\_Template.zip} file.
+  \end{itemize}
+
+\item Set up the compiler and main document settings:
+
+  \begin{itemize}[leftmargin=0.5cm]
+    \item Click the \texttt{Menu} button in the top-left corner of Overleaf.
+    \item Select \texttt{XeLaTeX} from the compiler dropdown.
+    \item Ensure the main document is set to \texttt{main.tex}.
+    \item Make sure your TeX Live distribution is version 2023 or later.
+  \end{itemize}
+\end{enumerate}
+\end{paragraph}
+
+
+
+
 %========================
 \section{Directory Structure}
 \label{manual:directory-structure}
@@ -534,13 +573,14 @@ An \textcolor{orange}{``Overfull \texttt{\textbackslash hbox}''} warning occurs 
 \end{subparagraph}
 
 \begin{itemize}[leftmargin=\subparitemindent]
-  \item Use \verb|\hyphenation{}| in the preamble to define custom word break points.
-  \item Insert a manual line break using \verb|\newline| in the document body.
+  \item Use \verb|\hyphenation{}| in the preamble to define custom hyphenation points for specific words.
+  \item Insert a manual line break using \verb|\break| or \verb|\newline| in the document body. (It is recommended to use \verb|\break| for better formatting control.)
 \end{itemize}
+
 
 %------------------------
 \begin{subparagraph}
-\textbf{Example 1: Using Hyphenation Rules \textcolor{red}{(recommend)}}
+\textbf{Example 1: Using Hyphenation Rules \textcolor{red}{(recommended for Title)}}\\
 
 Place these commands in the preamble to help LaTeX break long words:
 \end{subparagraph}
@@ -555,20 +595,29 @@ Place these commands in the preamble to help LaTeX break long words:
 
 %------------------------
 \begin{subparagraph}
-\textbf{Example 2: Manual Line Break}
+\textbf{Example 2: Manual Line Break \textcolor{red}{(recommended for body text)}}\\
 
-Insert \verb|\newline| at the desired point in a long sentence:
+Insert \verb|\break| and \verb|\newline| at the desired point in a long sentence:
 \end{subparagraph}
 
 \noindent\textbf{File: \texttt{contents/xxx.tex}}\vspace{-1.5em}
 \begin{minted}[breaklines, fontsize=\small]{latex}
-This sentence is too long and exceeds the margin, so we insert a break.\newline
-Here is the continuation on the next line with proper indentation.
+This sentence is too long and exceeds the margin, so we insert a break here with proper\break
+indentation on the next line.
+
+This sentence is too long and exceeds the margin, so we insert a newline here with proper\newline
+indentation on the next line.
 \end{minted}
 
-\begin{subparagraph}
-Use \verb|\newline| only in body text. Avoid using it in math mode, figure captions, or references unless absolutely necessary.
-\end{subparagraph}
+\textbf{Output:}\vspace{0.5em}
+
+\begin{tcolorbox}[colback=white, colframe=black, sharp corners, boxrule=0.4pt]
+This sentence is too long and exceeds the margin, so we insert a break here with proper\break
+indentation on the next line.
+
+This sentence is too long and exceeds the margin, so we insert a newline here with proper\newline
+indentation on the next line.
+\end{tcolorbox}
 
 %------------------------
 \subsection{Forcing a Page Break}

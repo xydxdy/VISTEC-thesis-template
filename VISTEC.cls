@@ -755,7 +755,7 @@
       \noindent
       \makebox[\widthof{Chapter X}][l]{%
         \ifinappendix
-          Appendix~\thechapter%
+          Appendix\hspace{0.18cm}\thechapter%
         \else
           Chapter~\thechapter%
         \fi
@@ -779,7 +779,7 @@
 \renewcommand*\l@chapter[2]{%
 \ifnum \c@tocdepth >\m@ne
   \addpenalty{-\@highpenalty}%
-  % \hangindent=1cm
+  \hangindent=1.85cm
   \setlength\@tempdima{0em}%
   \setlength\leftskip{0em}
   \begingroup

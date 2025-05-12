@@ -3,7 +3,8 @@
 ## 📚 Download
 
 - **Release**: [GitHub Release](https://github.com/xydxdy/VISTEC-thesis-template/releases)
-- For Submissions **Before August 2025**, use _version 1.1.0_. For Submissions **After August 2025**, use _version 2.0.0_ or _later_
+- For Submissions **Before August 2025**, use _version 1.1.0_.
+- For Submissions **After August 2025**, use _version 2.0.0_ or _later_
 - It is recommended to always use the latest available version.
 
 ---

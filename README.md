@@ -20,7 +20,7 @@
 ## ☁️ Usage on Overleaf
 
 You can directly use this template online:
-- For v1 users (before August 2025): [Access Overleaf v1](https://www.overleaf.com/read/kycjnywvhdzt#0c025e)
+- For v1 users (before August 2025): [Official Overleaf Template](https://www.overleaf.com/latex/templates/vistec-thesis-template/xztppnmcgqrb)
 - For v2 users (starting August 2025): [Access Overleaf v2](https://www.overleaf.com/read/mddvdjwsbxgb#b38ff6)
 
 ---

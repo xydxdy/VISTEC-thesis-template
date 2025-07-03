@@ -239,6 +239,60 @@
   backend=bibtex
 ]{biblatex}
 
+
+% Fullcite Formatting
+
+\newtoggle{showrefnumber}
+\togglefalse{showrefnumber} % default = false
+
+\DeclareCiteCommand{\fullcite}
+  {\usebibmacro{prenote}}
+  {\entrydata{\thefield{entrykey}}{%
+     \iftoggle{showrefnumber}{%
+       % --- Show label number with table layout ---
+       \begin{tabular}{@{}p{0.06\linewidth}p{0.9\linewidth}@{}}
+        \quad\printtext[labelnumberwidth]{\printfield{labelnumber}}%
+        &
+        \usebibmacro{author}%
+        \setunit{\labelnamepunct}\newblock
+        \printfield{title}%
+        \setunit{\addperiod\space}%
+        \printfield[journaltitle]{journaltitle}%
+        \setunit{\addperiod\addspace}%
+        \printfield{year}%
+        \setunit*{\addsemicolon}%
+        \printfield{volume}%
+        \iffieldundef{number}
+          {}
+          {\printtext[parens]{\printfield{number}}}%
+        \setunit*{\addcolon}%
+        \printfield{pages}%
+        \setunit{\addperiod}
+        \finentry
+      \end{tabular}%
+     }{%
+       % --- No label number ---
+      \usebibmacro{author}%
+      \setunit{\labelnamepunct}\newblock
+      \printfield{title}%
+      \setunit{\addperiod\space}%
+      \printfield[journaltitle]{journaltitle}%
+      \setunit{\addperiod\addspace}%
+      \printfield{year}%
+      \setunit*{\addsemicolon}%
+      \printfield{volume}%
+      \iffieldundef{number}
+        {}
+        {\printtext[parens]{\printfield{number}}}%
+      \setunit*{\addcolon}%
+      \printfield{pages}%
+      \setunit{\addperiod}
+      \finentry
+     }%
+   }}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
 % Bibliography Field Formatting
 \DeclareFieldFormat[article]{title}{#1}
 \DeclareFieldFormat[article]{journaltitle}{\mkbibbold{#1}}

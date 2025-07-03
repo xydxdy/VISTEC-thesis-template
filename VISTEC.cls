@@ -901,6 +901,29 @@
   \fi
 }
 
+%% Customize ToC formatting for subsubsections
+\renewcommand*\l@subsubsection[2]{%
+  \ifnum \c@tocdepth >\z@
+    \addpenalty{-\@highpenalty}%
+    \hangindent=3.8cm % hanging indent for wrapped lines
+    \setlength\@tempdima{3.5em}% alignment reference for text block
+    \begingroup
+      \parindent\z@
+      \rightskip\@pnumwidth
+      \parfillskip -\@pnumwidth
+      \leavevmode
+      \advance\leftskip\@tempdima
+      \hskip -\leftskip
+      \hskip 3.8cm  % indent label from margin (aligns with hangindent)
+      #1%\quad       % label (e.g., 1.1.1) and space before title
+      \nobreak
+      \leaders\hbox{.}\hfill
+      \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
+      \penalty\@highpenalty
+    \endgroup
+  \fi
+}
+
 %% --------------------------------------------------------------------------
 %% List of Tables Formatting
 %% --------------------------------------------------------------------------

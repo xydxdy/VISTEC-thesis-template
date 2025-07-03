@@ -239,6 +239,60 @@
   backend=bibtex
 ]{biblatex}
 
+
+% Fullcite Formatting
+
+\newtoggle{showrefnumber}
+\togglefalse{showrefnumber} % default = false
+
+\DeclareCiteCommand{\fullcite}
+  {\usebibmacro{prenote}}
+  {\entrydata{\thefield{entrykey}}{%
+     \iftoggle{showrefnumber}{%
+       % --- Show label number with table layout ---
+       \begin{tabular}{@{}p{0.06\linewidth}p{0.9\linewidth}@{}}
+        \quad\printtext[labelnumberwidth]{\printfield{labelnumber}}%
+        &
+        \usebibmacro{author}%
+        \setunit{\labelnamepunct}\newblock
+        \printfield{title}%
+        \setunit{\addperiod\space}%
+        \printfield[journaltitle]{journaltitle}%
+        \setunit{\addperiod\addspace}%
+        \printfield{year}%
+        \setunit*{\addsemicolon}%
+        \printfield{volume}%
+        \iffieldundef{number}
+          {}
+          {\printtext[parens]{\printfield{number}}}%
+        \setunit*{\addcolon}%
+        \printfield{pages}%
+        \setunit{\addperiod}
+        \finentry
+      \end{tabular}%
+     }{%
+       % --- No label number ---
+      \usebibmacro{author}%
+      \setunit{\labelnamepunct}\newblock
+      \printfield{title}%
+      \setunit{\addperiod\space}%
+      \printfield[journaltitle]{journaltitle}%
+      \setunit{\addperiod\addspace}%
+      \printfield{year}%
+      \setunit*{\addsemicolon}%
+      \printfield{volume}%
+      \iffieldundef{number}
+        {}
+        {\printtext[parens]{\printfield{number}}}%
+      \setunit*{\addcolon}%
+      \printfield{pages}%
+      \setunit{\addperiod}
+      \finentry
+     }%
+   }}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
 % Bibliography Field Formatting
 \DeclareFieldFormat[article]{title}{#1}
 \DeclareFieldFormat[article]{journaltitle}{\mkbibbold{#1}}
@@ -838,6 +892,29 @@
       \advance\leftskip\@tempdima
       \hskip -\leftskip
       \hskip 2.7cm  % indent label from margin (aligns with hangindent)
+      #1%\quad       % label (e.g., 1.1.1) and space before title
+      \nobreak
+      \leaders\hbox{.}\hfill
+      \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
+      \penalty\@highpenalty
+    \endgroup
+  \fi
+}
+
+%% Customize ToC formatting for subsubsections
+\renewcommand*\l@subsubsection[2]{%
+  \ifnum \c@tocdepth >\z@
+    \addpenalty{-\@highpenalty}%
+    \hangindent=3.8cm % hanging indent for wrapped lines
+    \setlength\@tempdima{3.5em}% alignment reference for text block
+    \begingroup
+      \parindent\z@
+      \rightskip\@pnumwidth
+      \parfillskip -\@pnumwidth
+      \leavevmode
+      \advance\leftskip\@tempdima
+      \hskip -\leftskip
+      \hskip 3.8cm  % indent label from margin (aligns with hangindent)
       #1%\quad       % label (e.g., 1.1.1) and space before title
       \nobreak
       \leaders\hbox{.}\hfill

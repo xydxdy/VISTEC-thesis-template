@@ -8,6 +8,9 @@
 % Set line spacing in table rows
 \renewcommand{\arraystretch}{1.5}
 
+% Enable ref numbering for publications
+\toggletrue{showrefnumber}
+
 \begin{longtable}{@{}p{0.34\linewidth} p{0.63\linewidth}@{}}
 
 %----- Name -----
@@ -29,12 +32,14 @@
 %----- Scholarship -----
 \textbf{Scholarship:} & Recipient of the full scholarship from Vidyasirimedhi \break Institute of Science and Technology (VISTEC) \\
 
-%----- Academic Publications -----
-\textbf{Academic Publication:} & \fullcite{id1}. \\
-{} & \fullcite{id3}. \\
-{} & \fullcite{id5}. \\ %% Will be excluded
+%----- Publications -----
+\multicolumn{2}{@{}p{\linewidth}@{}}{\textbf{Academic Publication:}} \\
+\multicolumn{2}{@{}p{\linewidth}@{}}{\fullcite{id3}} \\
+\multicolumn{2}{@{}p{\linewidth}@{}}{\fullcite{id5}} \\
 
 \end{longtable}
 
-% Exclude non-relevant papers from references
+\togglefalse{showrefnumber}
+
+% Exclude non-relevant papers from reference page
 \addtocategory{exclude}{id5}

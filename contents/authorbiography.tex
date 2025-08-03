@@ -8,9 +8,6 @@
 % Set line spacing in table rows
 \renewcommand{\arraystretch}{1.5}
 
-% Enable ref numbering for publications
-\toggletrue{showrefnumber}
-
 \begin{longtable}{@{}p{0.34\linewidth} p{0.63\linewidth}@{}}
 
 %----- Name -----
@@ -32,14 +29,27 @@
 %----- Scholarship -----
 \textbf{Scholarship:} & Recipient of the full scholarship from Vidyasirimedhi \break Institute of Science and Technology (VISTEC) \\
 
-%----- Publications -----
-\multicolumn{2}{@{}p{\linewidth}@{}}{\textbf{Academic Publication:}} \\
-\multicolumn{2}{@{}p{\linewidth}@{}}{\fullcite{id3}} \\
-\multicolumn{2}{@{}p{\linewidth}@{}}{\fullcite{id5}} \\
-
 \end{longtable}
 
+\vspace{-1em}
+
+%----- Publications style 1 (Manual)-------------%
+% Disable auto numbering for publications
+
 \togglefalse{showrefnumber}
+\noindent\textbf{Academic Publication:}
+\begin{longtable}{@{}p{0.06\linewidth} p{0.9\linewidth}@{}}
+\quad 1. & \fullcite{id3} \\
+\quad 2. & \fullcite{id5} \\
+\end{longtable}
+
+%----- Publications style 2 (Auto)-------------%
+% Enable auto numbering for publications
+
+% \toggletrue{showrefnumber}
+% \noindent\textbf{Academic Publication:}\\[1em]
+% \noindent\fullcite{id3} \\
+% \noindent\fullcite{id5} \\
 
 % Exclude non-relevant papers from reference page
 \addtocategory{exclude}{id5}

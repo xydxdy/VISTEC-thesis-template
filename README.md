@@ -31,6 +31,13 @@ For detailed setup and usage instructions, refer to the user manual:
   - TeX Live 2023/2024 or newer
 
 ---
+## ☕ Buy me a coffee
+
+Thesis writing is powered by caffeine. If this template made your life easier, consider fueling the next round of updates! Scan below to buy me a coffee.
+
+<img style="height:200px!important;margin-left:3px;vertical-align:text-bottom;" src="figures/qr-code.JPG" alt="Thai QR Payment">
+
+---
 
 ## 📜 License
 

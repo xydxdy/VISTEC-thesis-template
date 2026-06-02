@@ -1150,7 +1150,7 @@
   \begin{table}[h]
     \centering
     \singlespacingplus
-    \begin{tabular}{p{0.5\linewidth} p{0.5\linewidth}}
+    \begin{tabular}{@{}p{0.5\linewidth} p{0.5\linewidth}@{}}
       \ifthenelse{\equal\tmpone\memone}{}{
         \begin{tabular}[c]{@{}l@{}} .......................................... Chairperson \\ (\@memberone) \end{tabular}
       }
@@ -1186,7 +1186,7 @@
     % Graduate Committee Approval
   \begin{table}[h]
     \singlespacingplus
-    \begin{tabular}{p{0.5\linewidth} p{0.5\linewidth}}
+    \begin{tabular}{@{}p{0.5\linewidth} p{0.5\linewidth}@{}}
       \multicolumn{1}{l}{
         \begin{tabular}[c]{@{}c@{}} \\~\\ ............................................................... \\ (\@gradcommittee) \\ Chairperson \\ Graduate Studies Committee \end{tabular}
       }

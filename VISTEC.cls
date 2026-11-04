@@ -1,10 +1,10 @@
 %% !TEX encoding = UTF-8 Unicode
 %% Compiler: XeLaTeX
-%% Packages: TeX live version 2023/2024
+%% Packages: TeX live version 2026
 %% --------------------------------------------------------------------------
 %% Author: Rattanaphon Chaisaen
 %% Email: r.chaisaen@gmail.com
-%% version = 2
+%% version = 2.1.0
 
 %% VISTEC Thesis Template © 2024 by Rattanaphon Chaisaen is licensed under CC BY-NC-SA 4.0 
 %% --------------------------------------------------------------------------
@@ -216,6 +216,8 @@
 \usepackage{etoolbox}
 \usepackage{afterpage}
 \usepackage{comment}
+\usepackage[export]{adjustbox} % max width / max height for images and tables
+\usepackage{xurl}              % allow long URLs to break at any character
 
 %% --------------------------------------------------------------------------
 %% Chemistry Packages
@@ -385,6 +387,7 @@
 \newcommand{\@school}{<<The school>>}
 \newcommand{\@institute}{Vidyasirimedhi Institute of Science and Technology}
 \newcommand{\@logo}{figures/logo_vistec.png}
+\newcommand{\@approvaltitle}{\@title} % approval page title (defaults to \title)
 
 %% --------------------------------------------------------------------------
 %% Automatic Degree and School Info from Class Options
@@ -448,6 +451,9 @@
 \newcommand{\school}[1]{\renewcommand{\@school}{#1}}
 \newcommand{\institute}[1]{\renewcommand{\@institute}{#1}}
 \newcommand{\logo}[1]{\renewcommand{\@logo}{#1}}
+% Title as it should break on the approval page, e.g.
+% \approvaltitle{Adaptive ... Learning For EEG-\\based Brain-computer Interfaces}
+\newcommand{\approvaltitle}[1]{\renewcommand{\@approvaltitle}{#1}}
 
 
 
@@ -469,20 +475,63 @@
 \urlstyle{same}
 
 %% --------------------------------------------------------------------------
+%% Keep Content Inside the Text Area
+%% Applies to every page except the approval page (\makeapproval)
+%% --------------------------------------------------------------------------
+
+% Switch: true = limit content to the text area (off on the approval page)
+\newif\ifvistec@limit
+\vistec@limittrue
+
+% Paragraphs: allow a little more interword stretch instead of letting
+% a line run into the margin
+\setlength{\emergencystretch}{3em}
+\tolerance=2000
+
+% Images: never wider than the line or taller than the text block
+\NewCommandCopy{\vistec@includegraphics}{\includegraphics}
+\RenewDocumentCommand{\includegraphics}{s O{} m}{%
+  \ifvistec@limit
+    \IfBooleanTF{#1}%
+      {\vistec@includegraphics*[#2,max width=\linewidth,max height=\textheight]{#3}}%
+      {\vistec@includegraphics[#2,max width=\linewidth,max height=\textheight]{#3}}%
+  \else
+    \IfBooleanTF{#1}%
+      {\vistec@includegraphics*[#2]{#3}}%
+      {\vistec@includegraphics[#2]{#3}}%
+  \fi
+}
+
+% Tables: a tabular wider than the line is scaled down to fit
+% (tables that already fit are not changed)
+\let\vistec@tabular\tabular
+\let\vistec@endtabular\endtabular
+\renewenvironment{tabular}{%
+  \ifvistec@limit\begin{adjustbox}{max width=\linewidth}\fi
+  \vistec@tabular
+}{%
+  \vistec@endtabular
+  \ifvistec@limit\end{adjustbox}\fi
+}
+
+%% --------------------------------------------------------------------------
 %% Define font size and spacing
 %% --------------------------------------------------------------------------
 
 % Redefine font sizes
-\newcommand\HUGE{\normalfont\fontsize{24pt}{24pt}\selectfont}
-\renewcommand\huge{\normalfont\fontsize{20pt}{20pt}\selectfont}
-\renewcommand\LARGE{\normalfont\fontsize{18pt}{18pt}\selectfont}
-\renewcommand\Large{\normalfont\fontsize{16pt}{16pt}\selectfont}
-\renewcommand\large{\normalfont\fontsize{14pt}{14pt}\selectfont}
-\renewcommand\normalsize{\normalfont\fontsize{12pt}{12pt}\selectfont}
-\renewcommand\small{\normalfont\fontsize{11pt}{11pt}\selectfont}
-\renewcommand\footnotesize{\normalfont\fontsize{10pt}{10pt}\selectfont}
-\renewcommand\scriptsize{\normalfont\fontsize{9pt}{9pt}\selectfont}
-\renewcommand\tiny{\normalfont\fontsize{8pt}{8pt}\selectfont}
+% Line height = 1.15 x font size, which is what MS Word uses as "single"
+% line spacing for Times New Roman. So 1.5 spacing = 20.7pt at 12pt,
+% the same as Word's "1.5 lines".
+\newcommand\HUGE{\normalfont\fontsize{24pt}{27.6pt}\selectfont}
+\renewcommand\huge{\normalfont\fontsize{20pt}{23pt}\selectfont}
+\renewcommand\LARGE{\normalfont\fontsize{18pt}{20.7pt}\selectfont}
+\renewcommand\Large{\normalfont\fontsize{16pt}{18.4pt}\selectfont}
+\renewcommand\large{\normalfont\fontsize{14pt}{16.1pt}\selectfont}
+\renewcommand\normalsize{\normalfont\fontsize{12pt}{13.8pt}\selectfont}
+\renewcommand\small{\normalfont\fontsize{11pt}{12.65pt}\selectfont}
+\renewcommand\footnotesize{\normalfont\fontsize{10pt}{11.5pt}\selectfont}
+\renewcommand\scriptsize{\normalfont\fontsize{9pt}{10.35pt}\selectfont}
+\renewcommand\tiny{\normalfont\fontsize{8pt}{9.2pt}\selectfont}
 
 % Redefine Spacing
 \newcommand{\realsinglespacing}{%
@@ -647,8 +696,13 @@
   baselinestretch=1,
   linenos=True,
   frame=lines,
-  framesep=2mm
+  framesep=2mm,
+  breaklines=true,     % wrap long code lines instead of running off the page
+  breakanywhere=true
 }
+
+% Same for listings
+\lstset{breaklines=true, breakatwhitespace=false}
 
 %% --------------------------------------------------------------------------
 %% Listing Caption Settings / Source Code Caption Settings
@@ -985,25 +1039,24 @@
   \newpage
 }
 
+% Blank page without a page number (still counted)
+\newcommand\emptyblankpage{%
+  \null
+  \thispagestyle{empty}% no page number
+  \newpage
+}
+
 %% --------------------------------------------------------------------------
 %% Chapter Page Formatting
 % %% --------------------------------------------------------------------------
 \def\@makechapterhead#1{%
   \clearpage
-  \pagestyle{plain} % page number in the footer
+  \firstpagegeometry    % first page top = 5cm, others top = 3.75cm
+  \pagestyle{plain}     % page number in the footer
   \thispagestyle{empty} % no page number on the first page of the chapter
-  
-  \newgeometry{
-    inner  = 3.75cm,
-    outer  = 2.5cm,
-    top    = 3.75cm,
-    bottom = 2.5cm,
-    twoside
-  }
 
   \begin{center}%
     {\Large\bfseries
-    \vspace*{16pt}
     \@chapapp\space\thechapter\\
     \vspace*{16pt}
     #1
@@ -1091,112 +1144,224 @@
 
 %% --------------------------------------------------------------------------
 %% Approval Page Formatting
+%% Layout taken from the VISTEC Word template (2_Template_-_Approval_Page.docx)
+%%  - info rows: labels (no colon) in a 3.25cm column, 1.5 line spacing (20pt)
+%%  - 0.5pt rule, 15.2cm long
+%%  - committee table: columns 7.62cm | 0.42cm | 8.13cm, cell padding 0.19cm,
+%%    signature/name rows 0.8cm high, 0.7cm between pairs
+%%  - Graduate Studies Committee block: 22pt lines, centered in the left column
 %% --------------------------------------------------------------------------
 
-\newcommand{\makeapproval}[1]{
+% Info row: \vistec@apprline{Label}{Value}
+\newcommand{\vistec@apprline}[2]{%
+  \par
+  \noindent
+  \hangindent=3.25cm
+  \hangafter=1
+  \let\\\newline % a \\ in the value breaks the line but keeps the indent
+  \setbox\@tempboxa\hbox{#1}%
+  \ifdim\wd\@tempboxa<3.25cm
+    \makebox[3.25cm][l]{#1}%
+  \else
+    \box\@tempboxa\ \ % label wider than the column (e.g. Examination Date)
+  \fi
+  \ignorespaces#2\par
+}
+
+% Signature line: dots filling a fixed width, then the role
+\newcommand{\vistec@sigline}[2]{% #1 width, #2 role
+  \hbox to #1{\xleaders\hbox{…}\hfill\ #2}%
+}
+
+% One row of the committee table (left cell text, right cell text)
+\newcommand{\vistec@apprrow}[2]{%
+  \par
+  \noindent
+  \makebox[\linewidth][l]{\hspace{0.19cm}\makebox[8.04cm][l]{#1}#2}%
+  \par
+}
+
+% Run #3 only if the member macro #1 is not the placeholder #2
+\newcommand{\vistec@ifmember}[4]{%
+  \def\vistec@tmpa{#2}%
+  \expandafter\def\expandafter\vistec@tmpb\expandafter{#1}%
+  \ifx\vistec@tmpa\vistec@tmpb #4\else #3\fi
+}
+
+\newif\ifvistec@firstpair
+\newif\ifvistec@leftset
+\newif\ifvistec@rightset
+\newif\ifvistec@anyset
+
+% A pair of committee members side by side
+% #1 left member, #2 its placeholder, #3 left role,
+% #4 right member, #5 its placeholder
+\newcommand{\vistec@apprpair}[5]{%
+  \vistec@ifmember{#1}{#2}{\vistec@leftsettrue}{\vistec@leftsetfalse}%
+  \vistec@ifmember{#4}{#5}{\vistec@rightsettrue}{\vistec@rightsetfalse}%
+  \vistec@anysetfalse
+  \ifvistec@leftset\vistec@anysettrue\fi
+  \ifvistec@rightset\vistec@anysettrue\fi
+  \ifvistec@anyset
+    \ifvistec@firstpair
+      \global\vistec@firstpairfalse
+    \else
+      \vspace{0.7cm}% spacer row between pairs
+    \fi
+    \vistec@apprrow
+      {\ifvistec@leftset\vistec@sigline{6.83cm}{#3}\fi}
+      {\ifvistec@rightset\vistec@sigline{6.62cm}{Member}\fi}%
+    \vistec@apprrow
+      {\ifvistec@leftset(#1)\fi}
+      {\ifvistec@rightset(#4)\fi}%
+  \fi
+}
+
+\newcommand{\makeapproval}[1]{%
   \clearpage
+  \vistec@limitfalse % approval page: keep its own layout, no width limits
   \hyphenation{technology}
   \hyphenation{international}
   \hyphenation{engineering}
   \hyphenation{fulfillment}
-  
+
   \newgeometry{
     left   = 3.75cm,
     right  = 2.5cm,
-    top    = 5cm, 
+    top    = 5cm,
     bottom = 2.5cm
   }
   \pagestyle{empty} % no page number
-  % Approval Information Table
-  \noindent
-  \normalfont\normalsize
-  \begin{tabular}{p{0.16\linewidth}p{0.8\linewidth}}
-    \leftskip-0.1in Title: & \@title \\
-    \leftskip-0.1in Advisor: & \@advisor \\
-    \leftskip-0.1in Name: & \@authortitle \ \@author \\
-    \leftskip-0.1in Program: & {\@degreefield} Program in {\@program} (International Program) \\
-  \end{tabular} \\[1ex]
-  Examination Date {\@examinationday} {\@examinationmonth} {\@examinationyear} \\
-  \rule{\linewidth}{0.5pt}
-  \\[1ex]
-  {\@institute} approved this thesis as a partial fulfillment of the requirements for the degree of {\@degreefield} in {\@program}.
+  \thispagestyle{empty}
 
-  \vskip 1\baselineskip
+  \begingroup
+  \normalfont
+  \renewcommand{\baselinestretch}{1}%
+  \fontsize{12pt}{20.7pt}\selectfont % 12pt text, Word "1.5 lines" (1.5 x 13.8pt)
+  \setlength{\parindent}{0pt}%
+  \setlength{\parskip}{0pt}%
 
-    % Define Committee Members
-  \def\tmpone{The first committee member}
-  \def\tmptwo{The second committee member}
-  \def\tmpthree{The third committee member}
-  \def\tmpfour{The fourth committee member}
-  \def\tmpfive{The fifth committee member}
-  \def\tmpsix{The sixth committee member}
-  \def\tmpseven{The seventh committee member}
-  \def\tmpeight{The eighth committee member}
-  
-  \def\memone{\@memberone}
-  \def\memtwo{\@membertwo}
-  \def\memthree{\@memberthree}
-  \def\memfour{\@memberfour}
-  \def\memfive{\@memberfive}
-  \def\memsix{\@membersix}
-  \def\memseven{\@memberseven}
-  \def\memeight{\@membereight}
-  
-  % Examination Committee Information
-  \par\noindent Examination Committee:
-  \vskip 1\baselineskip
-  \noindent
+  % ---- Information rows -------------------------------------------------
+  \begingroup
+    \raggedright
+    \vistec@apprline{Title}{\@approvaltitle}
+    \vistec@apprline{Advisor}{\@advisor}
+    \vistec@apprline{Name}{\@authortitle\ \@author}
+    \begingroup
+      \rightskip=-0.6cm plus 1fil % Word lets this row run 0.6cm into the margin
+      \vistec@apprline{Program}{{\@degreefield} Program in {\@program}\newline (International Program)}
+    \endgroup
+    \vistec@apprline{Examination Date}{{\@examinationday} {\@examinationmonth} {\@examinationyear}}
+  \endgroup
 
-  \begin{table}[h]
-    \centering
-    \singlespacingplus
-    \begin{tabular}{@{}p{0.5\linewidth} p{0.5\linewidth}@{}}
-      \ifthenelse{\equal\tmpone\memone}{}{
-        \begin{tabular}[c]{@{}l@{}} .......................................... Chairperson \\ (\@memberone) \end{tabular}
-      }
-      \ifthenelse{\equal\tmptwo\memtwo}{& \\}{
-        & \begin{tabular}[c]{@{}l@{}} ................................................ Member \\ (\@membertwo) \end{tabular} \\~\\
-      }
+  % ---- Rule -------------------------------------------------------------
+  \noindent\makebox[\linewidth][l]{\rule{15.2cm}{0.5pt}}\par
 
-      \ifthenelse{\equal\tmpthree\memthree}{}{
-        \begin{tabular}[c]{@{}l@{}} ................................................ Member \\ (\@memberthree) \end{tabular}
-      }
-      \ifthenelse{\equal\tmpfour\memfour}{& \\}{
-        & \begin{tabular}[c]{@{}l@{}} ................................................ Member \\ (\@memberfour) \end{tabular} \\~\\
-      }
+  % ---- Approval statement -----------------------------------------------
+  {\@institute} approved this thesis as a partial fulfillment of the
+  requirements for the degree of {\@degreefield} in {\@program}.\par
+  \vspace{\baselineskip}%
 
-      \ifthenelse{\equal\tmpfive\memfive}{}{
-        \begin{tabular}[c]{@{}l@{}} ................................................ Member \\ (\@memberfive) \end{tabular}
-      }
-      \ifthenelse{\equal\tmpsix\memsix}{& \\}{
-        & \begin{tabular}[c]{@{}l@{}} ................................................ Member \\ (\@membersix) \end{tabular} \\~\\
-      }
+  Examination Committee:\par
 
-      \ifthenelse{\equal\tmpseven\memseven}{}{
-        \begin{tabular}[c]{@{}l@{}} ................................................ Member \\ (\@memberseven) \end{tabular}
-      }
-      \ifthenelse{\equal\tmpeight\memeight}{& \\}{
-        & \begin{tabular}[c]{@{}l@{}} ................................................ Member \\ (\@membereight) \end{tabular} \\~\\
-      }
-    \end{tabular}
-  \end{table}
+  % ---- Examination committee (2 per row) --------------------------------
+  \begingroup
+    \setlength{\baselineskip}{0.8cm}% row height 0.8cm
+    \setlength{\lineskiplimit}{-\maxdimen}%
+    \vspace{0.795cm}%
+    \global\vistec@firstpairtrue
+    \vistec@apprpair{\@memberone}{The first committee member}{Chairperson}%
+                    {\@membertwo}{The second committee member}%
+    \vistec@apprpair{\@memberthree}{The third committee member}{Member}%
+                    {\@memberfour}{The fourth committee member}%
+    \vistec@apprpair{\@memberfive}{The fifth committee member}{Member}%
+                    {\@membersix}{The sixth committee member}%
+    \vistec@apprpair{\@memberseven}{The seventh committee member}{Member}%
+                    {\@membereight}{The eighth committee member}%
+  \endgroup
 
-  \vfill
-  
-    % Graduate Committee Approval
-  \begin{table}[h]
-    \singlespacingplus
-    \begin{tabular}{@{}p{0.5\linewidth} p{0.5\linewidth}@{}}
-      \multicolumn{1}{l}{
-        \begin{tabular}[c]{@{}c@{}} \\~\\ ............................................................... \\ (\@gradcommittee) \\ Chairperson \\ Graduate Studies Committee \end{tabular}
-      }
-      & \multicolumn{1}{l}{}
-    \end{tabular}
-  \end{table}
-  \vspace{-1.5em}
+  % ---- Graduate Studies Committee ---------------------------------------
+  \begingroup
+    \setlength{\baselineskip}{22pt}%
+    \setlength{\lineskiplimit}{-\maxdimen}%
+    \vspace{\dimexpr 2.78cm - 22pt\relax}%
+    \noindent\makebox[7.62cm][c]{………………………………………..}\par
+    \noindent\makebox[7.62cm][c]{(\@gradcommittee)}\par
+    \noindent\makebox[7.62cm][c]{Chairperson}\par
+    \noindent\makebox[7.62cm][c]{Graduate Studies Committee}\par
+  \endgroup
+  \endgroup
 
   \clearpage
+  \vistec@limittrue % limits back on for the rest of the thesis
   \afterpage{\realblankpage}
+}
+
+%% --------------------------------------------------------------------------
+%% First page top = 5cm, following pages top = 3.75cm (real geometry)
+%% Used by: Abstract, Acknowledgment, ToC, List of Tables, List of Figures
+%% --------------------------------------------------------------------------
+\newlength{\firstpagetopextra}
+\setlength{\firstpagetopextra}{\dimexpr 5cm - 3.75cm\relax}
+
+\newcommand{\firstpagegeometry}{%
+  % First page layout
+  \newgeometry{
+    inner  = 3.75cm, % left on odd pages
+    outer  = 2.5cm,  % right on odd pages
+    top    = 5cm,    % first page only
+    bottom = 2.5cm,
+    twoside
+  }%
+  % After the first page is shipped out, move the text block up 1.25cm
+  % and make it 1.25cm taller -> top = 3.75cm from the second page on
+  \AddToHookNext{shipout/after}{%
+    \global\advance\topmargin  -\firstpagetopextra
+    \global\advance\textheight  \firstpagetopextra
+  }%
+}
+
+%% --------------------------------------------------------------------------
+%% Column layout for List of Figures / List of Tables
+%% | number (1.99cm) | caption (10.75cm) | page (2cm) |
+%% --------------------------------------------------------------------------
+\newlength{\lolabelwidth}
+\setlength{\lolabelwidth}{1.99cm}
+\newlength{\lotitlewidth}
+\setlength{\lotitlewidth}{10.75cm}
+\newlength{\lopagewidth}
+\setlength{\lopagewidth}{2cm}
+
+% One entry: #1 = \numberline{number}caption, #2 = page
+\newcommand{\vistec@listentry}[2]{%
+  \par
+  \begingroup
+    \setlength{\parindent}{0pt}%
+    \setlength{\parskip}{0pt}%
+    \setlength{\leftskip}{\lolabelwidth}%                     column 1
+    \setlength{\rightskip}{\dimexpr\linewidth-\lolabelwidth-\lotitlewidth\relax}% column 2 = 10.75cm
+    \setlength{\parfillskip}{0pt plus 1fil}%
+    \renewcommand{\numberline}[1]{%
+      \hskip-\lolabelwidth\makebox[\lolabelwidth][c]{##1}}%  number centered
+    % Page number on the FIRST line, centered in the page column
+    \noindent
+    \rlap{\hskip\lotitlewidth\makebox[\rightskip][c]{#2}}%
+    #1\par
+  \endgroup
+}
+
+% Header row under "List of ...": #1 = "Table" or "Figure"
+\newcommand{\vistec@listcolheader}[1]{%
+  \par
+  \begingroup
+    \setlength{\parindent}{0pt}%
+    \setlength{\leftskip}{0pt}%
+    \setlength{\rightskip}{0pt}%
+    \noindent
+    \makebox[\lolabelwidth][c]{#1}%
+    \makebox[\lotitlewidth]{}%
+    \makebox[\dimexpr\linewidth-\lolabelwidth-\lotitlewidth\relax][c]{Page}\par
+  \endgroup
 }
 
 %% --------------------------------------------------------------------------
@@ -1205,26 +1370,19 @@
 
 \renewenvironment{abstract}{
   \typeout{Abstract}
+  \clearpage
+  \firstpagegeometry    % first page top = 5cm, others top = 3.75cm
+  \pagestyle{plain}     % show page numbering
+  \thispagestyle{empty} % No page number on the first page
   \label{Abstract}
   \addcontentsline{toc}{chapter}{Abstract}
-  \clearpage
-  \newgeometry{
-    inner=3.75cm, % left on odd pages
-    outer=2.5cm,  % right on odd pages
-    top=3.75cm,
-    bottom=2.5cm,
-    twoside % important: activate two-side margins (for books/thesis)
-  }
-  \pagestyle{plain} % show page numbering
-  \thispagestyle{empty} % No page number on the first page
 
   % Abstract Title Section
-  \begin{center}
-    \vspace*{16pt}
-    {\singlespacingplus\Large\normalfont{\@title}\\~\\}
-    {\singlespacingplus\Large\normalfont{\bfseries{Abstract}}\\~\\}
-    {\singlespacingplus\normalsize\normalfont{\@author}\\~\\}
-  \end{center}
+  {\centering\singlespacingplus
+    {\Large\normalfont{\@title}\\~\\}
+    {\Large\normalfont{\bfseries{Abstract}}\\~\\}
+    {\normalsize\normalfont{\@author}\\~\\}
+  \par}
   
   % Abstract Text
   {\setlength\parindent{1.25cm}
@@ -1256,26 +1414,16 @@ Keywords: & #1.
 
 \newenvironment{acknowledgment}{%
   \clearpage
-  \newgeometry{
-    inner=3.75cm, % left on odd pages
-    outer=2.5cm,  % right on odd pages
-    top=3.75cm,
-    bottom=2.5cm,
-    twoside % important: activate two-side margins (for books/thesis)
-  }
+  \firstpagegeometry    % first page top = 5cm, others top = 3.75cm
   \pagestyle{plain} % show page numbering
   \thispagestyle{empty} % No page number on first page
   % \addcontentsline{toc}{chapter}{Acknowledgment}
   % \typeout{acknowledgment}
 
   % Title
-  \begin{center}
-    {
-    \vspace*{16pt}
-    \singlespacingplus\normalfont\Large\bfseries{Acknowledgment}
-    \\~\\
-    }
-  \end{center}
+  {\centering\singlespacingplus
+    {\normalfont\Large\bfseries{Acknowledgment}\\~\\}
+  \par}
 
   % Acknowledgment Content
   \setlength\parindent{1.25cm}
@@ -1283,24 +1431,14 @@ Keywords: & #1.
   \input{contents/acknowledgment}
 
   % Author Signature Section
-  \vspace{54pt} % 3 line x 12 pt x 1.5
-  
-  \newlength{\signaturewidth}
-  \settowidth{\signaturewidth}{\@author}
-  \settowidth{\@tempdima}{{\@examinationday} {\@examinationmonth} {\@examinationyear}}
-  \ifdim\@tempdima>\signaturewidth
-    \setlength{\signaturewidth}{\@tempdima}
-  \fi
-  
-  % Create dynamic layout
+  \vspace{54pt} % 3 lines x 12pt x 1.5
+
+  % Name and date centered in an 8cm column at the right
   \noindent
-  \makebox[\dimexpr\textwidth-\signaturewidth\relax][l]{}%
-  \makebox[\signaturewidth][c]{%
-    \begin{tabular}{c}
-      \@author \\
-      {\@examinationday} {\@examinationmonth} {\@examinationyear}
-    \end{tabular}
-  }
+  \begin{tabular}{@{}p{\dimexpr\textwidth-8cm\relax}@{}p{8cm}@{}}
+    & \makebox[8cm][c]{\@author} \\
+    & \makebox[8cm][c]{{\@examinationday} {\@examinationmonth} {\@examinationyear}}
+  \end{tabular}
 
   \clearpage
 
@@ -1341,33 +1479,86 @@ Keywords: & #1.
 %% Author's Biography Page Formatting
 %% --------------------------------------------------------------------------
 
+% Layout taken from the VISTEC Word template (bio.docx):
+%  - labels in a 2in (5.08cm) column, values wrap under the value column
+%  - 1.5 line spacing, 8pt space after each paragraph
+%  - "Academic Publication:" on its own line, then a numbered list
+%    (number at 0.635cm, text at 1.27cm, number in 10pt)
+\newlength{\biolabelwidth}
+\setlength{\biolabelwidth}{5.08cm}
+
+% \bioentry{Label:}{Value}   (use an empty label for a second line, e.g. a 2nd degree)
+\newcommand{\bioentry}[2]{%
+  \par
+  \noindent
+  \hangindent\biolabelwidth
+  \hangafter=1
+  \makebox[\biolabelwidth][l]{\textbf{#1}}%
+  \ignorespaces#2\par
+}
+
+% \begin{biopublications} \biopub{key} ... \end{biopublications}
+% Optional argument changes the heading (default: Academic Publication:)
+\newenvironment{biopublications}[1][Academic Publication:]{%
+  \par\noindent\textbf{#1}\par
+  % Justified: every publication fills the same text width
+  \let\\\@normalcr
+  \@rightskip\z@skip
+  \rightskip\z@skip
+  \parfillskip\z@ \@plus 1fil\relax
+  \hyphenpenalty=50     % allow hyphenation here so word spacing stays even
+  \exhyphenpenalty=50
+  \begin{enumerate}[
+    label={\footnotesize\arabic*.},
+    align=left,
+    leftmargin=1.27cm,
+    labelwidth=0.635cm,
+    labelsep=0pt,
+    topsep=0pt,
+    partopsep=0pt,
+    itemsep=8pt,
+    parsep=0pt
+  ]
+}{%
+  \end{enumerate}
+}
+
+% One numbered publication
+\newcommand{\biopub}[1]{\item \fullcite{#1}}
+
 \newenvironment{authorbiography}{
   \clearpage
-  \pagestyle{plain} % Show page numbering
+  \firstpagegeometry    % first page top = 5cm, others top = 3.75cm
+  \pagestyle{plain}     % Show page numbering
   \thispagestyle{empty} % No page number on the first page
   \addcontentsline{toc}{chapter}{Author’s Biography}
   \typeout{authorbiography}
-  
+
   % Author Biography Title
-  \noindent
-  \begin{center}
-    \vspace*{16pt}
+  {\centering
     {\Large\normalfont\bfseries{Author’s Biography}\\[12pt]}
-  \end{center}
+  \par}
   
-  % Author's Biography Content
-  \noindent
-  \normalsize
-  \input{contents/authorbiography}
-  
+  % Author's Biography Content (1.5 spacing, 8pt after each paragraph)
+  \begingroup
+    \normalfont\normalsize\singlespacingplus
+    \setlength{\parindent}{0pt}%
+    \setlength{\parskip}{8pt}%
+    \raggedright          % left-aligned, no hyphenation (as in the Word template)
+    \hyphenpenalty=10000
+    \exhyphenpenalty=10000
+    \input{contents/authorbiography}\par
+  \endgroup
+
   \clearpage
 
+  % Last page of the thesis: the blank back page has no page number
   \ifodd\value{page}\relax
     % Odd page, good, do nothing
   \else
-    \blankpage
+    \emptyblankpage
   \fi
-}
+}{}
 
 %% --------------------------------------------------------------------------
 %% References Page Formatting
@@ -1377,16 +1568,16 @@ Keywords: & #1.
 
 \newcommand{\vancouverbib}{
   \clearpage
-  \pagestyle{plain} % Show page numbering
+  \firstpagegeometry    % first page top = 5cm, others top = 3.75cm
+  \pagestyle{plain}     % Show page numbering
   \thispagestyle{empty} % No page number on first page of References
   \addcontentsline{toc}{chapter}{References}
 
   % Title for References
-  \begin{center}%
-    \vspace*{16pt}
+  {\centering
     {\Large\bfseries{References}}
     {\normalsize\\~\\}
-  \end{center}
+  \par}
   
   % Set formatting for the references
   \singlespacingplus\normalsize
@@ -1409,9 +1600,8 @@ Keywords: & #1.
 % First page Table of Contents header
 \newcommand{\tocheader}{%
   \begin{center}
-    \vspace*{16pt}
     {\Large\bfseries \contentsname} \normalsize\\~\\
-    {} \hfill Page
+    {} \hfill Page%
     \vspace{-1em}
   \end{center}
 }
@@ -1420,7 +1610,7 @@ Keywords: & #1.
 \newcommand{\toccontheader}{%
   \begin{center}
     {\Large\bfseries \contentsname~(Cont.)} \normalsize\\~\\
-    {} \hfill Page
+    {} \hfill Page%
     \vspace{-1em}
   \end{center}
 }
@@ -1428,16 +1618,9 @@ Keywords: & #1.
 % Custom Table of Contents Command
 \renewcommand\tableofcontents{%
   \clearpage
-  \pagestyle{plain} % show page numbering
-  \thispagestyle{empty} % No page number on first page
-
-  \newgeometry{
-    inner=3.75cm, % left on odd pages
-    outer=2.5cm,  % right on odd pages
-    top=3.75cm,
-    bottom=2.5cm,
-    twoside % important: activate two-side margins (for books/thesis)
-  }
+  \firstpagegeometry    % first page top = 5cm, others top = 3.75cm
+  \pagestyle{plain}     % show page numbering
+  \thispagestyle{empty} % no page number on the first page
 
   % Flag to detect first page
   \newif\if@firsttocpage
@@ -1469,42 +1652,30 @@ Keywords: & #1.
 %% --------------------------------------------------------------------------
 
 % Redefine table formatting in the List of Tables
-\renewcommand{\l@table}{
-    \@dottedtocline{1}{0cm}{1.5cm}
-}
+\renewcommand{\l@table}{\vistec@listentry}
 
 % First page List of Tables header
 \newcommand{\lotheader}{%
-  \begin{center}
-    \vspace*{16pt}
-    {\Large\bfseries \listtablename} \normalsize\\~\\
-    \tablename \hfill Page
-    \vspace{-1em}
-  \end{center}
+  {\centering\singlespacingplus
+    {\Large\bfseries \listtablename}\normalsize\\~\\
+  \par}
+  \vistec@listcolheader{\tablename}
 }
 
 % Continuation List of Tables header
 \newcommand{\lotcontheader}{%
-  \begin{center}
-    {\Large\bfseries \listtablename~(Cont.)} \normalsize\\~\\
-    \tablename \hfill Page
-    \vspace{-1em}
-  \end{center}
+  {\centering\singlespacingplus
+    {\Large\bfseries \listtablename~(Cont.)}\normalsize\\~\\
+  \par}
+  \vistec@listcolheader{\tablename}
 }
 
 % Custom List of Tables command
 \renewcommand\listoftables{%
   \clearpage
-  \pagestyle{plain} % show page numbering
+  \firstpagegeometry    % first page top = 5cm, others top = 3.75cm
+  \pagestyle{plain}     % show page numbering
   \thispagestyle{empty} % no page number on the first page
-
-  \newgeometry{
-    inner=3.75cm, % left on odd pages
-    outer=2.5cm,  % right on odd pages
-    top=3.75cm,
-    bottom=2.5cm,
-    twoside % important: activate two-side margins (for books/thesis)
-  }
 
   % Add List of Tables to the ToC
   \addcontentsline{toc}{chapter}{\listtablename}
@@ -1544,42 +1715,30 @@ Keywords: & #1.
 %% --------------------------------------------------------------------------
 
 % Redefine figure formatting in the List of Figures
-\renewcommand{\l@figure}{
-  \@dottedtocline{1}{0cm}{1.5cm}
-}
+\renewcommand{\l@figure}{\vistec@listentry}
 
 % First page List of Figures header
 \newcommand{\lofheader}{%
-  \begin{center}
-    \vspace*{16pt}
-    {\Large\bfseries \listfigurename} \normalsize\\~\\
-    \figurename \hfill Page
-    \vspace{-1em}
-  \end{center}
+  {\centering\singlespacingplus
+    {\Large\bfseries \listfigurename}\normalsize\\~\\
+  \par}
+  \vistec@listcolheader{\figurename}
 }
 
 % Continuation List of Figures header
 \newcommand{\lofcontheader}{%
-  \begin{center}
-    {\Large\bfseries \listfigurename~(Cont.)} \normalsize\\~\\
-    \figurename \hfill Page
-    \vspace{-1em}
-  \end{center}
+  {\centering\singlespacingplus
+    {\Large\bfseries \listfigurename~(Cont.)}\normalsize\\~\\
+  \par}
+  \vistec@listcolheader{\figurename}
 }
 
 % Custom List of Figures command
 \renewcommand\listoffigures{%
   \clearpage
-  \pagestyle{plain} % show page numbering
+  \firstpagegeometry    % first page top = 5cm, others top = 3.75cm
+  \pagestyle{plain}     % show page numbering
   \thispagestyle{empty} % no page number on the first page
-
-  \newgeometry{
-    inner=3.75cm, % left on odd pages
-    outer=2.5cm,  % right on odd pages
-    top=3.75cm,
-    bottom=2.5cm,
-    twoside % important: activate two-side margins (for books/thesis)
-  }
 
   % Add List of Figures to the ToC
   \addcontentsline{toc}{chapter}{\listfigurename}
@@ -1645,7 +1804,7 @@ Keywords: & #1.
   \begin{center}
     \vspace*{16pt}
     {\Large\bfseries \listlistingname} \normalsize\\~\\
-    \listingname \hfill Page
+    \listingname \hfill Page%
     \vspace{-1em}
   \end{center}
 }
@@ -1654,7 +1813,7 @@ Keywords: & #1.
 \newcommand{\lolcontheader}{%
   \begin{center}
     {\Large\bfseries \listlistingname~(Cont.)} \normalsize\\~\\
-    \listingname \hfill Page
+    \listingname \hfill Page%
     \vspace{-1em}
   \end{center}
 }
@@ -1736,7 +1895,7 @@ Keywords: & #1.
   \begin{center}
     /vspace*{16pt}
     {\Large\bfseries \listalgorithmname} \normalsize\\~\\
-    \algorithmname \hfill Page
+    \algorithmname \hfill Page%
     \vspace{-1em}
   \end{center}
 }
@@ -1745,7 +1904,7 @@ Keywords: & #1.
 \newcommand{\loacontheader}{%
   \begin{center}
     {\Large\bfseries \listalgorithmname~(Cont.)} \normalsize\\~\\
-    \algorithmname \hfill Page
+    \algorithmname \hfill Page%
     \vspace{-1em}
   \end{center}
 }
@@ -1829,16 +1988,9 @@ Keywords: & #1.
 % Abbreviations Environment
 \newenvironment{abbreviations}{%
   \clearpage
-  \pagestyle{plain} % show page numbering
+  \firstpagegeometry    % first page top = 5cm, others top = 3.75cm
+  \pagestyle{plain}     % show page numbering
   \thispagestyle{empty} % no page number on the first page
-
-  \newgeometry{
-    inner=3.75cm, % left on odd pages
-    outer=2.5cm,  % right on odd pages
-    top=5cm,
-    bottom=2.5cm,
-    twoside % important: activate two-side margins (for books/thesis)
-  }
 
   \addcontentsline{toc}{chapter}{List of Abbreviations}
 

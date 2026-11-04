@@ -1,55 +1,40 @@
 %----------------------------------------
-% Author Information Table
+% Author's Biography
+% Layout follows the VISTEC Word template:
+%   \bioentry{Label:}{Value}     one row (label column is 2 in wide)
+%   \bioentry{}{Value}           extra row under the same label
+%   \begin{biopublications}      "Academic Publication:" + numbered list
+%   \biopub{bibkey}              one publication (numbered 1., 2., 3. ...)
 %----------------------------------------
 
-% Define superscript command
-\newcommand{\ts}{\textsuperscript}
-
-% Set line spacing in table rows
-\renewcommand{\arraystretch}{1.5}
-
-\begin{longtable}{@{}p{0.34\linewidth} p{0.63\linewidth}@{}}
+% Superscript shortcut (e.g. 19\ts{th})
+\providecommand{\ts}{\textsuperscript}
 
 %----- Name -----
-\textbf{Name:} & Author Name \\
+\bioentry{Name:}{Author Name}
 
 %----- Date of Birth -----
-\textbf{Date of Birth:} & February 19\ts{th}, 1993 \\
+\bioentry{Date of Birth:}{February 19\ts{th}, 1993}
 
 %----- Place of Birth -----
-\textbf{Place of Birth:} & Bangkok, Thailand \\
+\bioentry{Place of Birth:}{Bangkok, Thailand}
 
 %----- Current Address -----
-\textbf{Current Address:} & 555 Vibhavadi Rangsit Road, Chatuchak, Bangkok 10900 \\
+\bioentry{Current Address:}{555 Vibhavadi Rangsit Road, Chatuchak, Bangkok 10900}
 
 %----- Education -----
-\textbf{Education:} & Bachelor of Science in Computer Science, Lorem Ipsum University, Bangkok, Thailand (2011–2014) \\
-{} & Master of Science in Computer Science, Lorem Ipsum University, Bangkok, Thailand (2015–2017) \\
+\bioentry{Education:}{Bachelor of Science in Computer Science, Lorem Ipsum University, Bangkok, Thailand (2011–2014)}
+\bioentry{}{Master of Science in Computer Science, Lorem Ipsum University, Bangkok, Thailand (2015–2017)}
 
 %----- Scholarship -----
-\textbf{Scholarship:} & Recipient of the full scholarship from Vidyasirimedhi \break Institute of Science and Technology (VISTEC) \\
+\bioentry{Scholarship:}{Recipient of the full scholarship from Vidyasirimedhi Institute of Science and Technology (VISTEC)}
 
-\end{longtable}
+%----- Academic Publication -----
+% Numbers 1., 2., ... are added automatically
+\begin{biopublications}
+  \biopub{id3}
+  \biopub{id5}
+\end{biopublications}
 
-\vspace{-1em}
-
-%----- Publications style 1 (Manual)-------------%
-% Disable auto numbering for publications
-
-\togglefalse{showrefnumber}
-\noindent\textbf{Academic Publication:}
-\begin{longtable}{@{}p{0.06\linewidth} p{0.9\linewidth}@{}}
-\quad 1. & \fullcite{id3} \\
-\quad 2. & \fullcite{id5} \\
-\end{longtable}
-
-%----- Publications style 2 (Auto)-------------%
-% Enable auto numbering for publications
-
-% \toggletrue{showrefnumber}
-% \noindent\textbf{Academic Publication:}\\[1em]
-% \noindent\fullcite{id3} \\
-% \noindent\fullcite{id5} \\
-
-% Exclude non-relevant papers from reference page
+% Exclude non-relevant papers from the References page
 \addtocategory{exclude}{id5}
